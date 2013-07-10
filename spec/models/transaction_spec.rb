@@ -15,6 +15,7 @@ describe Transaction do
   end
 
   describe :Associations do
+    it { should belong_to(:rent) }
   end
 
   describe :Validations do
