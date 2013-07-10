@@ -1,0 +1,13 @@
+<%= content_tag_for(:article, parking) do %>
+  <header></header>
+
+  <ul>
+    <li><%= parking.location %></li>
+  </ul>
+
+  <footer>
+    <%= link_to 'Show', parking_path(parking) %>
+    <%= link_to 'Edit', edit_parking_path(parking) %>
+    <%= link_to 'Destroy', parking_path(parking), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </footer>
+<% end %>

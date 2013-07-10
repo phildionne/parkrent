@@ -1,0 +1,7 @@
+<h1>Listing parkings</h1>
+
+<%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
+
+<hr>
+
+<%= link_to 'New Parking', new_parking_path %>
