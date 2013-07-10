@@ -15,9 +15,11 @@ describe Rent do
   end
 
   describe :Associations do
+    it { should belong_to(:parking) }
   end
 
   describe :Validations do
+    it { should validate_presence_of(:parking) }
     it { should validate_presence_of(:price) }
     it { should validate_presence_of(:beginning) }
     it { should validate_presence_of(:termination) }

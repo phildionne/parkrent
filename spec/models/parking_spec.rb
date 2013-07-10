@@ -15,6 +15,7 @@ describe Parking do
   end
 
   describe :Associations do
+    it { should have_many(:rents) }
   end
 
   describe :Validations do

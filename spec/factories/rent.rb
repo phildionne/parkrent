@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :rent do
+    parking
+
     price       { [50, 100].sample }
     beginning   { Date.today }
     termination { Date.today + 1.day }
