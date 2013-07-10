@@ -24,6 +24,35 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+group :development, :test do
+  gem 'debugger'
+  gem 'sqlite3'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'awesome_print'
+  gem 'faker'
+end
+
+group :development do
+  gem 'quiet_assets'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'guard-brakeman'
+  gem 'i18n-spec'
+  gem 'rspec-rails'
+  # gem 'spork-rails'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
+  gem 'database_cleaner'
+end
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
