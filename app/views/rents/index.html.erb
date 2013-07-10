@@ -1,0 +1,7 @@
+<h1>Listing rents</h1>
+
+<%= render partial: 'rent_listing', collection: @rents, as: :rent %>
+
+<hr>
+
+<%= link_to 'New Rent', new_rent_path %>

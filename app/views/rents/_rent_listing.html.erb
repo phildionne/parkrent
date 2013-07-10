@@ -1,0 +1,15 @@
+<%= content_tag_for(:article, rent) do %>
+  <header></header>
+
+  <ul>
+    <li><%= rent.price %></li>
+    <li><%= rent.beginning %></li>
+    <li><%= rent.termination %></li>
+  </ul>
+
+  <footer>
+    <%= link_to 'Show', rent_path(rent) %>
+    <%= link_to 'Edit', edit_rent_path(rent) %>
+    <%= link_to 'Destroy', rent_path(rent), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </footer>
+<% end %>
