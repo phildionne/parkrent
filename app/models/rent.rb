@@ -4,5 +4,4 @@ class Rent < ActiveRecord::Base
   validates_with RentValidator
 
   belongs_to :parking
-  has_many :transactions
 end

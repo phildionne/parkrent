@@ -28,10 +28,4 @@ ActiveRecord::Schema.define(version: 20130710205926) do
     t.integer  "parking_id"
   end
 
-  create_table "transactions", force: true do |t|
-    t.integer  "rent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end
