@@ -7,7 +7,7 @@ class ParkingsController < ApplicationController
 
   # GET /parkings/1
   def show
-    @parking = Parking.find(params.require(:id))
+    @parking = Parking.includes(:rents).find(params.require(:id))
   end
 
   # GET /parkings/new
