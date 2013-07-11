@@ -6,6 +6,12 @@ describe Seller do
     context "Valid factory" do
       subject { FactoryGirl.create(:seller) }
       specify { should be_valid }
+
+      subject { FactoryGirl.create(:seller_with_parkings) }
+      specify { should be_valid }
+
+      subject { FactoryGirl.create(:seller_with_parkings_and_rents) }
+      specify { should be_valid }
     end
 
     context "Invalid factory" do
@@ -15,6 +21,7 @@ describe Seller do
   end
 
   describe :Associations do
+    it { should have_many(:parkings).dependent(:destroy) }
   end
 
   describe :Validations do
