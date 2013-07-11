@@ -18,11 +18,13 @@ describe Order do
   end
 
   describe :Associations do
+    it { should belong_to(:buyer) }
     it { should belong_to(:rent) }
     it { should have_one(:payment).dependent(:destroy) }
   end
 
   describe :Validations do
+    it { should validate_presence_of(:buyer) }
     it { should validate_presence_of(:rent) }
   end
 

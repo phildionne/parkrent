@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :order do
+    buyer
     rent
   end
 
@@ -10,6 +11,7 @@ FactoryGirl.define do
   end
 
   factory :invalid_order, parent: :order do
+    buyer nil
     rent nil
   end
 end

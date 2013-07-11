@@ -15,6 +15,7 @@ describe Buyer do
   end
 
   describe :Associations do
+    it { should have_many(:orders).dependent(:destroy) }
   end
 
   describe :Validations do
