@@ -1,17 +1,15 @@
 FactoryGirl.define do
   factory :order do
+    rent
   end
 
-  factory :order_with_payments, parent: :order do
-    ignore do
-      payments_count [1,2].sample
-    end
-
-    after(:create) do |order, evaluator|
-      order.payments << FactoryGirl.create_list(:payment, evaluator.payments_count)
+  factory :order_with_payment, parent: :order do
+    after(:create) do |order|
+      FactoryGirl.create(:payment, order: order)
     end
   end
 
   factory :invalid_order, parent: :order do
+    rent nil
   end
 end

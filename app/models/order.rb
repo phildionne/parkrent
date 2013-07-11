@@ -1,5 +1,7 @@
 class Order < ActiveRecord::Base
-  has_many :payments, dependent: :destroy
+  belongs_to :rent
+  has_one :payment, dependent: :destroy
 
+  validates :rent, presence: true
   validates_with OrderValidator
 end

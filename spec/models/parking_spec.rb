@@ -20,7 +20,7 @@ describe Parking do
   end
 
   describe :Associations do
-    it { should have_many(:rents) }
+    it { should have_many(:rents).dependent(:destroy) }
   end
 
   describe :Validations do
