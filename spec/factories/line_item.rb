@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :line_item do
+    order
+
     quantity [1,2].sample
   end
 

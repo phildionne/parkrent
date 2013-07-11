@@ -1,51 +1,46 @@
 class LineItemsController < ApplicationController
   before_action :set_order
 
-  # GET /line_items
+  # GET /orders/:order_id/line_items
   def index
-    @line_items = LineItem.all
+    @line_items = @order.line_items
   end
 
-  # GET /line_items/1
+  # GET /orders/:order_id/line_items/:id
   def show
-    @line_item = LineItem.find(params[:id])
+    @line_item = @order.line_items.find(params.require(:id))
   end
 
-  # GET /line_items/new
+  # GET /orders/:order_id/line_items/new
   def new
-    @line_item = LineItem.new
+    @line_item = @order.line_items.new
   end
 
-  # GET /line_items/1/edit
-  def edit
-    @line_item = LineItem.find(params[:id])
-  end
-
-  # POST /line_items
+  # POST /orders/:order_id/line_items
   def create
-    @line_item = LineItem.new(permitted_params)
+    @line_item = @order.line_items.new(permitted_params)
 
     if @line_item.save
       redirect_to @line_item, notice: 'Line item was successfully created.'
     else
-      render action: 'new'
+      render action: :new
     end
   end
 
-  # PATCH/PUT /line_items/1
+  # PATCH/PUT /orders/:order_id/line_items/1
   def update
-    @line_item = LineItem.find(params[:id])
+    @line_item = @order.line_items.new(permitted_params)
 
     if @line_item.update(permitted_params)
       redirect_to @line_item, notice: 'Line item was successfully updated.'
     else
-      render action: 'edit'
+      render action: :edit
     end
   end
 
-  # DELETE /line_items/1
+  # DELETE /orders/:order_id/line_items/:id
   def destroy
-    @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.find(params.require(:id))
     @line_item.destroy
 
     redirect_to order_line_items_path

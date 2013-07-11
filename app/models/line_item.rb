@@ -1,4 +1,6 @@
 class LineItem < ActiveRecord::Base
-  validates :quantity, presence: true
+  belongs_to :order
+
+  validates :order, :quantity, presence: true
   validates_with LineItemValidator
 end
