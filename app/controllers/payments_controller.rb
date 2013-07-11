@@ -1,24 +1,21 @@
 class PaymentsController < ApplicationController
+  # @TODO Add Devise
+  # before_filter :authenticate_user!
   before_action :set_order
 
-  # GET /orders/:order_id/payments
-  def index
-    @payments = @order.payments
-  end
-
-  # GET /orders/:order_id/payments/:id
+  # GET /orders/:order_id/payment
   def show
-    @payment = @order.payments.find(params.require(:id))
+    @payment = @order.payment
   end
 
-  # GET /orders/:order_id/payments/new
+  # GET /orders/:order_id/payment/new
   def new
-    @payment = @order.payments.new
+    @payment = @order.payment.new
   end
 
-  # POST /orders/:order_id/payments
+  # POST /orders/:order_id/payment
   def create
-    @payment = @order.payments.new(permitted_params)
+    @payment = @order.payment.new(permitted_params)
 
     if @payment.save
       redirect_to @payment, notice: 'Payment was successfully created.'
@@ -27,9 +24,9 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orders/:order_id/payments/1
+  # PATCH/PUT /orders/:order_id/payment/1
   def update
-    @payment = @order.payments.new(permitted_params)
+    @payment = @order.payment.new(permitted_params)
 
     if @payment.update(permitted_params)
       redirect_to @payment, notice: 'Payment was successfully updated.'
@@ -38,7 +35,7 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # DELETE /orders/:order_id/payments/:id
+  # DELETE /orders/:order_id/payment/:id
   def destroy
     @payment = @order.payments.find(params.require(:id))
     @payment.destroy
