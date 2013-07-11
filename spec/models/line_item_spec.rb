@@ -6,6 +6,9 @@ describe LineItem do
     context "Valid factory" do
       subject { FactoryGirl.create(:line_item) }
       specify { should be_valid }
+
+      subject { FactoryGirl.create(:line_item_with_rent) }
+      specify { should be_valid }
     end
 
     context "Invalid factory" do
@@ -16,10 +19,12 @@ describe LineItem do
 
   describe :Associations do
     it { should belong_to(:order) }
+    it { should belong_to(:rent) }
   end
 
   describe :Validations do
     it { should validate_presence_of(:order) }
+    it { should validate_presence_of(:rent) }
   end
 
   describe :Callbacks do

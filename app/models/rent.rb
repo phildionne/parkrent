@@ -4,4 +4,5 @@ class Rent < ActiveRecord::Base
   validates_with RentValidator
 
   belongs_to :parking
+  has_one :line_item
 end

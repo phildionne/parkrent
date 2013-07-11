@@ -16,6 +16,7 @@ describe Rent do
 
   describe :Associations do
     it { should belong_to(:parking) }
+    it { should have_one(:line_item) }
   end
 
   describe :Validations do
