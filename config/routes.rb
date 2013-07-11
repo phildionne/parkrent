@@ -5,9 +5,7 @@ ParkRent::Application.routes.draw do
     resources :rents
   end
 
-  resources :orders do
-    resources :line_items
-  end
+  resources :orders
 
   root :to => 'frontpage#show'
 end

@@ -11,11 +11,6 @@ describe Order do
       specify { should be_valid }
     end
 
-    context "Valid factory" do
-      subject { FactoryGirl.create(:order_with_line_items) }
-      specify { should be_valid }
-    end
-
     context "Invalid factory" do
       subject { FactoryGirl.build(:invalid_order) }
       specify { should_not be_valid }
@@ -23,7 +18,6 @@ describe Order do
   end
 
   describe :Associations do
-    it { should have_many(:line_items).dependent(:destroy) }
     it { should have_many(:payments).dependent(:destroy) }
   end
 
