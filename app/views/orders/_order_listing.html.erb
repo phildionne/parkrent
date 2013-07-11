@@ -1,0 +1,13 @@
+<%= content_tag_for(:article, order) do %>
+  <header></header>
+
+  <ul>
+    <li><%= order.id %></li>
+  </ul>
+
+  <footer>
+    <%= link_to 'Show', order_path(order) %>
+    <%= link_to 'Edit', edit_order_path(order) %>
+    <%= link_to 'Destroy', order_path(order), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </footer>
+<% end %>

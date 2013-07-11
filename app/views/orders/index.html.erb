@@ -1,0 +1,7 @@
+<h1>Listing orders</h1>
+
+<%= render partial: 'order_listing', collection: @orders, as: :order %>
+
+<hr>
+
+<%= link_to 'New Order', new_order_path %>
