@@ -1,74 +1,58 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_action :set_order
 
-  # GET /payments
-  # GET /payments.json
+  # GET /orders/:order_id/payments
   def index
-    @payments = Payment.all
+    @payments = @order.payments
   end
 
-  # GET /payments/1
-  # GET /payments/1.json
+  # GET /orders/:order_id/payments/:id
   def show
+    @payment = @order.payments.find(params.require(:id))
   end
 
-  # GET /payments/new
+  # GET /orders/:order_id/payments/new
   def new
-    @payment = Payment.new
+    @payment = @order.payments.new
   end
 
-  # GET /payments/1/edit
-  def edit
-  end
-
-  # POST /payments
-  # POST /payments.json
+  # POST /orders/:order_id/payments
   def create
-    @payment = Payment.new(payment_params)
+    @payment = @order.payments.new(permitted_params)
 
-    respond_to do |format|
-      if @payment.save
-        format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @payment }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
-      end
+    if @payment.save
+      redirect_to @payment, notice: 'Payment was successfully created.'
+    else
+      render action: :new
     end
   end
 
-  # PATCH/PUT /payments/1
-  # PATCH/PUT /payments/1.json
+  # PATCH/PUT /orders/:order_id/payments/1
   def update
-    respond_to do |format|
-      if @payment.update(payment_params)
-        format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
-      end
+    @payment = @order.payments.new(permitted_params)
+
+    if @payment.update(permitted_params)
+      redirect_to @payment, notice: 'Payment was successfully updated.'
+    else
+      render action: :edit
     end
   end
 
-  # DELETE /payments/1
-  # DELETE /payments/1.json
+  # DELETE /orders/:order_id/payments/:id
   def destroy
+    @payment = @order.payments.find(params.require(:id))
     @payment.destroy
-    respond_to do |format|
-      format.html { redirect_to payments_url }
-      format.json { head :no_content }
-    end
+
+    redirect_to order_payments_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_payment
-      @payment = Payment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def payment_params
-      params.require(:payment).permit(:amount, :type)
-    end
+  def set_order
+    @order = Order.find(params.require(:order_id))
+  end
+
+  def permitted_params
+    params.require(:payment)
+  end
 end
