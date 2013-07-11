@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130711204141) do
+ActiveRecord::Schema.define(version: 20130711205626) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -49,6 +49,9 @@ ActiveRecord::Schema.define(version: 20130711204141) do
     t.string   "password_confirmation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
   end
 
 end
