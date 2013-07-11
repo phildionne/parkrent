@@ -53,6 +53,6 @@ class OrdersController < ApplicationController
   private
 
   def permitted_params
-    params.require(:order)
+    params.require(:order).permit(:rent_id)
   end
 end

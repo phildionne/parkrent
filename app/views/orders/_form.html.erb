@@ -1,4 +1,6 @@
 <%= simple_form_for @order do |f| %>
 
+  <%= f.association :rent %>
+
   <%= f.button :submit, :class => 'btn btn-primary' %>
 <% end %>
