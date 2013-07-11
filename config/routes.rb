@@ -1,5 +1,7 @@
 ParkRent::Application.routes.draw do
 
+  resources :users
+
   resources :parkings do
     resources :rents
   end
