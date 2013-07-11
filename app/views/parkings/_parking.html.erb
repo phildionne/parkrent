@@ -5,5 +5,19 @@
     <li><%= parking.location %></li>
   </ul>
 
+  <hr>
+
+  <ul>
+    <% parking.rents.each do |rent| %>
+      <%= content_tag_for(:li, rent) do %>
+        <ul>
+          <li><%= rent.price %></li>
+          <li><%= rent.beginning %></li>
+          <li><%= rent.termination %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </ul>
+
   <footer></footer>
 <% end %>

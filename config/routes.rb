@@ -1,6 +1,7 @@
 ParkRent::Application.routes.draw do
-  resources :parkings
-  resources :rents
+  resources :parkings do
+    resources :rents
+  end
 
   resources :orders do
     resources :line_items

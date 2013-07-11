@@ -1,56 +1,61 @@
 class RentsController < ApplicationController
+  before_action :set_parking
 
-  # GET /rents
+  # GET parkings/:parking_id/rents
   def index
-    @rents = Rent.all
+    @rents = @parking.rents
   end
 
-  # GET /rents/1
+  # GET parkings/:parking_id/rents/1
   def show
-    @rent = Rent.find(params.require(:id))
+    @rent = @parking.rents.find(params.require(:id))
   end
 
-  # GET /rents/new
+  # GET parkings/:parking_id/rents/new
   def new
-    @rent = Rent.new
+    @rent = @parking.rents.new
   end
 
-  # GET /rents/1/edit
+  # GET parkings/:parking_id/rents/1/edit
   def edit
-    @rent = Rent.find(params.require(:id))
+    @rent = @parking.rents.find(params.require(:id))
   end
 
-  # POST /rents
+  # POST parkings/:parking_id/rents
   def create
-    @rent = Rent.new(permitted_params)
+    @rent = @parking.rents.new(permitted_params)
 
     if @rent.save
-      redirect_to @rent, notice: 'Rent was successfully created.'
+      redirect_to parking_rent_path(@parking, @rent), notice: 'Rent was successfully created.'
     else
       render action: :new
     end
   end
 
-  # PATCH/PUT /rents/1
+  # PATCH/PUT parkings/:parking_id/rents/1
   def update
-    @rent = Rent.find(params.require(:id))
+    @rent = @parking.rents.new(permitted_params)
 
     if @rent.update_attributes(permitted_params)
-      redirect_to @rent, notice: 'Rent was successfully updated.'
+      redirect_to parking_rent_path(@parking, @rent), notice: 'Rent was successfully updated.'
     else
       render action: :edit
     end
   end
 
-  # DELETE /rents/1
+  # DELETE parkings/:parking_id/rents/1
   def destroy
-    @rent = Rent.find(params.require(:id))
+    @rent = @parking.rents.find(params.require(:id))
     @rent.destroy
 
-    redirect_to rents_url
+    redirect_to parking_rents_path(@parking)
   end
 
   private
+
+  def set_parking
+    @parking = Parking.find(params.require(:parking_id))
+  end
 
   def permitted_params
     params.require(:rent).permit(:price, :beginning, :termination)

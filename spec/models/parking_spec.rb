@@ -8,6 +8,11 @@ describe Parking do
       specify { should be_valid }
     end
 
+    context "Valid factory" do
+      subject { FactoryGirl.create(:parking_with_rents) }
+      specify { should be_valid }
+    end
+
     context "Invalid factory" do
       subject { FactoryGirl.build(:invalid_parking) }
       specify { should_not be_valid }

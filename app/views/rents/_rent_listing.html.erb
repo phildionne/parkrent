@@ -8,8 +8,8 @@
   </ul>
 
   <footer>
-    <%= link_to 'Show', rent_path(rent) %>
-    <%= link_to 'Edit', edit_rent_path(rent) %>
-    <%= link_to 'Destroy', rent_path(rent), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Show', parking_rent_path(rent.parking, rent) %>
+    <%= link_to 'Edit', edit_parking_rent_path(rent.parking, rent) %>
+    <%= link_to 'Destroy', parking_rent_path(rent.parking, rent), method: :delete, data: { confirm: 'Are you sure?' } %>
   </footer>
 <% end %>
