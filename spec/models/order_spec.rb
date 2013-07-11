@@ -6,6 +6,9 @@ describe Order do
     context "Valid factory" do
       subject { FactoryGirl.create(:order) }
       specify { should be_valid }
+
+      subject { FactoryGirl.create(:order_with_payment) }
+      specify { should be_valid }
     end
 
     context "Valid factory" do
@@ -20,7 +23,8 @@ describe Order do
   end
 
   describe :Associations do
-    it { should have_many(:line_items) }
+    it { should have_many(:line_items).dependent(:destroy) }
+    it { should have_many(:payments).dependent(:destroy) }
   end
 
   describe :Validations do
