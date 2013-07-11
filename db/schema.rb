@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130711015649) do
+ActiveRecord::Schema.define(version: 20130711114646) do
 
   create_table "line_items", force: true do |t|
     t.integer  "quantity"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20130711015649) do
 
   create_table "parkings", force: true do |t|
     t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", force: true do |t|
+    t.decimal  "amount"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
