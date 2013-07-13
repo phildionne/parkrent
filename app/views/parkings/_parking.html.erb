@@ -1,23 +1,31 @@
 <%= content_tag_for(:article, parking) do %>
-  <header></header>
+  <div class="row">
+    <div class="col col-lg-8">
 
-  <ul>
-    <li><%= parking.location %></li>
-  </ul>
+      <img src="http://placehold.it/600" alt="">
 
-  <hr>
+      <hr>
 
-  <ul>
-    <% parking.rents.each do |rent| %>
-      <%= content_tag_for(:li, rent) do %>
-        <ul>
-          <li><%= rent.price %></li>
-          <li><%= rent.beginning %></li>
-          <li><%= rent.termination %></li>
-        </ul>
+      <h2>Rentals</h2>
+
+      <% parking.rents.each do |rent| %>
+        <%= content_tag_for(:article, rent) do %>
+          <ul>
+            <li><%= rent.price %></li>
+            <li><%= rent.beginning %></li>
+            <li><%= rent.termination %></li>
+          </ul>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+
+    </div><!-- /.col -->
+
+    <div class="col col-lg-4">
+      <header>
+        <h1><%= parking.location %></h1>
+      </header>
+    </div>
+  </div><!-- /.col -->
 
   <footer></footer>
 <% end %>
