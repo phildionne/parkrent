@@ -8,15 +8,7 @@
 
       <h2>Rentals</h2>
 
-      <% parking.rents.each do |rent| %>
-        <%= content_tag_for(:article, rent) do %>
-          <ul>
-            <li><%= rent.price %></li>
-            <li><%= rent.beginning %></li>
-            <li><%= rent.termination %></li>
-          </ul>
-        <% end %>
-      <% end %>
+      <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
 
     </div><!-- /.col -->
 

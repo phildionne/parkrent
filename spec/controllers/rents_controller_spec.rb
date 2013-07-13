@@ -2,33 +2,6 @@ require 'spec_helper'
 
 describe RentsController do
 
-  describe "GET index" do
-    let(:parking) { FactoryGirl.create(:parking_with_rents) }
-
-    before { get :index, { parking_id: parking } }
-
-    it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :index
-    end
-  end
-
-  describe "GET show" do
-    let(:parking) { FactoryGirl.create(:parking_with_rents) }
-    let(:rent) { parking.rents.first }
-
-    before { get :show, id: rent, parking_id: parking }
-
-    it "assigns the rent as @rent" do
-      assigns(:rent).should eq(rent)
-    end
-
-    it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :show
-    end
-  end
-
   describe "GET new" do
     let(:parking) { FactoryGirl.create(:parking) }
 
@@ -59,7 +32,7 @@ describe RentsController do
 
       it "redirects to the created rent" do
         post :create, { rent: rent_attributes, parking_id: parking }
-        response.should redirect_to(parking_rent_path(parking, Rent.last))
+        response.should redirect_to(parking_path(parking))
       end
     end
 
@@ -91,7 +64,7 @@ describe RentsController do
 
     it "redirects to the rents list" do
       delete :destroy, { id: rent, parking_id: @parking }
-      response.should redirect_to(parking_rents_path)
+      response.should redirect_to(parking_path(@parking))
     end
   end
 
