@@ -1,7 +1,11 @@
-<h1>Listing parkings</h1>
+<section>
+  <%= render 'parkings/search_form' %>
+</section>
 
-<%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
+<section>
+  <%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
+</section>
 
-<hr>
-
-<%= link_to 'New Parking', new_parking_path %>
+<section>
+  <%= link_to 'New Parking', new_parking_path %>
+</section>
