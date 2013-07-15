@@ -20,12 +20,12 @@ describe Parking do
   end
 
   describe :Associations do
-    it { should belong_to(:seller) }
+    it { should belong_to(:user) }
     it { should have_many(:rents).dependent(:destroy) }
   end
 
   describe :Validations do
-    it { should validate_presence_of(:seller) }
+    it { should validate_presence_of(:user) }
     it { should validate_presence_of(:location) }
   end
 

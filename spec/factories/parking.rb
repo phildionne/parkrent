@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :parking do
-    seller
+    user
 
     location "Somewhere"
   end
