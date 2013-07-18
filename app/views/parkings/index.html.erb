@@ -3,7 +3,11 @@
 </section>
 
 <section>
-  <%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
+  <% if @parkings.any? %>
+    <%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
+  <% else %>
+    <p>No results</p>
+  <% end %>
 </section>
 
 <section>

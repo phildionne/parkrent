@@ -1,9 +1,9 @@
 <%= content_tag_for(:article, parking) do %>
-  <header></header>
+  <header>
+    <h3><%= parking.location %></h3>
+  </header>
 
-  <ul>
-    <li><%= parking.location %></li>
-  </ul>
+  <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
 
   <footer>
     <%= link_to 'Show', parking_path(parking) %>

@@ -2,7 +2,12 @@ class ParkingsController < ApplicationController
 
   # GET /parkings
   def index
-    @parkings = Parking.all
+    if params[:search]
+      # @parkings = Parking.near(permitted_search_params[:location], 20, order: :distance)
+      @parkings = Parking.near(permitted_search_params[:location], permitted_search_params[:distance])
+    else
+      @parkings = Parking.all
+    end
   end
 
   # GET /parkings/1
@@ -54,5 +59,9 @@ class ParkingsController < ApplicationController
 
   def permitted_params
     params.require(:parking).permit(:location)
+  end
+
+  def permitted_search_params
+    params.require(:search).permit(:location, :distance, :beginning, :termination)
   end
 end
