@@ -1,4 +1,5 @@
 class RentsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_parking
 
   # GET parkings/:parking_id/rents/new
