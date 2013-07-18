@@ -1,4 +1,7 @@
 class Parking < ActiveRecord::Base
+
+  geocoded_by :location
+
   belongs_to :user
   has_many :rents, dependent: :destroy
 
@@ -6,4 +9,6 @@ class Parking < ActiveRecord::Base
 
   validates :user, :location, presence: true
   validates_with RentValidator
+
+  after_validation :geocode, if: :location_changed?
 end
