@@ -3,8 +3,7 @@ class FrontpageController < ApplicationController
   # GET /
   def show
 
-    if true
-
+    if current_user
       render 'homepage'
     else
       render 'frontpage'
