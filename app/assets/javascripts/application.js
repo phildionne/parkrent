@@ -10,6 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// @FIXME gmaps4rails assets are loaded twice because it expects to find them in /public
+// but they have been moved to /vendor
+//= require gmaps4rails/base
+//= require gmaps4rails/google
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks

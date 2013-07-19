@@ -1,0 +1,27 @@
+<%= content_tag_for(:article, parking) do %>
+  <div class="row">
+    <div class="col col-lg-8">
+
+      <img src="http://placehold.it/300" alt="">
+
+      <hr>
+
+      <%= gmaps4rails(@parking.to_gmaps4rails) %>
+
+      <hr>
+
+      <h2>Rentals</h2>
+
+      <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
+
+    </div><!-- /.col -->
+
+    <div class="col col-lg-4">
+      <header>
+        <h1><%= parking.location %></h1>
+      </header>
+    </div>
+  </div><!-- /.col -->
+
+  <footer></footer>
+<% end %>

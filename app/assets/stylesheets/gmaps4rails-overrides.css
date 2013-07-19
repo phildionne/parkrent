@@ -1,0 +1,12 @@
+/* Fix an issue with the map's controls when used with Bootstrap */
+#map img {
+  max-width: none;
+}
+#map label {
+  width: auto;
+}
+.map_container {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}

@@ -1,0 +1,19 @@
+<%= content_tag_for(:article, parking) do %>
+  <header>
+    <h3><%= parking.location %></h3>
+  </header>
+
+  <hr>
+
+  <%= gmaps4rails(parking.to_gmaps4rails) %>
+
+  <hr>
+
+  <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
+
+  <footer>
+    <%= link_to 'Show', parking_path(parking) %>
+    <%= link_to 'Edit', edit_parking_path(parking) %>
+    <%= link_to 'Destroy', parking_path(parking), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </footer>
+<% end %>
