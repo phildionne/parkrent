@@ -2,11 +2,20 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-
-# Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'thin'
+gem 'foreman'
+gem 'devise'
+gem 'devise-i18n'
+gem 'geocoder'
+gem 'high_voltage'
+gem 'flutie'
+gem 'friendly_id', github: 'FriendlyId/friendly_id'
+gem 'simple_form'
+gem 'gmaps4rails', github: 'apneadiving/Google-Maps-for-Rails'
 
-# Use SCSS for stylesheets
+gem 'less-rails'
+gem 'therubyracer', platforms: :ruby
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
