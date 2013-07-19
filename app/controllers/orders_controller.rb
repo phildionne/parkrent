@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @rent = Rent.find(params.require(:rent_id))
   end
 
   # GET /orders/1/edit
@@ -23,7 +24,7 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    @order = Order.new(permitted_params)
+    @order = current_user.orders.build(permitted_params)
 
     if @order.save
       redirect_to @order, notice: 'Order was successfully created.'

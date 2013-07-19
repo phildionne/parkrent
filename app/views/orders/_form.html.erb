@@ -1,6 +1,6 @@
 <%= simple_form_for @order do |f| %>
 
-  <%= f.association :rent %>
+  <%= f.input :rent_id, as: :hidden, input_html: { value: @rent.id } %>
 
   <%= f.button :submit, :class => 'btn btn-primary' %>
 <% end %>
