@@ -5,51 +5,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, a, quod corporis eius ipsum magnam veniam amet porro.</p>
     </div>
 
-    <form>
-      <div class="col col-lg-3">
-        <fieldset>
-          <legend>Your informations</legend>
-
-          <label>First name</label>
-          <input type="text" placeholder="First name">
-
-          <label>Last name</label>
-          <input type="text" placeholder="Last name">
-
-          <label>Phone number</label>
-          <input type="number" placeholder="Phone number">
-
-          <label>Email</label>
-          <input type="email" placeholder="Email">
-        </fieldset>
-      </div>
-
-      <div class="col col-lg-3"
-        <fieldset>
-          <legend>Your Parking</legend>
-
-          <label>Location</label>
-          <input type="text" placeholder="Start typing…">
-
-          <label>Beginning</label>
-          <input type="text" placeholder="">
-
-          <label>Termination</label>
-          <input type="text" placeholder="">
-
-          <label>Price</label>
-          <div class="input-group">
-            <span class="input-group-addon">$</span>
-            <input type="text">
-            <span class="input-group-addon">.00</span>
-          </div>
-
-          <hr>
-
-          <button type="submit" class="btn btn-block btn-primary">Create listing</button>
-        </fieldset>
-      </div>
-    </form>
+    <%= render 'onboardings/form' %>
   </div><!-- /.row -->
 </section>
 

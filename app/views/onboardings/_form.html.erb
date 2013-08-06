@@ -1,0 +1,44 @@
+<%= simple_form_for @onboarding, url: onboarding_path do |f| %>
+
+  <div class="col col-lg-3">
+    <fieldset>
+      <legend>Your informations</legend>
+
+      <%= f.input :first_name, placeholder: 'first_name' %>
+      <%= f.full_error :first_name %>
+
+      <%= f.input :last_name, placeholder: 'last_name' %>
+      <%= f.full_error :last_name %>
+
+      <%= f.input :phone_number, placeholder: 'phone_number' %>
+      <%= f.full_error :phone_number %>
+
+      <%= f.input :email, placeholder: 'email' %>
+      <%= f.full_error :email %>
+    </fieldset>
+  </div>
+
+  <div class="col col-lg-3">
+    <fieldset>
+      <legend>Your Parking</legend>
+
+      <%= f.input :location, placeholder: 'location'  %>
+      <%= f.full_error :location %>
+
+      <%= f.input :beginning, placeholder: 'beginning', input_html: { class: 'datepicker' } %>
+      <%= f.full_error :beginning %>
+
+      <%= f.input :termination, placeholder: 'termination', input_html: { class: 'datepicker' } %>
+      <%= f.full_error :termination %>
+
+      <%= f.input :price, placeholder: 'price' %>
+      <%= f.full_error :price %>
+
+    </fieldset>
+
+    <hr>
+
+    <%= f.button :submit, 'Create listing', :class => 'btn btn-primary btn-block' %>
+  </div>
+
+<% end %>

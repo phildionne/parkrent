@@ -6,6 +6,8 @@ class FrontpageController < ApplicationController
     if current_user
       render 'homepage'
     else
+      @onboarding = Onboarding.new
+
       render 'frontpage'
     end
   end
