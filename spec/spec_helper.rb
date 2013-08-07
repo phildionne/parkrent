@@ -23,6 +23,8 @@ Spork.prefork do
     # FactoryGirl
     config.include FactoryGirl::Syntax::Methods
 
+    config.include Devise::TestHelpers, :type => :controller
+
     # Database Cleaner
     config.before(:suite) do
       DatabaseCleaner.clean_with(:truncation)
