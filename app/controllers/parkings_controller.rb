@@ -4,11 +4,12 @@ class ParkingsController < ApplicationController
   # GET /parkings
   def index
     if params[:search]
-      # @parkings = Parking.near(permitted_search_params[:location], 20, order: :distance)
-      @parkings = Parking.near(permitted_search_params[:location], permitted_search_params[:distance])
+      parkings = Parking.near(permitted_search_params[:location], permitted_search_params[:distance])
     else
-      @parkings = Parking.all
+      parkings = Parking.all
     end
+
+    @parkings = parkings.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /parkings/1

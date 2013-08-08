@@ -5,6 +5,7 @@
 <section>
   <% if @parkings.any? %>
     <%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
+    <%= will_paginate @parkings %>
   <% else %>
     <p>No results</p>
   <% end %>
