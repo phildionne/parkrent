@@ -12,6 +12,7 @@ gem 'high_voltage'
 gem 'flutie'
 gem 'friendly_id', github: 'FriendlyId/friendly_id'
 gem 'simple_form'
+gem 'cocoon'
 gem 'will_paginate'
 
 gem 'less-rails'
