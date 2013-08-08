@@ -1,5 +1,7 @@
 <%= content_tag_for(:article, rent) do %>
-  <header></header>
+  <header>
+    <h2><%= rent.title %></h2>
+  </header>
 
   <ul>
     <li><%= rent.price %></li>
