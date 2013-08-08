@@ -5,7 +5,7 @@ class Parking < ActiveRecord::Base
   belongs_to :user
   has_many :rents, dependent: :destroy
 
-  accepts_nested_attributes_for :rents
+  accepts_nested_attributes_for :rents, :reject_if => :all_blank, :allow_destroy => true
 
   validates :user, :location, presence: true
   validates_with RentValidator

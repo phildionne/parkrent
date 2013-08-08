@@ -2,7 +2,17 @@
 
   <%= f.input :location %>
 
-  <%= f.association :rents %>
+  <%= f.simple_fields_for :rents do |rent_form| %>
+    <hr>
 
-  <%= f.button :submit, :class => 'btn btn-primary' %>
+    <h3><%= rent_form.object.title %></h3>
+
+    <%= render 'rent_fields', f: rent_form %>
+  <% end %>
+
+  <%= link_to_add_association('add rent', f, :rents, { :class => 'btn btn-primary' }) %>
+
+  <hr>
+
+  <%= f.button :submit, :disable_with => 'Please wait ...', :class => 'btn btn-primary' %>
 <% end %>
