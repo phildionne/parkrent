@@ -2,5 +2,5 @@
 
   <%= f.input :rent_id, as: :hidden, input_html: { value: @rent.id } %>
 
-  <%= f.button :submit, :class => 'btn btn-primary' %>
+  <%= f.button :submit, :disable_with => 'Please wait ...', :class => 'btn btn-primary' %>
 <% end %>
