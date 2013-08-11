@@ -8,7 +8,11 @@
 
       <h2>Rentals</h2>
 
-      <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
+      <% if parking.rents.any? %>
+        <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
+      <% else %>
+        <p><%= I18n.t('parkings.show.rents.empty_state') %></p>
+      <% end %>
 
     </div><!-- /.col -->
 

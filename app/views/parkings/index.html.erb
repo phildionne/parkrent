@@ -7,7 +7,7 @@
     <%= render partial: 'parking_listing', collection: @parkings, as: :parking %>
     <%= will_paginate @parkings %>
   <% else %>
-    <p>No results</p>
+    <p><%= I18n.t('parkings.index.empty_state') %></p>
   <% end %>
 </section>
 
