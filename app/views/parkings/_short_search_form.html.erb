@@ -8,12 +8,6 @@
 
           Search for parkings near <%= f.input :location, wrapper: false, input_html: { :class => 'form-control col-lg-6 transparent' }, placeholder: 'Québec, Grand Théâtre ...', label: false %>
 
-          <%= f.input :distance,    input_html: { :class => 'transparent' }, placeholder: 'distance', label: false %>
-
-          <%= f.input :begining,    input_html: { :class => 'transparent datepicker' }, placeholder: 'begining', label: false %>
-
-          <%= f.input :termination, input_html: { :class => 'transparent datepicker' }, placeholder: 'termination', label: false %>
-
           <%= f.button :submit, 'Search', :disable_with => 'Please wait ...', :class => 'btn btn-default' %>
         <% end %>
 
