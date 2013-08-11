@@ -8,23 +8,23 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   def show
-    @order = Order.find(params.require(:id))
+    @order = current_user.orders.find(params.require(:id))
   end
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @order = current_user.orders.new
     @rent = Rent.find(params.require(:rent_id))
   end
 
   # GET /orders/1/edit
   def edit
-    @order = Order.find(params.require(:id))
+    @order = current_user.orders.find(params.require(:id))
   end
 
   # POST /orders
   def create
-    @order = current_user.orders.build(permitted_params)
+    @order = current_user.orders.new(permitted_params)
 
     if @order.save
       redirect_to @order, notice: 'Order was successfully created.'
@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
-    @order = Order.find(params.require(:id))
+    @order = current_user.orders.find(params.require(:id))
 
     if @order.update(permitted_params)
       redirect_to @order, notice: 'Order was successfully updated.'
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1
   def destroy
-    @order = Order.find(params.require(:id))
+    @order = current_user.orders.find(params.require(:id))
 
     @order.destroy
     redirect_to orders_path

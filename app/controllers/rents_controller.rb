@@ -45,7 +45,7 @@ class RentsController < ApplicationController
   private
 
   def set_parking
-    @parking = Parking.find(params.require(:parking_id))
+    @parking = current_user.parkings.find(params.require(:parking_id))
   end
 
   def permitted_params

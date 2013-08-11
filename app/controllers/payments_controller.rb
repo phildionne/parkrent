@@ -46,7 +46,7 @@ class PaymentsController < ApplicationController
   private
 
   def set_order
-    @order = Order.find(params.require(:order_id))
+    @order = current_user.orders.find(params.require(:order_id))
   end
 
   def permitted_params
