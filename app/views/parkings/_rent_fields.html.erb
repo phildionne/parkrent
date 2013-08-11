@@ -1,9 +1,9 @@
 <%= content_tag_for(:div, f.object, :class => 'nested-fields') do %>
   <%= f.input :price %>
 
-  <%= f.input :beginning, as: :string, input_html: { :class => 'datepicker' } %>
+  <%= f.input :beginning, as: :string, input_html: { :class => 'js-datepicker' } %>
 
-  <%= f.input :termination, as: :string, input_html: { :class => 'datepicker' } %>
+  <%= f.input :termination, as: :string, input_html: { :class => 'js-datepicker' } %>
 
   <%= link_to_remove_association('remove rent', f, { :class => 'btn btn-default btn-small' }) %>
 <% end %>
