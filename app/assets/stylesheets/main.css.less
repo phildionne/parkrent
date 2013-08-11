@@ -46,6 +46,25 @@ section {
 .navbar .nav > li > a { border-radius: 2px; }
 
 
+// Forms
+// -------------------------
+
+input.transparent {
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+  border-bottom: 1px solid @gray-darker;
+
+  &:focus {
+    border-color: @gray-darker;
+  }
+
+  &:focus, &:focus:invalid {
+    box-shadow: none;
+  }
+}
+
+
 // Footer
 // -------------------------
 
