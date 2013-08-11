@@ -14,6 +14,7 @@ gem 'friendly_id', github: 'FriendlyId/friendly_id'
 gem 'simple_form'
 gem 'cocoon'
 gem 'will_paginate'
+gem 'date_validator'
 
 gem 'less-rails'
 gem 'therubyracer', platforms: :ruby

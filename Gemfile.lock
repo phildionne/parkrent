@@ -75,6 +75,8 @@ GEM
     commonjs (0.2.6)
     daemons (1.1.9)
     database_cleaner (1.0.1)
+    date_validator (0.7.0)
+      activemodel (>= 3)
     debug_inspector (0.0.2)
     debugger (1.6.1)
       columnize (>= 0.3.1)
@@ -282,6 +284,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.0.0)
   database_cleaner
+  date_validator
   debugger
   devise
   devise-i18n
