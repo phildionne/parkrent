@@ -41,11 +41,15 @@ class Onboarding
     return false unless valid?
 
     ActiveRecord::Base.transaction do
-      @user.save!
-      @parking.user = @user
-      @parking.save!
-      @rent.parking = @parking
-      @rent.save!
+      begin
+        @user.save!
+        @parking.user = @user
+        @parking.save!
+        @rent.parking = @parking
+        @rent.save!
+      rescue ActiveRecord::RecordInvalid
+        false
+      end
     end
   end
 
