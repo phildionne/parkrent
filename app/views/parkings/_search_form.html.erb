@@ -6,7 +6,7 @@
 
         <%= simple_form_for :search, url: parkings_path, method: :get, html: { :class => 'form-inline' } do |f| %>
 
-          Search for parkings near <%= f.input :location, wrapper: false, input_html: { :class => 'form-control col-lg-6 transparent' }, placeholder: 'Québec, Grand Théâtre ...', label: false %>
+          Search for parkings near <%= f.input :location, wrapper: false, input_html: { :class => 'form-control col-lg-6 transparent js-geocomplete', :autocomplete => false }, placeholder: 'Québec, Grand Théâtre ...', label: false %>
 
           <%= f.input :distance,    input_html: { :class => 'transparent' }, placeholder: 'distance', label: false, required: false %>
 
