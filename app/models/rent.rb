@@ -3,6 +3,7 @@ class Rent < ActiveRecord::Base
 
   validates :parking, :price, :beginning, :termination, presence: true
   validates :price, numericality: { greater_than: 0 }
+  validates :beginning, :date => { :before => :termination }
   validates_with RentValidator
 
   def title
