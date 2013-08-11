@@ -1,36 +1,38 @@
-<%= simple_form_for @onboarding, url: onboarding_path do |f| %>
+<div class="row">
+  <%= simple_form_for @onboarding, url: onboarding_path do |f| %>
 
-  <div class="col col-lg-3">
-    <fieldset>
-      <legend>Your informations</legend>
+    <div class="col col-lg-6">
+      <fieldset>
+        <legend>Your informations</legend>
 
-      <%= f.input :first_name, placeholder: 'first_name' %>
+        <%= f.input :first_name, placeholder: 'first_name' %>
 
-      <%= f.input :last_name, placeholder: 'last_name' %>
+        <%= f.input :last_name, placeholder: 'last_name' %>
 
-      <%= f.input :phone_number, placeholder: 'phone_number' %>
+        <%= f.input :phone_number, placeholder: 'phone_number' %>
 
-      <%= f.input :email, placeholder: 'email' %>
-    </fieldset>
-  </div>
+        <%= f.input :email, placeholder: 'email' %>
+      </fieldset>
+    </div>
 
-  <div class="col col-lg-3">
-    <fieldset>
-      <legend>Your Parking</legend>
+    <div class="col col-lg-6">
+      <fieldset>
+        <legend>Your Parking</legend>
 
-      <%= f.input :location, placeholder: 'location'  %>
+        <%= f.input :location, placeholder: 'location'  %>
 
-      <%= f.input :beginning, placeholder: 'beginning', input_html: { class: 'datepicker' } %>
+        <%= f.input :beginning, placeholder: 'beginning', input_html: { class: 'datepicker' } %>
 
-      <%= f.input :termination, placeholder: 'termination', input_html: { class: 'datepicker' } %>
+        <%= f.input :termination, placeholder: 'termination', input_html: { class: 'datepicker' } %>
 
-      <%= f.input :price, placeholder: 'price' %>
+        <%= f.input :price, placeholder: 'price' %>
 
-    </fieldset>
+      </fieldset>
 
-    <hr>
+      <hr>
 
-    <%= f.button :submit, 'Create listing', :disable_with => 'Please wait ...', :class => 'btn btn-primary btn-block' %>
-  </div>
+      <%= f.button :submit, 'Create listing', :disable_with => 'Please wait ...', :class => 'btn btn-primary btn-block' %>
+    </div>
 
-<% end %>
+  <% end %>
+</div><!-- /.row -->
