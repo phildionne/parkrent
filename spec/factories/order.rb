@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :order do
-    user
+    association :user, factory: :user_with_vehicles
     rent
+    vehicle { user.vehicles.sample }
   end
 
   factory :order_with_payment, parent: :order do
@@ -11,7 +12,8 @@ FactoryGirl.define do
   end
 
   factory :invalid_order, parent: :order do
-    user nil
+    user
     rent nil
+    vehicle nil
   end
 end

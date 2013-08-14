@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
   has_many :parkings, dependent: :destroy
+  has_many :vehicles, dependent: :destroy
 end

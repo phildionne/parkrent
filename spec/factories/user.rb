@@ -8,6 +8,16 @@ FactoryGirl.define do
     password     { Faker::Lorem.characters(10) }
   end
 
+  factory :user_with_vehicles, parent: :user do
+    ignore do
+      vehicles_count [1,2].sample
+    end
+
+    after(:create) do |user, evaluator|
+      FactoryGirl.create_list(:vehicle, evaluator.vehicles_count, user: user)
+    end
+  end
+
   factory :user_with_parkings, parent: :user do
     ignore do
       parkings_count [1,2].sample

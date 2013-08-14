@@ -7,6 +7,9 @@ describe User do
       subject { FactoryGirl.create(:user) }
       specify { should be_valid }
 
+      subject { FactoryGirl.create(:user_with_vehicles) }
+      specify { should be_valid }
+
       subject { FactoryGirl.create(:user_with_parkings) }
       specify { should be_valid }
 
@@ -23,6 +26,7 @@ describe User do
   describe :Associations do
     it { should have_many(:orders).dependent(:destroy) }
     it { should have_many(:parkings).dependent(:destroy) }
+    it { should have_many(:vehicles).dependent(:destroy) }
   end
 
   describe :Validations do

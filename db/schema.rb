@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718212215) do
+ActiveRecord::Schema.define(version: 20130814012011) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rent_id"
     t.integer  "user_id"
+    t.integer  "vehicle_id"
   end
 
   create_table "parkings", force: true do |t|
@@ -57,6 +58,11 @@ ActiveRecord::Schema.define(version: 20130718212215) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+  end
+
+  create_table "vehicles", force: true do |t|
+    t.string  "license_plate"
+    t.integer "user_id"
   end
 
 end
