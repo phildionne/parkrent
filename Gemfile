@@ -15,6 +15,7 @@ gem 'simple_form'
 gem 'cocoon'
 gem 'will_paginate'
 gem 'date_validator'
+gem 'money-rails'
 
 gem 'less-rails'
 gem 'therubyracer', platforms: :ruby
