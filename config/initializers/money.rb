@@ -4,7 +4,7 @@ MoneyRails.configure do |config|
 
   # To set the default currency
   #
-  # config.default_currency = :usd
+  config.default_currency = :cad
 
   # Set default bank object
   #
@@ -62,6 +62,6 @@ MoneyRails.configure do |config|
   # Default value is nil meaning "ignore this option".
   # Options are nil, true, false.
   #
-  # config.no_cents_if_whole = nil
+  config.no_cents_if_whole = true
   # config.symbol = nil
 end
