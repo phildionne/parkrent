@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130814012011) do
+ActiveRecord::Schema.define(version: 20130815005547) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -39,12 +39,13 @@ ActiveRecord::Schema.define(version: 20130814012011) do
   end
 
   create_table "rents", force: true do |t|
-    t.decimal  "price"
     t.datetime "beginning"
     t.datetime "termination"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parking_id"
+    t.integer  "price_cents",    default: 0,     null: false
+    t.string   "price_currency", default: "CAD", null: false
   end
 
   create_table "users", force: true do |t|
