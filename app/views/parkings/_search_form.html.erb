@@ -1,24 +1,29 @@
 <div class="row">
-  <div class="col col-lg-8 col-offset-2">
+  <div class="col col-lg-10 col-offset-1">
 
     <div class="row">
-      <div class="col col-lg-8 col-offset-2">
+      <%= simple_form_for :search, url: parkings_path, method: :get, html: { :class => 'form-inline' } do |f| %>
+        <div class="col col-lg-4">
+          <%= f.input :location, wrapper: false, input_html: { :class => 'form-control transparent js-geocomplete', :autocomplete => false }, placeholder: 'Québec, Montréal, ...', label: false %>
+        </div>
 
-        <%= simple_form_for :search, url: parkings_path, method: :get, html: { :class => 'form-inline' } do |f| %>
+        <div class="col col-lg-1">
+          <%= f.input :distance, wrapper: false, input_html: { :class => 'form-control transparent' }, placeholder: 'distance', label: false, required: false %>
+        </div>
 
-          Search for parkings near <%= f.input :location, wrapper: false, input_html: { :class => 'form-control col-lg-6 transparent js-geocomplete', :autocomplete => false }, placeholder: 'Québec, Grand Théâtre ...', label: false %>
+        <div class="col col-lg-2">
+          <%= f.input :begining, wrapper: false, input_html: { :class => 'form-control transparent js-datepicker' }, placeholder: 'begining', label: false, required: false %>
+        </div>
 
-          <%= f.input :distance,    input_html: { :class => 'transparent' }, placeholder: 'distance', label: false, required: false %>
+        <div class="col col-lg-2">
+          <%= f.input :termination, wrapper: false, input_html: { :class => 'form-control transparent js-datepicker' }, placeholder: 'termination', label: false, required: false %>
+        </div>
 
-          <%= f.input :begining,    input_html: { :class => 'transparent js-datepicker' }, placeholder: 'begining', label: false, required: false %>
-
-          <%= f.input :termination, input_html: { :class => 'transparent js-datepicker' }, placeholder: 'termination', label: false, required: false %>
-
-          <%= f.button :submit, 'Search', :disable_with => 'Please wait ...', :class => 'btn btn-default' %>
-        <% end %>
-
-      </div>
-    </div>
+        <div class="col col-lg-2">
+          <%= f.button :submit, 'Search', :disable_with => 'Please wait ...', :class => 'btn btn-default btn-block' %>
+        </div>
+      <% end %>
+    </div><!-- /.row -->
 
   </div>
 </div><!-- /.row -->
