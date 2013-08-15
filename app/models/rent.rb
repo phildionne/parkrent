@@ -8,6 +8,6 @@ class Rent < ActiveRecord::Base
   validates_with RentValidator
 
   def title
-    "#{price} - #{beginning} #{termination}"
+    "#{price.format} - #{beginning.to_formatted_s(:short)} #{termination.to_formatted_s(:short)}"
   end
 end
