@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'money-rails/test_helpers'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -24,6 +25,8 @@ Spork.prefork do
     config.include FactoryGirl::Syntax::Methods
 
     config.include Devise::TestHelpers, :type => :controller
+
+    config.include MoneyRails::TestHelpers
 
     # Database Cleaner
     config.before(:suite) do
