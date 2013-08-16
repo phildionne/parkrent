@@ -17,9 +17,9 @@ class Onboarding
 
   # param attributes [Hash]
   def initialize(attributes = {})
-    @user    = User.new(attributes.slice(:first_name, :last_name, :phone_number, :email, :password, :password_confirmation))
-    @parking = Parking.new(attributes.slice(:location))
-    @rent    = Rent.new(attributes.slice(:price, :beginning, :termination))
+    attributes.each do |attr, value|
+      self.public_send("#{attr}=", value)
+    end
   end
 
   def user
