@@ -53,6 +53,10 @@ group :test do
   gem 'database_cleaner'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
