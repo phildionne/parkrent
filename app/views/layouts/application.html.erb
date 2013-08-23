@@ -8,6 +8,11 @@
   <meta name="author" content="">
 
   <%= stylesheet_link_tag :application, "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css" %>
+
+  <!--[if lte IE 8]>
+    <%= stylesheet_link_tag "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css" %>
+  <![endif]-->
 
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114-precomposed.png">
@@ -29,6 +34,7 @@
 
   <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js" %>
   <%= javascript_include_tag "//maps.googleapis.com/maps/api/js?libraries=places&sensor=false" %>
+  <%= javascript_include_tag "//api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js" %>
 
   <%= javascript_include_tag :application, "data-turbolinks-track" => true %>
   <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js" %>
