@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815005547) do
+ActiveRecord::Schema.define(version: 20130823010458) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20130815005547) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
   create_table "vehicles", force: true do |t|
     t.string  "license_plate"
