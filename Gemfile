@@ -5,6 +5,9 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 gem 'thin'
 gem 'foreman'
+
+gem 'rack-timeout'
+
 gem 'devise'
 gem 'devise-i18n'
 gem 'geocoder'
