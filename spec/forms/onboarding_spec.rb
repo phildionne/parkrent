@@ -14,6 +14,8 @@ describe Onboarding do
     end
   end
 
+  # @note There is no presence validation spec for 'price' attribute because
+  # of the way #monetize overrides the #price and #price= method
   describe :Validations do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
@@ -22,7 +24,6 @@ describe Onboarding do
     it { should validate_presence_of(:location,) }
     it { should validate_presence_of(:beginning) }
     it { should validate_presence_of(:termination) }
-    it { should validate_presence_of(:price) }
     it { should validate_presence_of(:password) }
     it { should validate_presence_of(:password_confirmation) }
   end

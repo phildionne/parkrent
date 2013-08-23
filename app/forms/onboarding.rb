@@ -1,9 +1,5 @@
 class Onboarding
-  extend ActiveModel::Naming
-  include ActiveModel::Conversion
-  include ActiveModel::Validations
-
-  attr_writer :user, :parking, :rent
+  include ActiveModel::Model
 
   delegate :first_name, :last_name, :phone_number, :email,
            :password, :password_confirmation, :confirmation_token,
@@ -14,13 +10,6 @@ class Onboarding
 
   validates :first_name, :last_name, :phone_number, :email, :location,
             :beginning, :termination, :price, :password, :password_confirmation, presence: true
-
-  # param attributes [Hash]
-  def initialize(attributes = {})
-    attributes.each do |attr, value|
-      self.public_send("#{attr}=", value)
-    end
-  end
 
   def user
     @user ||= User.new
@@ -53,4 +42,32 @@ class Onboarding
     end
   end
 
+  # Runs all the specified validations and the associated models' validations
+  #
+  # @return [Boolean]
+  def valid?(context = nil)
+    super
+
+    [:user, :parking, :rent].each do |model|
+      instance = send(model)
+      instance.valid?(context)
+
+      instance.attribute_names.each do |attribute|
+        if respond_to?(attribute)
+          instance.errors[attribute].each do |message|
+            errors.add(attribute, message)
+          end
+        end
+      end
+    end
+
+    errors.messages.values.each(&:uniq!)
+    errors.none?
+  end
+
+  # @return [Boolean] Wether the Onboarding is only missing the user's password & password_confirmation
+  def can_assign_credential?
+    valid?
+    errors.keys == [:password, :password_confirmation]
+  end
 end
