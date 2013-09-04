@@ -6,6 +6,8 @@ class LicensePlateValidator < ActiveModel::EachValidator
   # @param attribute [Symbol]
   # @param value [String]
   def validate_each(record, attribute, value)
+    value.squish! if value.respond_to?(:squish)
+
     formats = [
       /\A[a-zA-Z]\d{2} ?[a-zA-Z]{3}\z/,  # A00 ABC
       /\A[a-zA-Z]{3} ?\d{3}\z/,          # ABC 000
@@ -16,7 +18,7 @@ class LicensePlateValidator < ActiveModel::EachValidator
 
     regex = Regexp.union(formats)
 
-    unless value.is_a?(String) && value.match(regex)
+    unless value.present? && value.match(regex)
       record.errors[attribute] << (options[:message] || "is not a valid license plate")
     end
   end
