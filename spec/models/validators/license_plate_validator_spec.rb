@@ -19,7 +19,13 @@ describe LicensePlateValidator do
         'ABC 000',
         '000H000',
         'CC 000',
-        'CD 000'
+        'CD 000',
+        'A00ABC',
+        '000ABC',
+        'ABC000',
+        '000H000',
+        'CC000',
+        'CD000'
       ]
     end
 
@@ -36,9 +42,12 @@ describe LicensePlateValidator do
       [
         '000 000',
         'ABC ABC',
-        'ABC 000',
         '000 ABCD',
-        '0000 ABC'
+        '0000 ABC',
+        '000000',
+        'ABCABC',
+        '000ABCD',
+        '0000ABC'
       ]
     end
 
