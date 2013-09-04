@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe OrdersController do
+  let(:user) { FactoryGirl.create(:user_with_vehicles) }
+  before { sign_in user }
+
   describe "GET index" do
     before { get :index }
 
@@ -11,7 +14,7 @@ describe OrdersController do
   end
 
   describe "GET show" do
-    let(:order) { FactoryGirl.create(:order) }
+    let(:order) { FactoryGirl.create(:order, user: user) }
 
     before { get :show, id: order }
 
@@ -35,7 +38,7 @@ describe OrdersController do
   end
 
   describe "GET edit" do
-    let(:order) { FactoryGirl.create(:order) }
+    let(:order) { FactoryGirl.create(:order, user: user) }
 
     before { get :edit, id: order }
 
@@ -120,7 +123,7 @@ describe OrdersController do
   end
 
   describe "DELETE destroy" do
-    before { @order = FactoryGirl.create(:order) }
+    before { @order = FactoryGirl.create(:order, user: user) }
 
     it "destroys the requested order" do
       expect {

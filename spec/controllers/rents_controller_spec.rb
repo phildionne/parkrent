@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe RentsController do
+  let(:user) { FactoryGirl.create(:user) }
+  before { sign_in user }
 
   describe "GET new" do
-    let(:parking) { FactoryGirl.create(:parking) }
+    let(:parking) { FactoryGirl.create(:parking, user: user) }
 
     before { get :new, parking_id: parking }
 
@@ -15,7 +17,7 @@ describe RentsController do
 
   describe "POST create" do
     context "with valid params" do
-      let(:parking) { FactoryGirl.create(:parking) }
+      let(:parking) { FactoryGirl.create(:parking, user: user) }
       let(:rent_attributes) { FactoryGirl.attributes_for(:rent) }
 
       it "creates a new Rent" do
@@ -37,7 +39,7 @@ describe RentsController do
     end
 
     context "with invalid params" do
-      let(:parking) { FactoryGirl.create(:parking) }
+      let(:parking) { FactoryGirl.create(:parking, user: user) }
       let(:invalid_rent_attributes) { FactoryGirl.attributes_for(:invalid_rent) }
 
       before do
@@ -53,7 +55,7 @@ describe RentsController do
   end
 
   describe "DELETE destroy" do
-    before { @parking = FactoryGirl.create(:parking_with_rents) }
+    before { @parking = FactoryGirl.create(:parking_with_rents, user: user) }
     let(:rent) { @parking.rents.first }
 
     it "destroys the requested rent" do

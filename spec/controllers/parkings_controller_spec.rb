@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ParkingsController do
+  # @FIXME Consider adding context to test a signed in/signed out usecase
+  let(:user) { FactoryGirl.create(:user) }
+  before { sign_in user }
+
   describe "GET index" do
     before { get :index }
 
@@ -35,7 +39,7 @@ describe ParkingsController do
   end
 
   describe "GET edit" do
-    let(:parking) { FactoryGirl.create(:parking) }
+    let(:parking) { FactoryGirl.create(:parking, user: user) }
 
     before { get :edit, id: parking }
 
@@ -79,7 +83,7 @@ describe ParkingsController do
   end
 
   describe "PUT update" do
-    let(:parking) { FactoryGirl.create(:parking, location: "Somewhere") }
+    let(:parking) { FactoryGirl.create(:parking, location: "Somewhere", user: user) }
 
     context "with valid params" do
       it "assigns the requested parking as @parking" do
@@ -120,7 +124,7 @@ describe ParkingsController do
   end
 
   describe "DELETE destroy" do
-    before { @parking = FactoryGirl.create(:parking) }
+    before { @parking = FactoryGirl.create(:parking, user: user) }
 
     it "destroys the requested parking" do
       expect {
