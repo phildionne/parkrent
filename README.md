@@ -12,4 +12,5 @@
 
 ## Running tests
 
-    foreman run bundle exec guard
+    foreman run guard
+
