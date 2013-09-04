@@ -18,12 +18,14 @@ describe Rent do
     it { should belong_to(:parking) }
   end
 
+  # @note There is no presence validation spec for 'price' attribute because
+  # of the way #monetize overrides the #price and #price= method. And there is
+  # no validation of 'price' attribute numericality because #monetize default to 0
+  # when passed an invalid value.
   describe :Validations do
     it { should validate_presence_of(:parking) }
-    it { should validate_presence_of(:price) }
     it { should validate_presence_of(:beginning) }
     it { should validate_presence_of(:termination) }
-    it { should validate_numericality_of(:price) }
   end
 
   describe :Callbacks do
