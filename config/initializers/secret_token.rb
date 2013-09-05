@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-ParkRent::Application.config.secret_key_base = '463e2744dcbc03f13079251ca6788107797fff0895ae5ed472cff275591553ca1b68a5e6d7675a2eb63b575ab87897b996d98fb1b468688fa0a6cf35670f5ac1'
+ParkRent::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']
