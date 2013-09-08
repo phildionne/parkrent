@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery.geocomplete.min
-//= require cocoon
 //= require bootstrap-datepicker/bootstrap-datepicker
 //= require jquery_ujs
 //= require turbolinks
