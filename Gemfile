@@ -10,6 +10,7 @@ gem 'rack-timeout'
 
 gem 'devise'
 gem 'devise-i18n'
+gem 'paranoia', '~> 2.0'
 gem 'geocoder'
 gem 'high_voltage'
 gem 'flutie'
