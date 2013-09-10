@@ -5,8 +5,8 @@ describe OnboardingsController do
     before { get :new }
 
     it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :new
+      expect(response).to be_success
+      expect(response).to render_template :new
     end
   end
 
@@ -22,13 +22,15 @@ describe OnboardingsController do
 
       it "assigns a newly created onboarding as @onboarding" do
         post :create, { onboarding: onboarding_attributes }
-        assigns(:onboarding).should be_a(Onboarding)
-        assigns(:onboarding).should be_persisted
+        expect(assigns(:onboarding)).to be_a(Onboarding)
+        expect(assigns(:onboarding).user).to be_persisted
+        expect(assigns(:onboarding).parking).to be_persisted
+        expect(assigns(:onboarding).rent).to be_persisted
       end
 
-      it "redirects to the frontpage" do
+      it "redirects to the newly created parking" do
         post :create, { onboarding: onboarding_attributes }
-        response.should redirect_to(root_path)
+        expect(response).to redirect_to(assigns(:onboarding).parking)
       end
     end
 
@@ -36,7 +38,7 @@ describe OnboardingsController do
       before { post :create, onboarding: FactoryGirl.attributes_for(:invalid_onboarding) }
 
       it "assigns a newly created but unsaved onboarding as @onboarding" do
-        assigns(:onboarding).should be_a_new(Onboarding)
+        expect(assigns(:onboarding)).to be_a_new(Onboarding)
       end
 
       it { should render_template :new }

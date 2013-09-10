@@ -8,8 +8,8 @@ describe OrdersController do
     before { get :index }
 
     it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :index
+      expect(response).to be_success
+      expect(response).to render_template :index
     end
   end
 
@@ -19,21 +19,23 @@ describe OrdersController do
     before { get :show, id: order }
 
     it "assigns the order as @order" do
-      assigns(:order).should eq(order)
+      expect(assigns(:order)).to eq(order)
     end
 
     it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :show
+      expect(response).to be_success
+      expect(response).to render_template :show
     end
   end
 
   describe "GET new" do
-    before { get :new }
+    let(:rent) { FactoryGirl.create(:rent) }
+
+    before { get :new, rent_id: rent }
 
     it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :new
+      expect(response).to be_success
+      expect(response).to render_template :new
     end
   end
 
@@ -43,8 +45,8 @@ describe OrdersController do
     before { get :edit, id: order }
 
     it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :edit
+      expect(response).to be_success
+      expect(response).to render_template :edit
     end
   end
 
@@ -60,13 +62,13 @@ describe OrdersController do
 
       it "assigns a newly created order as @order" do
         post :create, { order: order_attributes }
-        assigns(:order).should be_a(Order)
-        assigns(:order).should be_persisted
+        expect(assigns(:order)).to be_a(Order)
+        expect(assigns(:order)).to be_persisted
       end
 
       it "redirects to the created order" do
         post :create, { order: order_attributes }
-        response.should redirect_to(Order.last)
+        expect(response).to redirect_to(Order.last)
       end
     end
 
@@ -74,7 +76,7 @@ describe OrdersController do
       before { post :create, order: FactoryGirl.attributes_for(:invalid_order) }
 
       it "assigns a newly created but unsaved order as @order" do
-        assigns(:order).should be_a_new(Order)
+        expect(assigns(:order)).to be_a_new(Order)
       end
 
       it { should render_template :new }
@@ -82,42 +84,44 @@ describe OrdersController do
   end
 
   describe "PUT update" do
-    let(:order) { FactoryGirl.create(:order, location: "Somewhere") }
+    let(:rent) { FactoryGirl.create(:rent) }
+    let(:other_rent) { FactoryGirl.create(:rent) }
+    let(:order) { FactoryGirl.create(:order, rent: rent, user: user) }
 
     context "with valid params" do
       it "assigns the requested order as @order" do
         put :update, { id: order, order: FactoryGirl.attributes_for(:order)}
-        assigns(:order).should eq(order)
+        expect(assigns(:order)).to eq(order)
       end
 
       it "updates the requested order" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:order, location: "Somewhere else") }
+        put :update, { id: order, order: FactoryGirl.attributes_for(:order, rent: other_rent) }
         order.reload
-        order.location.should eq("Somewhere else")
+        expect(order.rent).to eq(other_rent)
       end
 
       it "redirects to the order" do
         put :update, { id: order, order: FactoryGirl.attributes_for(:order) }
         order.reload
-        response.should redirect_to(order)
+        expect(response).to redirect_to(order)
       end
     end
 
     context "with invalid params" do
       it "assigns the order as @order" do
         put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order) }
-        assigns(:order).should eq(order)
+        expect(assigns(:order)).to eq(order)
       end
 
       it "does not update @order's attributes" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order, location: "Invalid location") }
+        put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order, rent: "Invalid rent") }
         order.reload
-        order.location.should_not eq("Invalid location")
+        order.rent.should_not eq("Invalid rent")
       end
 
       it "re-renders the 'edit' template" do
         put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order) }
-        response.should render_template :edit
+        expect(response).to render_template :edit
       end
     end
   end
@@ -133,7 +137,7 @@ describe OrdersController do
 
     it "redirects to the orders list" do
       delete :destroy, { id: @order }
-      response.should redirect_to(orders_path)
+      expect(response).to redirect_to(orders_path)
     end
   end
 end

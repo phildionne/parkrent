@@ -10,8 +10,8 @@ describe FrontpageController do
       end
 
       it "responds with success and render template" do
-        response.should be_success
-        response.should render_template :homepage
+        expect(response).to be_success
+        expect(response).to render_template :homepage
       end
     end
 
@@ -19,10 +19,9 @@ describe FrontpageController do
       before { get :show }
 
       it "responds with success and render template" do
-        response.should be_success
-        response.should render_template :frontpage
+        expect(response).to be_success
+        expect(response).to render_template :frontpage
       end
     end
   end
-
 end

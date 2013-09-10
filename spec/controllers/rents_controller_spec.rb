@@ -10,8 +10,8 @@ describe RentsController do
     before { get :new, parking_id: parking }
 
     it "responds with success and render template" do
-      response.should be_success
-      response.should render_template :new
+      expect(response).to be_success
+      expect(response).to render_template :new
     end
   end
 
@@ -28,8 +28,8 @@ describe RentsController do
 
       it "assigns a newly created rent as @rent" do
         post :create, { rent: rent_attributes, parking_id: parking }
-        assigns(:rent).should be_a(Rent)
-        assigns(:rent).should be_persisted
+        expect(assigns(:rent)).to be_a(Rent)
+        expect(assigns(:rent)).to be_persisted
       end
 
       it "redirects to the created rent" do
@@ -47,7 +47,7 @@ describe RentsController do
       end
 
       it "assigns a newly created but unsaved rent as @rent" do
-        assigns(:rent).should be_a_new(Rent)
+        expect(assigns(:rent)).to be_a_new(Rent)
       end
 
       it { should render_template :new }
@@ -66,7 +66,7 @@ describe RentsController do
 
     it "redirects to the rents list" do
       delete :destroy, { id: rent, parking_id: @parking }
-      response.should redirect_to(parking_path(@parking))
+      expect(response).to redirect_to(parking_path(@parking))
     end
   end
 
