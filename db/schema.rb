@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130823010458) do
+ActiveRecord::Schema.define(version: 20130910221615) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20130823010458) do
     t.integer  "rent_id"
     t.integer  "user_id"
     t.integer  "vehicle_id"
+    t.datetime "deleted_at"
   end
 
   create_table "parkings", force: true do |t|
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20130823010458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "order_id"
+    t.datetime "deleted_at"
   end
 
   create_table "rents", force: true do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20130823010458) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
