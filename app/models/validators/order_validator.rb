@@ -4,4 +4,7 @@ class OrderValidator < ActiveModel::Validator
   def validate(record)
     # record.errors[:base] = "This record is invalid"
   end
+
+  # @TODO Ensure vehicle is property of user
+
 end

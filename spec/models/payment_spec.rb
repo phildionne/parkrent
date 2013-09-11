@@ -16,6 +16,7 @@ describe Payment do
 
   describe :Associations do
     it { should belong_to(:order) }
+    it { should have_one(:user).through(:order) }
   end
 
   describe :Validations do

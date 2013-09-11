@@ -3,4 +3,5 @@ class Vehicle < ActiveRecord::Base
   validates :license_plate, license_plate: true
 
   belongs_to :user
+  has_many :orders, through: :user
 end

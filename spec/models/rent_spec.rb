@@ -16,6 +16,7 @@ describe Rent do
 
   describe :Associations do
     it { should belong_to(:parking) }
+    it { should have_many(:orders) }
   end
 
   # @note There is no presence validation spec for 'price' attribute because
