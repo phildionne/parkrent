@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910221615) do
+ActiveRecord::Schema.define(version: 20130911232159) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20130910221615) do
   create_table "vehicles", force: true do |t|
     t.string  "license_plate"
     t.integer "user_id"
+    t.string  "model"
+    t.date    "year"
   end
 
 end
