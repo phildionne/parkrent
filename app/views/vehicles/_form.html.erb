@@ -1,10 +1,6 @@
 <%= simple_form_for @vehicle do |f| %>
 
-  <%= f.input :license_plate %>
-
-  <%= f.input :year, start_year: Date.current.year - 15, end_year: Date.current.year, discard_month: true, discard_day: true %>
-
-  <%= f.input :model %>
+  <%= render 'fields', f: f %>
 
   <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary' %>
 <% end %>

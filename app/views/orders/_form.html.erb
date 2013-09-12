@@ -1,6 +1,19 @@
 <%= simple_form_for @order do |f| %>
 
-  <%= f.input :rent_id, as: :hidden, input_html: { value: @rent.id } %>
+  <%= f.association :rent, collection: Rent.all, prompt: 'Select a rent' %>
+
+  <% if @order.user.vehicles.any? %>
+
+    <%= f.association :vehicle, collection: @order.user.vehicles, prompt: 'Select a vehicle' %>
+
+  <% else %>
+
+    <h3>Add a vehicle</h3>
+    <%= simple_fields_for @vehicle do |vehicle_form| %>
+      <%= render 'vehicles/fields', f: vehicle_form %>
+    <% end %>
+
+  <% end %>
 
   <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary' %>
 <% end %>

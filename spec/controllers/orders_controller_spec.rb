@@ -81,6 +81,33 @@ describe OrdersController do
 
       it { should render_template :new }
     end
+
+    context "without existing vehicles" do
+      context "with valid params" do
+        let(:order_attributes) { FactoryGirl.attributes_for(:order) }
+        let(:vehicle_attributes) { FactoryGirl.attributes_for(:vehicle) }
+
+        it "creates a new Vehicle" do
+          expect {
+            post :create, { order: order_attributes, vehicle: vehicle_attributes }
+          }.to change(Vehicle, :count).by(1)
+        end
+
+        it "assigns a newly created vehicle as @vehicle" do
+          post :create, { order: order_attributes, vehicle: vehicle_attributes }
+          expect(assigns(:vehicle)).to be_a(Vehicle)
+          expect(assigns(:vehicle)).to be_persisted
+        end
+      end
+
+      context "with invalid params" do
+        before { post :create, order: FactoryGirl.attributes_for(:invalid_order), vehicle: FactoryGirl.attributes_for(:invalid_vehicle) }
+
+        it "assigns a newly created but unsaved vehicle as @vehicle" do
+          expect(assigns(:vehicle)).to be_a_new(Vehicle)
+        end
+      end
+    end
   end
 
   describe "PUT update" do

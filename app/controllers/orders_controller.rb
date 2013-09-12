@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   def new
     @order = current_user.orders.new
     @rent = Rent.find(params.require(:rent_id))
+    @vehicle = Vehicle.new
   end
 
   # GET /orders/1/edit
@@ -25,6 +26,15 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = current_user.orders.new(permitted_params)
+
+    # Build and persist a newly created vehicle when none exist
+    if @order.user.vehicles.none?
+      @vehicle = @order.user.vehicles.new(permitted_vehicle_params)
+
+      if @vehicle.save
+        @order.vehicle = @vehicle
+      end
+    end
 
     if @order.save
       redirect_to @order, notice: 'Order was successfully created.'
@@ -55,6 +65,10 @@ class OrdersController < ApplicationController
   private
 
   def permitted_params
-    params.require(:order).permit(:rent_id)
+    params.require(:order).permit(:rent_id, :vehicle_id)
+  end
+
+  def permitted_vehicle_params
+    params.require(:vehicle).permit(:license_plate, :year, :model)
   end
 end
