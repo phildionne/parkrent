@@ -54,7 +54,7 @@ class ParkingsController < ApplicationController
     @parking = current_user.parkings.find(params.require(:id))
     @parking.destroy
 
-    redirect_to parkings_path
+    redirect_to root_path
   end
 
   private

@@ -132,9 +132,9 @@ describe ParkingsController do
       }.to change(Parking, :count).by(-1)
     end
 
-    it "redirects to the parkings list" do
+    it "redirects to the dashboard" do
       delete :destroy, { id: @parking }
-      expect(response).to redirect_to(parkings_path)
+      expect(response).to redirect_to(root_path)
     end
   end
 end
