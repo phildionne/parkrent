@@ -6,6 +6,8 @@ ParkRent::Application.routes.draw do
 
   resource :onboarding, only: [:new, :create]
 
+  resources :vehicles, except: [:index, :show]
+
   resources :parkings do
     resources :rents, except: [:index, :show]
   end
