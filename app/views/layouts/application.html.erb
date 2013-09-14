@@ -20,6 +20,8 @@
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57-precomposed.png">
   <%= favicon_link_tag %>
 
+  <%= content_for :head %>
+
   <%= csrf_meta_tags %>
 </head>
 <body data-view="<%= body_class %>">

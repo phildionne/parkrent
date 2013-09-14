@@ -14,3 +14,7 @@
 <section>
   <%= link_to 'New Parking', new_parking_path %>
 </section>
+
+<% content_for :head do %>
+  <%= auto_discovery_link_tag(:rss, parkings_search_results_rss_url) %>
+<% end %>
