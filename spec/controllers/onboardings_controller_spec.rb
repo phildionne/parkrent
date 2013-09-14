@@ -38,7 +38,8 @@ describe OnboardingsController do
       before { post :create, onboarding: FactoryGirl.attributes_for(:invalid_onboarding) }
 
       it "assigns a newly created but unsaved onboarding as @onboarding" do
-        expect(assigns(:onboarding)).to be_a_new(Onboarding)
+        expect(assigns(:onboarding)).to be_a(Onboarding)
+        expect(assigns(:onboarding)).not_to be_persisted
       end
 
       it { should render_template :new }
