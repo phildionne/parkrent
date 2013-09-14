@@ -1,0 +1,30 @@
+<%= simple_form_for @checkout, url: checkout_path do |f| %>
+
+  <%= f.input :first_name, placeholder: 'first_name', autofocus: true %>
+
+  <%= f.input :last_name, placeholder: 'last_name' %>
+
+  <%= f.input :phone_number, placeholder: 'phone_number' %>
+
+  <%= f.input :email, placeholder: 'email' %>
+
+  <%= f.input :password, placeholder: 'password' %>
+
+  <%= f.input :password_confirmation, placeholder: 'password_confirmation' %>
+
+  <hr>
+
+  <%= f.input :rent_id, collection: Rent.all, selected: Rent.where(id: params[:rent_id]).pluck(:id), prompt: 'Select a rent' %>
+
+  <% if @checkout.user.vehicles.any? %>
+
+    <%= f.association :vehicle, collection: @checkout.user.vehicles, prompt: 'Select a vehicle' %>
+
+  <% else %>
+
+    <h3>Add a vehicle</h3>
+    <%= render 'vehicles/fields', f: f %>
+  <% end %>
+
+  <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary btn-block' %>
+<% end %>
