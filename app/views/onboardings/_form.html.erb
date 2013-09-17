@@ -1,17 +1,14 @@
 <div class="row">
-  <%= simple_form_for @onboarding, url: onboarding_path do |f| %>
+  <%= simple_form_for(@onboarding, url: onboarding_path, defaults: { label: false, input_html: { :class => 'transparent' }}) do |f| %>
 
     <div class="col col-lg-6">
       <fieldset>
         <legend>Your informations</legend>
 
-        <%= f.input :first_name, placeholder: 'first_name' %>
-
-        <%= f.input :last_name, placeholder: 'last_name' %>
-
-        <%= f.input :phone_number, placeholder: 'phone_number' %>
-
-        <%= f.input :email, placeholder: 'email' %>
+        <%= f.input :first_name,   placeholder: 'First name' %>
+        <%= f.input :last_name,    placeholder: 'Last name' %>
+        <%= f.input :phone_number, placeholder: 'Phone number' %>
+        <%= f.input :email,        placeholder: 'Email' %>
       </fieldset>
     </div>
 
@@ -19,13 +16,10 @@
       <fieldset>
         <legend>Your Parking</legend>
 
-        <%= f.input :location, placeholder: 'location' %>
-
-        <%= f.input :beginning, placeholder: 'beginning', input_html: { :class => 'js-datepicker' } %>
-
-        <%= f.input :termination, placeholder: 'termination', input_html: { :class => 'js-datepicker' } %>
-
-        <%= f.input :price, placeholder: 'price' %>
+        <%= f.input :location,    placeholder: 'Location' %>
+        <%= f.input :beginning,   placeholder: 'Beginning', input_html: { :class => 'transparent js-datepicker' } %>
+        <%= f.input :termination, placeholder: 'Termination', input_html: { :class => 'transparent js-datepicker' } %>
+        <%= f.input :price,       placeholder: 'Price' %>
 
       </fieldset>
 
