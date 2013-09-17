@@ -1,5 +1,5 @@
-<%= f.input :license_plate %>
+<%= f.input :license_plate, placeholder: 'License plate' %>
 
-<%= f.input :year, start_year: Date.current.year - 15, end_year: Date.current.year, discard_month: true, discard_day: true, prompt: 'Select a year' %>
+<%= f.input :year, start_year: Date.current.year - 15, end_year: Date.current.year, discard_month: true, discard_day: true, placeholder: 'Year', prompt: 'Select a year' %>
 
-<%= f.input :model %>
+<%= f.input :model, placeholder: 'Make/Model' %>

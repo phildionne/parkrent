@@ -1,4 +1,4 @@
-<%= simple_form_for @vehicle do |f| %>
+<%= simple_form_for(@vehicle, defaults: { label: false, input_html: { :class => 'transparent'}}) do |f| %>
 
   <%= render 'fields', f: f %>
 
