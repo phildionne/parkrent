@@ -9,6 +9,10 @@ describe RentsController do
 
     before { get :new, parking_id: parking }
 
+    it "assigns a new rent as @rent" do
+      expect(assigns(:rent)).to be_a_new(Rent)
+    end
+
     it "responds with success and render template" do
       expect(response).to be_success
       expect(response).to render_template :new
@@ -34,7 +38,7 @@ describe RentsController do
 
       it "redirects to the created rent" do
         post :create, { rent: rent_attributes, parking_id: parking }
-        response.should redirect_to(parking_path(parking))
+        expect(response).to redirect_to(parking_path(parking))
       end
     end
 
@@ -48,6 +52,7 @@ describe RentsController do
 
       it "assigns a newly created but unsaved rent as @rent" do
         expect(assigns(:rent)).to be_a_new(Rent)
+        expect(assigns(:rent)).not_to be_persisted
       end
 
       it { should render_template :new }

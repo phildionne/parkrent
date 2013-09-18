@@ -33,5 +33,4 @@ describe Payment do
 
   describe :InstanceMethods do
   end
-
 end

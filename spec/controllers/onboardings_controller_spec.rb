@@ -4,6 +4,10 @@ describe OnboardingsController do
   describe "GET new" do
     before { get :new }
 
+    it "assigns a new onboarding as @onboarding" do
+      expect(assigns(:onboarding)).to be_a_new(Onboarding)
+    end
+
     it "responds with success and render template" do
       expect(response).to be_success
       expect(response).to render_template :new

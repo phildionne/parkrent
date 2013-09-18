@@ -4,6 +4,10 @@ describe CheckoutsController do
   describe "GET new" do
     before { get :new }
 
+    it "assigns a new checkout as @checkout" do
+      expect(assigns(:checkout)).to be_a_new(Checkout)
+    end
+
     it "responds with success and render template" do
       expect(response).to be_success
       expect(response).to render_template :new
@@ -28,6 +32,11 @@ describe CheckoutsController do
         expect(assigns(:checkout).order).to be_persisted
         expect(assigns(:checkout).user).to be_persisted
         expect(assigns(:checkout).vehicle).to be_persisted
+      end
+
+      it "assigns the correct rent" do
+        post :create, { checkout: checkout_attributes }
+        expect(assigns(:checkout).rent).to eq(rent)
       end
 
       it "redirects to the newly created order" do

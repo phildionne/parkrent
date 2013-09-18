@@ -37,5 +37,4 @@ describe Parking do
 
   describe :InstanceMethods do
   end
-
 end

@@ -37,5 +37,4 @@ describe Rent do
 
   describe :InstanceMethods do
   end
-
 end

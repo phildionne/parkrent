@@ -32,5 +32,4 @@ describe Vehicle do
 
   describe :InstanceMethods do
   end
-
 end

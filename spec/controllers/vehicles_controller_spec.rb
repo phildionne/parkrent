@@ -8,6 +8,10 @@ describe VehiclesController do
   describe "GET new" do
     before { get :new }
 
+    it "assigns a new vehicle as @vehicle" do
+      expect(assigns(:vehicle)).to be_a_new(Vehicle)
+    end
+
     it "responds with success and render template" do
       expect(response).to be_success
       expect(response).to render_template :new
@@ -18,6 +22,10 @@ describe VehiclesController do
     let(:vehicle) { FactoryGirl.create(:vehicle, user: user) }
 
     before { get :edit, id: vehicle }
+
+    it "assigns the requested vehicle to @vehicle" do
+      expect(assigns(:vehicle)).to eq(vehicle)
+    end
 
     it "responds with success and render template" do
       expect(response).to be_success
@@ -52,29 +60,30 @@ describe VehiclesController do
 
       it "assigns a newly created but unsaved vehicle as @vehicle" do
         expect(assigns(:vehicle)).to be_a_new(Vehicle)
+        expect(assigns(:vehicle)).not_to be_persisted
       end
 
       it { should render_template :new }
     end
   end
 
-  describe "PUT update" do
+  describe "PATCH update" do
     let(:vehicle) { FactoryGirl.create(:vehicle, license_plate: "ABC 000", user: user) }
 
     context "with valid params" do
       it "assigns the requested vehicle as @vehicle" do
-        put :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:vehicle)}
+        patch :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:vehicle)}
         expect(assigns(:vehicle)).to eq(vehicle)
       end
 
       it "updates the requested vehicle" do
-        put :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:vehicle, license_plate: "ABC 123") }
+        patch :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:vehicle, license_plate: "ABC 123") }
         vehicle.reload
         expect(vehicle.license_plate).to eq("ABC 123")
       end
 
       it "redirects to the dashboard" do
-        put :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:vehicle) }
+        patch :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:vehicle) }
         vehicle.reload
         expect(response).to redirect_to(root_path)
       end
@@ -82,18 +91,18 @@ describe VehiclesController do
 
     context "with invalid params" do
       it "assigns the vehicle as @vehicle" do
-        put :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:invalid_vehicle) }
+        patch :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:invalid_vehicle) }
         expect(assigns(:vehicle)).to eq(vehicle)
       end
 
       it "does not update @vehicle's attributes" do
-        put :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:invalid_vehicle, license_plate: "123") }
+        patch :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:invalid_vehicle, license_plate: "123") }
         vehicle.reload
         expect(vehicle.license_plate).to_not eq("123")
       end
 
       it "re-renders the 'edit' template" do
-        put :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:invalid_vehicle) }
+        patch :update, { id: vehicle, vehicle: FactoryGirl.attributes_for(:invalid_vehicle) }
         expect(response).to render_template :edit
       end
     end

@@ -38,5 +38,4 @@ describe Order do
 
   describe :InstanceMethods do
   end
-
 end

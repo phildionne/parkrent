@@ -32,6 +32,10 @@ describe ParkingsController do
   describe "GET new" do
     before { get :new }
 
+    it "assigns a new parking as @parking" do
+      expect(assigns(:parking)).to be_a_new(Parking)
+    end
+
     it "responds with success and render template" do
       expect(response).to be_success
       expect(response).to render_template :new
@@ -42,6 +46,10 @@ describe ParkingsController do
     let(:parking) { FactoryGirl.create(:parking, user: user) }
 
     before { get :edit, id: parking }
+
+    it "assigns the requested parking to @parking" do
+      expect(assigns(:parking)).to eq(parking)
+    end
 
     it "responds with success and render template" do
       expect(response).to be_success
@@ -67,7 +75,7 @@ describe ParkingsController do
 
       it "redirects to the created parking" do
         post :create, { parking: parking_attributes }
-        expect(response).to redirect_to(Parking.last)
+        expect(response).to redirect_to(assigns(:parking))
       end
     end
 
@@ -76,29 +84,30 @@ describe ParkingsController do
 
       it "assigns a newly created but unsaved parking as @parking" do
         expect(assigns(:parking)).to be_a_new(Parking)
+        expect(assigns(:parking)).not_to be_persisted
       end
 
       it { should render_template :new }
     end
   end
 
-  describe "PUT update" do
+  describe "PATCH update" do
     let(:parking) { FactoryGirl.create(:parking, location: "Somewhere", user: user) }
 
     context "with valid params" do
       it "assigns the requested parking as @parking" do
-        put :update, { id: parking, parking: FactoryGirl.attributes_for(:parking)}
+        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:parking)}
         expect(assigns(:parking)).to eq(parking)
       end
 
       it "updates the requested parking" do
-        put :update, { id: parking, parking: FactoryGirl.attributes_for(:parking, location: "Somewhere else") }
+        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:parking, location: "Somewhere else") }
         parking.reload
         expect(parking.location).to eq("Somewhere else")
       end
 
       it "redirects to the parking" do
-        put :update, { id: parking, parking: FactoryGirl.attributes_for(:parking) }
+        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:parking) }
         parking.reload
         expect(response).to redirect_to(parking)
       end
@@ -106,18 +115,18 @@ describe ParkingsController do
 
     context "with invalid params" do
       it "assigns the parking as @parking" do
-        put :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking) }
+        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking) }
         expect(assigns(:parking)).to eq(parking)
       end
 
       it "does not update @parking's attributes" do
-        put :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking, location: " ") }
+        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking, location: " ") }
         parking.reload
         expect(parking.location).to_not eq(" ")
       end
 
       it "re-renders the 'edit' template" do
-        put :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking) }
+        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking) }
         expect(response).to render_template :edit
       end
     end
