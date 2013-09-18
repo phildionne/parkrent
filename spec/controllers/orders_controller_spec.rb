@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe OrdersController do
-  let(:user) { FactoryGirl.create(:user_with_vehicles) }
+  # @FIXME Consider adding context to test a signed in/signed out usecase
+  let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
 
   describe "GET index" do
@@ -29,13 +30,35 @@ describe OrdersController do
   end
 
   describe "GET new" do
-    let(:rent) { FactoryGirl.create(:rent) }
+    context "with valid params" do
+      let(:rent) { FactoryGirl.create(:rent) }
 
-    before { get :new, rent_id: rent }
+      before { get :new, { rent_id: rent.id } }
 
-    it "responds with success and render template" do
-      expect(response).to be_success
-      expect(response).to render_template :new
+      it "assigns a new order as @order" do
+        expect(assigns(:order)).to be_a_new(Order)
+      end
+
+      it "assigns the correct rent as @rent" do
+        expect(assigns(:rent)).to eq(rent)
+      end
+
+      it "assigns a new vehicle as @vehicle" do
+        expect(assigns(:vehicle)).to be_a_new(Vehicle)
+      end
+
+      it "responds with success and render template" do
+        expect(response).to be_success
+        expect(response).to render_template :new
+      end
+    end
+
+    context "with invalid params" do
+      it "raises an error" do
+        expect {
+          get :new, { rent_id: nil }
+        }.to raise_error
+      end
     end
   end
 
@@ -43,6 +66,14 @@ describe OrdersController do
     let(:order) { FactoryGirl.create(:order, user: user) }
 
     before { get :edit, id: order }
+
+    it "assigns the requested order as @order" do
+      expect(assigns(:order)).to eq(order)
+    end
+
+    it "assigns a new vehicle as @vehicle" do
+      expect(assigns(:vehicle)).to be_a_new(Vehicle)
+    end
 
     it "responds with success and render template" do
       expect(response).to be_success
@@ -52,7 +83,9 @@ describe OrdersController do
 
   describe "POST create" do
     context "with valid params" do
-      let(:order_attributes) { FactoryGirl.attributes_for(:order) }
+      let(:rent)             { FactoryGirl.create(:rent) }
+      let(:vehicle)          { FactoryGirl.create(:vehicle, user: user) }
+      let(:order_attributes) { FactoryGirl.attributes_for(:order).merge(rent_id: rent.id).merge(vehicle_id: vehicle.id) }
 
       it "creates a new Order" do
         expect {
@@ -68,23 +101,27 @@ describe OrdersController do
 
       it "redirects to the created order" do
         post :create, { order: order_attributes }
-        expect(response).to redirect_to(Order.last)
+        expect(response).to redirect_to(assigns(:order))
       end
     end
 
     context "with invalid params" do
-      before { post :create, order: FactoryGirl.attributes_for(:invalid_order) }
+      let(:order_attributes) { FactoryGirl.attributes_for(:invalid_order).merge(rent_id: nil).merge(vehicle_id: nil) }
+
+      before { post :create, { order: order_attributes } }
 
       it "assigns a newly created but unsaved order as @order" do
         expect(assigns(:order)).to be_a_new(Order)
+        expect(assigns(:order)).not_to be_persisted
       end
 
       it { should render_template :new }
     end
 
-    context "without existing vehicles" do
+    context "when creating a vehicle" do
       context "with valid params" do
-        let(:order_attributes) { FactoryGirl.attributes_for(:order) }
+        let(:rent)               { FactoryGirl.create(:rent) }
+        let(:order_attributes)   { FactoryGirl.attributes_for(:order).merge(rent_id: rent.id) }
         let(:vehicle_attributes) { FactoryGirl.attributes_for(:vehicle) }
 
         it "creates a new Vehicle" do
@@ -92,62 +129,66 @@ describe OrdersController do
             post :create, { order: order_attributes, vehicle: vehicle_attributes }
           }.to change(Vehicle, :count).by(1)
         end
-
-        it "assigns a newly created vehicle as @vehicle" do
-          post :create, { order: order_attributes, vehicle: vehicle_attributes }
-          expect(assigns(:vehicle)).to be_a(Vehicle)
-          expect(assigns(:vehicle)).to be_persisted
-        end
       end
 
       context "with invalid params" do
-        before { post :create, order: FactoryGirl.attributes_for(:invalid_order), vehicle: FactoryGirl.attributes_for(:invalid_vehicle) }
+        let(:order_attributes)   { FactoryGirl.attributes_for(:invalid_order).merge(rent_id: nil) }
+        let(:vehicle_attributes) { FactoryGirl.attributes_for(:invalid_vehicle) }
+
+        before { post :create, { order: order_attributes, vehicle: vehicle_attributes } }
 
         it "assigns a newly created but unsaved vehicle as @vehicle" do
           expect(assigns(:vehicle)).to be_a_new(Vehicle)
+          expect(assigns(:vehicle)).not_to be_persisted
         end
       end
     end
   end
 
-  describe "PUT update" do
-    let(:rent) { FactoryGirl.create(:rent) }
-    let(:other_rent) { FactoryGirl.create(:rent) }
-    let(:order) { FactoryGirl.create(:order, rent: rent, user: user) }
+  describe "PATCH update" do
+    let(:order) { FactoryGirl.create(:order, user: user) }
 
     context "with valid params" do
+      let(:rent)             { FactoryGirl.create(:rent) }
+      let(:vehicle)          { FactoryGirl.create(:vehicle, user: user) }
+      let(:order_attributes) { FactoryGirl.attributes_for(:order).merge(rent_id: rent.id).merge(vehicle_id: vehicle.id) }
+
       it "assigns the requested order as @order" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:order)}
+        patch :update, { id: order, order: order_attributes }
         expect(assigns(:order)).to eq(order)
       end
 
       it "updates the requested order" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:order, rent: other_rent) }
+        patch :update, { id: order, order: order_attributes }
         order.reload
-        expect(order.rent).to eq(other_rent)
+        expect(order.rent).to eq(rent)
+        expect(order.vehicle).to eq(vehicle)
       end
 
       it "redirects to the order" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:order) }
+        patch :update, { id: order, order: order_attributes }
         order.reload
         expect(response).to redirect_to(order)
       end
     end
 
     context "with invalid params" do
+      let(:rent)             { FactoryGirl.create(:rent) }
+      let(:order_attributes) { FactoryGirl.attributes_for(:invalid_order).merge(rent_id: rent.id).merge(vehicle_id: nil) }
+
       it "assigns the order as @order" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order) }
+        patch :update, { id: order, order: order_attributes }
         expect(assigns(:order)).to eq(order)
       end
 
       it "does not update @order's attributes" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order, rent: "Invalid rent") }
+        patch :update, { id: order, order: order_attributes }
         order.reload
-        order.rent.should_not eq("Invalid rent")
+        expect(order.rent).not_to eq(rent)
       end
 
       it "re-renders the 'edit' template" do
-        put :update, { id: order, order: FactoryGirl.attributes_for(:invalid_order) }
+        patch :update, { id: order, order: order_attributes }
         expect(response).to render_template :edit
       end
     end

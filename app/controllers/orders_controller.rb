@@ -13,23 +13,27 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = current_user.orders.new
-    @rent = Rent.find(params.require(:rent_id))
+    @order   = current_user.orders.new
+    @rent    = Rent.find(params.require(:rent_id))
     @vehicle = Vehicle.new
   end
 
   # GET /orders/1/edit
   def edit
-    @order = current_user.orders.find(params.require(:id))
+    @order   = current_user.orders.find(params.require(:id))
+    @rent    = @order.rent
+    @vehicle = Vehicle.new
   end
 
   # POST /orders
   def create
-    @order = current_user.orders.new(permitted_params)
+    @order   = current_user.orders.new(permitted_params)
+    @rent    = @order.rent
+    @vehicle = Vehicle.new
 
-    # Build and persist a newly created vehicle when none exist
-    if @order.user.vehicles.none?
-      @vehicle = @order.user.vehicles.new(permitted_vehicle_params)
+    # Build and persist a newly created vehicle
+    if params[:vehicle].present?
+      @vehicle = current_user.vehicles.new(permitted_vehicle_params)
 
       if @vehicle.save
         @order.vehicle = @vehicle
