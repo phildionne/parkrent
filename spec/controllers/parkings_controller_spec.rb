@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ParkingsController do
   # @FIXME Consider adding context to test a signed in/signed out usecase
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
   before { sign_in user }
 
   describe "GET index" do
@@ -15,7 +15,7 @@ describe ParkingsController do
   end
 
   describe "GET show" do
-    let(:parking) { FactoryGirl.create(:parking) }
+    let(:parking) { create(:parking) }
 
     before { get :show, id: parking }
 
@@ -43,7 +43,7 @@ describe ParkingsController do
   end
 
   describe "GET edit" do
-    let(:parking) { FactoryGirl.create(:parking, user: user) }
+    let(:parking) { create(:parking, user: user) }
 
     before { get :edit, id: parking }
 
@@ -59,7 +59,7 @@ describe ParkingsController do
 
   describe "POST create" do
     context "with valid params" do
-      let(:parking_attributes) { FactoryGirl.attributes_for(:parking) }
+      let(:parking_attributes) { attributes_for(:parking) }
 
       it "creates a new Parking" do
         expect {
@@ -80,7 +80,7 @@ describe ParkingsController do
     end
 
     context "with invalid params" do
-      before { post :create, parking: FactoryGirl.attributes_for(:invalid_parking) }
+      before { post :create, parking: attributes_for(:invalid_parking) }
 
       it "assigns a newly created but unsaved parking as @parking" do
         expect(assigns(:parking)).to be_a_new(Parking)
@@ -92,22 +92,22 @@ describe ParkingsController do
   end
 
   describe "PATCH update" do
-    let(:parking) { FactoryGirl.create(:parking, location: "Somewhere", user: user) }
+    let(:parking) { create(:parking, location: "Somewhere", user: user) }
 
     context "with valid params" do
       it "assigns the requested parking as @parking" do
-        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:parking)}
+        patch :update, { id: parking, parking: attributes_for(:parking)}
         expect(assigns(:parking)).to eq(parking)
       end
 
       it "updates the requested parking" do
-        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:parking, location: "Somewhere else") }
+        patch :update, { id: parking, parking: attributes_for(:parking, location: "Somewhere else") }
         parking.reload
         expect(parking.location).to eq("Somewhere else")
       end
 
       it "redirects to the parking" do
-        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:parking) }
+        patch :update, { id: parking, parking: attributes_for(:parking) }
         parking.reload
         expect(response).to redirect_to(parking)
       end
@@ -115,25 +115,25 @@ describe ParkingsController do
 
     context "with invalid params" do
       it "assigns the parking as @parking" do
-        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking) }
+        patch :update, { id: parking, parking: attributes_for(:invalid_parking) }
         expect(assigns(:parking)).to eq(parking)
       end
 
       it "does not update @parking's attributes" do
-        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking, location: " ") }
+        patch :update, { id: parking, parking: attributes_for(:invalid_parking, location: " ") }
         parking.reload
         expect(parking.location).to_not eq(" ")
       end
 
       it "re-renders the 'edit' template" do
-        patch :update, { id: parking, parking: FactoryGirl.attributes_for(:invalid_parking) }
+        patch :update, { id: parking, parking: attributes_for(:invalid_parking) }
         expect(response).to render_template :edit
       end
     end
   end
 
   describe "DELETE destroy" do
-    before { @parking = FactoryGirl.create(:parking, user: user) }
+    before { @parking = create(:parking, user: user) }
 
     it "destroys the requested parking" do
       expect {

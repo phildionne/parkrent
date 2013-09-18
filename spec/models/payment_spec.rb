@@ -4,12 +4,12 @@ describe Payment do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.create(:payment) }
+      subject { create(:payment) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_payment) }
+      subject { build(:invalid_payment) }
       specify { should_not be_valid }
     end
   end

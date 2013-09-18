@@ -4,12 +4,12 @@ describe Checkout do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.build(:checkout) }
+      subject { build(:checkout) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_checkout) }
+      subject { build(:invalid_checkout) }
       specify { should_not be_valid }
     end
   end
@@ -27,10 +27,10 @@ describe Checkout do
 
   describe :InstanceMethods do
     describe :process do
-      before { FactoryGirl.create(:rent) } # Ensure Rent is created before #expect evaluation
+      before { create(:rent) } # Ensure Rent is created before #expect evaluation
 
       context "with valid attributes" do
-        let(:checkout) { FactoryGirl.build(:checkout, rent: Rent.last) }
+        let(:checkout) { build(:checkout, rent: Rent.last) }
 
         it "creates a new user" do
           expect { checkout.process }.to change(User, :count).by(1)
@@ -46,7 +46,7 @@ describe Checkout do
       end
 
       context "with invalid attributes" do
-        let(:checkout) { FactoryGirl.build(:checkout, rent: Rent.last) }
+        let(:checkout) { build(:checkout, rent: Rent.last) }
 
         it "doesn't persist the user" do
           expect { checkout.process }.not_to change(User, :count).by(1)

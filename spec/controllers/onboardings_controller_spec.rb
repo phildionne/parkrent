@@ -16,7 +16,7 @@ describe OnboardingsController do
 
   describe "POST create" do
     context "with valid params" do
-      let(:onboarding_attributes) { FactoryGirl.attributes_for(:onboarding) }
+      let(:onboarding_attributes) { attributes_for(:onboarding) }
 
       it "creates a new Onboarding" do
         expect {
@@ -39,7 +39,7 @@ describe OnboardingsController do
     end
 
     context "with invalid params" do
-      before { post :create, onboarding: FactoryGirl.attributes_for(:invalid_onboarding) }
+      before { post :create, onboarding: attributes_for(:invalid_onboarding) }
 
       it "assigns a newly created but unsaved onboarding as @onboarding" do
         expect(assigns(:onboarding)).to be_a(Onboarding)

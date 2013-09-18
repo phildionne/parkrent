@@ -4,12 +4,12 @@ describe Vehicle do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.create(:vehicle) }
+      subject { create(:vehicle) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_vehicle) }
+      subject { build(:invalid_vehicle) }
       specify { should_not be_valid }
     end
   end

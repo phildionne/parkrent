@@ -4,21 +4,21 @@ describe User do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.create(:user) }
+      subject { create(:user) }
       specify { should be_valid }
 
-      subject { FactoryGirl.create(:user_with_vehicles) }
+      subject { create(:user_with_vehicles) }
       specify { should be_valid }
 
-      subject { FactoryGirl.create(:user_with_parkings) }
+      subject { create(:user_with_parkings) }
       specify { should be_valid }
 
-      subject { FactoryGirl.create(:user_with_parkings_and_rents) }
+      subject { create(:user_with_parkings_and_rents) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_user) }
+      subject { build(:invalid_user) }
       specify { should_not be_valid }
     end
   end
@@ -40,5 +40,4 @@ describe User do
 
   describe :InstanceMethods do
   end
-
 end

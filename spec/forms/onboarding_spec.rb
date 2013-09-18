@@ -4,12 +4,12 @@ describe Onboarding do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.build(:onboarding) }
+      subject { build(:onboarding) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_onboarding) }
+      subject { build(:invalid_onboarding) }
       specify { should_not be_valid }
     end
   end
@@ -31,7 +31,7 @@ describe Onboarding do
   describe :InstanceMethods do
     describe :register do
       context "with valid attributes" do
-        let(:onboarding) { FactoryGirl.build(:onboarding) }
+        let(:onboarding) { build(:onboarding) }
 
         it "creates a new user" do
           expect { onboarding.register }.to change(User, :count).by(1)
@@ -47,7 +47,7 @@ describe Onboarding do
       end
 
       context "with invalid attributes" do
-        let(:onboarding) { FactoryGirl.build(:onboarding, location: nil) }
+        let(:onboarding) { build(:onboarding, location: nil) }
 
         it "doesn't persist the user" do
           expect { onboarding.register }.not_to change(User, :count).by(1)

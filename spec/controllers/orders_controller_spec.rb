@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe OrdersController do
   # @FIXME Consider adding context to test a signed in/signed out usecase
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
   before { sign_in user }
 
   describe "GET index" do
@@ -15,7 +15,7 @@ describe OrdersController do
   end
 
   describe "GET show" do
-    let(:order) { FactoryGirl.create(:order, user: user) }
+    let(:order) { create(:order, user: user) }
 
     before { get :show, id: order }
 
@@ -31,7 +31,7 @@ describe OrdersController do
 
   describe "GET new" do
     context "with valid params" do
-      let(:rent) { FactoryGirl.create(:rent) }
+      let(:rent) { create(:rent) }
 
       before { get :new, { rent_id: rent.id } }
 
@@ -63,7 +63,7 @@ describe OrdersController do
   end
 
   describe "GET edit" do
-    let(:order) { FactoryGirl.create(:order, user: user) }
+    let(:order) { create(:order, user: user) }
 
     before { get :edit, id: order }
 
@@ -83,9 +83,9 @@ describe OrdersController do
 
   describe "POST create" do
     context "with valid params" do
-      let(:rent)             { FactoryGirl.create(:rent) }
-      let(:vehicle)          { FactoryGirl.create(:vehicle, user: user) }
-      let(:order_attributes) { FactoryGirl.attributes_for(:order).merge(rent_id: rent.id).merge(vehicle_id: vehicle.id) }
+      let(:rent)             { create(:rent) }
+      let(:vehicle)          { create(:vehicle, user: user) }
+      let(:order_attributes) { attributes_for(:order).merge(rent_id: rent.id).merge(vehicle_id: vehicle.id) }
 
       it "creates a new Order" do
         expect {
@@ -106,7 +106,7 @@ describe OrdersController do
     end
 
     context "with invalid params" do
-      let(:order_attributes) { FactoryGirl.attributes_for(:invalid_order).merge(rent_id: nil).merge(vehicle_id: nil) }
+      let(:order_attributes) { attributes_for(:invalid_order).merge(rent_id: nil).merge(vehicle_id: nil) }
 
       before { post :create, { order: order_attributes } }
 
@@ -120,9 +120,9 @@ describe OrdersController do
 
     context "when creating a vehicle" do
       context "with valid params" do
-        let(:rent)               { FactoryGirl.create(:rent) }
-        let(:order_attributes)   { FactoryGirl.attributes_for(:order).merge(rent_id: rent.id) }
-        let(:vehicle_attributes) { FactoryGirl.attributes_for(:vehicle) }
+        let(:rent)               { create(:rent) }
+        let(:order_attributes)   { attributes_for(:order).merge(rent_id: rent.id) }
+        let(:vehicle_attributes) { attributes_for(:vehicle) }
 
         it "creates a new Vehicle" do
           expect {
@@ -132,8 +132,8 @@ describe OrdersController do
       end
 
       context "with invalid params" do
-        let(:order_attributes)   { FactoryGirl.attributes_for(:invalid_order).merge(rent_id: nil) }
-        let(:vehicle_attributes) { FactoryGirl.attributes_for(:invalid_vehicle) }
+        let(:order_attributes)   { attributes_for(:invalid_order).merge(rent_id: nil) }
+        let(:vehicle_attributes) { attributes_for(:invalid_vehicle) }
 
         before { post :create, { order: order_attributes, vehicle: vehicle_attributes } }
 
@@ -146,12 +146,12 @@ describe OrdersController do
   end
 
   describe "PATCH update" do
-    let(:order) { FactoryGirl.create(:order, user: user) }
+    let(:order) { create(:order, user: user) }
 
     context "with valid params" do
-      let(:rent)             { FactoryGirl.create(:rent) }
-      let(:vehicle)          { FactoryGirl.create(:vehicle, user: user) }
-      let(:order_attributes) { FactoryGirl.attributes_for(:order).merge(rent_id: rent.id).merge(vehicle_id: vehicle.id) }
+      let(:rent)             { create(:rent) }
+      let(:vehicle)          { create(:vehicle, user: user) }
+      let(:order_attributes) { attributes_for(:order).merge(rent_id: rent.id).merge(vehicle_id: vehicle.id) }
 
       it "assigns the requested order as @order" do
         patch :update, { id: order, order: order_attributes }
@@ -173,8 +173,8 @@ describe OrdersController do
     end
 
     context "with invalid params" do
-      let(:rent)             { FactoryGirl.create(:rent) }
-      let(:order_attributes) { FactoryGirl.attributes_for(:invalid_order).merge(rent_id: rent.id).merge(vehicle_id: nil) }
+      let(:rent)             { create(:rent) }
+      let(:order_attributes) { attributes_for(:invalid_order).merge(rent_id: rent.id).merge(vehicle_id: nil) }
 
       it "assigns the order as @order" do
         patch :update, { id: order, order: order_attributes }
@@ -195,7 +195,7 @@ describe OrdersController do
   end
 
   describe "DELETE destroy" do
-    before { @order = FactoryGirl.create(:order, user: user) }
+    before { @order = create(:order, user: user) }
 
     it "destroys the requested order" do
       expect {

@@ -4,15 +4,15 @@ describe Order do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.create(:order) }
+      subject { create(:order) }
       specify { should be_valid }
 
-      subject { FactoryGirl.create(:order_with_payment) }
+      subject { create(:order_with_payment) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_order) }
+      subject { build(:invalid_order) }
       specify { should_not be_valid }
     end
   end

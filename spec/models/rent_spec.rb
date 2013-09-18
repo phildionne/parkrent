@@ -4,12 +4,12 @@ describe Rent do
 
   describe :Factories do
     context "Valid factory" do
-      subject { FactoryGirl.create(:rent) }
+      subject { create(:rent) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { FactoryGirl.build(:invalid_rent) }
+      subject { build(:invalid_rent) }
       specify { should_not be_valid }
     end
   end

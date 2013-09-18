@@ -15,10 +15,10 @@ describe CheckoutsController do
   end
 
   describe "POST create" do
-    let(:rent) { FactoryGirl.create(:rent) }
+    let(:rent) { create(:rent) }
 
     context "with valid params" do
-      let(:checkout_attributes) { FactoryGirl.attributes_for(:checkout, rent_id: rent.id) }
+      let(:checkout_attributes) { attributes_for(:checkout, rent_id: rent.id) }
 
       it "creates a new Checkout" do
         expect {
@@ -46,7 +46,7 @@ describe CheckoutsController do
     end
 
     context "with invalid params" do
-      before { post :create, checkout: FactoryGirl.attributes_for(:invalid_checkout, rent_id: rent.id) }
+      before { post :create, checkout: attributes_for(:invalid_checkout, rent_id: rent.id) }
 
       it "assigns a newly created but unsaved checkout as @checkout" do
         expect(assigns(:checkout)).to be_a(Checkout)
