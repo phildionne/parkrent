@@ -18,7 +18,7 @@ class LicensePlateValidator < ActiveModel::EachValidator
 
     regex = Regexp.union(formats)
 
-    unless value.present? && value.match(regex)
+    unless value.present? && value.respond_to?(:match) && value.match(regex)
       record.errors[attribute] << (options[:message] || "is not a valid license plate")
     end
   end
