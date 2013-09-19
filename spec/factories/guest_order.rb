@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :checkout do
+  factory :guest_order do
     rent
 
     first_name   { Faker::Name.first_name }
@@ -12,7 +12,7 @@ FactoryGirl.define do
     license_plate { ['A00 ABC', 'ABC 000', '000H000', 'CC 000', 'CD 000'].sample }
   end
 
-  factory :invalid_checkout, parent: :checkout do
+  factory :invalid_guest_order, parent: :guest_order do
     first_name   nil
     last_name    nil
     phone_number nil

@@ -1,4 +1,4 @@
-<%= simple_form_for @checkout, url: checkout_path do |f| %>
+<%= simple_form_for @guest_order, url: guest_order_path do |f| %>
 
   <%= f.input :first_name, placeholder: 'first_name', autofocus: true %>
 
@@ -16,9 +16,10 @@
 
   <%= f.input :rent_id, collection: Rent.all, selected: Rent.where(id: params[:rent_id]).pluck(:id), prompt: 'Select a rent' %>
 
-  <% if @checkout.user.vehicles.any? %>
+  <%# @TODO Think of extracting this in a partial (repeated in orders form) %>
+  <% if @guest_order.user.vehicles.any? %>
 
-    <%= f.association :vehicle, collection: @checkout.user.vehicles, prompt: 'Select a vehicle' %>
+    <%= f.association :vehicle, collection: @guest_order.user.vehicles, prompt: 'Select a vehicle' %>
 
   <% else %>
 

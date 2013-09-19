@@ -1,4 +1,4 @@
-class Checkout
+class GuestOrder
   include ActiveModel::Model
 
   delegate :first_name, :last_name, :phone_number, :email,

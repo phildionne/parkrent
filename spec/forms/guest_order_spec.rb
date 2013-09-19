@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe Checkout do
+describe GuestOrder do
 
   describe :Factories do
     context "Valid factory" do
-      subject { build(:checkout) }
+      subject { build(:guest_order) }
       specify { should be_valid }
     end
 
     context "Invalid factory" do
-      subject { build(:invalid_checkout) }
+      subject { build(:invalid_guest_order) }
       specify { should_not be_valid }
     end
   end
@@ -30,34 +30,34 @@ describe Checkout do
       before { create(:rent) } # Ensure Rent is created before #expect evaluation
 
       context "with valid attributes" do
-        let(:checkout) { build(:checkout, rent: Rent.last) }
+        let(:guest_order) { build(:guest_order, rent: Rent.last) }
 
         it "creates a new user" do
-          expect { checkout.process }.to change(User, :count).by(1)
+          expect { guest_order.process }.to change(User, :count).by(1)
         end
 
         it "creates a new vehicle" do
-          expect { checkout.process }.to change(Vehicle, :count).by(1)
+          expect { guest_order.process }.to change(Vehicle, :count).by(1)
         end
 
         it "creates a new order" do
-          expect { checkout.process }.to change(Order, :count).by(1)
+          expect { guest_order.process }.to change(Order, :count).by(1)
         end
       end
 
       context "with invalid attributes" do
-        let(:checkout) { build(:checkout, rent: Rent.last) }
+        let(:guest_order) { build(:guest_order, rent: Rent.last) }
 
         it "doesn't persist the user" do
-          expect { checkout.process }.not_to change(User, :count).by(1)
+          expect { guest_order.process }.not_to change(User, :count).by(1)
         end
 
         it "doesn't persist the vehicle" do
-          expect { checkout.process }.not_to change(Vehicle, :count).by(1)
+          expect { guest_order.process }.not_to change(Vehicle, :count).by(1)
         end
 
         it "doesn't persist the order" do
-          expect { checkout.process }.not_to change(Order, :count).by(1)
+          expect { guest_order.process }.not_to change(Order, :count).by(1)
         end
       end
     end
