@@ -1,4 +1,5 @@
 class GuestOrdersController < ApplicationController
+  prepend_before_action :require_no_authentication
 
   # GET /guest_order/new
   def new

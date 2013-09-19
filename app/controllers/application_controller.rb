@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def require_no_authentication
+    if user_signed_in?
+      flash[:alert] = I18n.t("devise.failure.already_authenticated")
+      redirect_to after_sign_in_path_for(current_user)
+    end
+  end
+
+
   protected
 
   def configure_permitted_parameters
