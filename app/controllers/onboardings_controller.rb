@@ -1,7 +1,7 @@
 class OnboardingsController < ApplicationController
   prepend_before_action :require_no_authentication
 
-  # /GET /onboarding/new
+  # GET /onboarding/new
   def new
     @onboarding = Onboarding.new
   end
