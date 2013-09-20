@@ -46,7 +46,7 @@ describe GuestOrder do
       end
 
       context "with invalid attributes" do
-        let(:guest_order) { build(:guest_order, rent: Rent.last) }
+        let(:guest_order) { build(:invalid_guest_order, rent: Rent.last) }
 
         it "doesn't persist the user" do
           expect { guest_order.process }.not_to change(User, :count).by(1)
