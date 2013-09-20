@@ -5,7 +5,7 @@ FactoryGirl.define do
     phone_number { Faker::PhoneNumber.phone_number }
 
     email        { Faker::Internet.email }
-    password     { Faker::Lorem.characters(10) }
+    password     { first_name + last_name + phone_number }
   end
 
   factory :user_with_vehicles, parent: :user do

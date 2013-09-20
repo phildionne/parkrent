@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name    { Faker::Name.last_name }
     phone_number { Faker::PhoneNumber.phone_number }
     email        { Faker::Internet.email }
-    password     { Faker::Lorem.characters(10) }
+    password     { first_name + last_name + phone_number }
     password_confirmation { password }
 
     price        { [50, 100].sample }
