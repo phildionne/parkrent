@@ -5,7 +5,8 @@ describe OnboardingsController do
     before { get :new }
 
     it "assigns a new onboarding as @onboarding" do
-      expect(assigns(:onboarding)).to be_a_new(Onboarding)
+      expect(assigns(:onboarding)).to be_a(Onboarding)
+      expect(assigns(:onboarding)).not_to be_persisted
     end
 
     it "responds with success and render template" do
