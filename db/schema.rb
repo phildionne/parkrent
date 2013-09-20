@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911232159) do
+ActiveRecord::Schema.define(version: 20130920004409) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -22,6 +22,10 @@ ActiveRecord::Schema.define(version: 20130911232159) do
     t.datetime "deleted_at"
   end
 
+  add_index "orders", ["rent_id"], name: "index_orders_on_rent_id"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["vehicle_id"], name: "index_orders_on_vehicle_id"
+
   create_table "parkings", force: true do |t|
     t.string   "location"
     t.datetime "created_at"
@@ -30,6 +34,8 @@ ActiveRecord::Schema.define(version: 20130911232159) do
     t.float    "latitude"
     t.float    "longitude"
   end
+
+  add_index "parkings", ["user_id"], name: "index_parkings_on_user_id"
 
   create_table "payments", force: true do |t|
     t.decimal  "amount"
@@ -40,6 +46,8 @@ ActiveRecord::Schema.define(version: 20130911232159) do
     t.datetime "deleted_at"
   end
 
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id"
+
   create_table "rents", force: true do |t|
     t.datetime "beginning"
     t.datetime "termination"
@@ -49,6 +57,8 @@ ActiveRecord::Schema.define(version: 20130911232159) do
     t.integer  "price_cents",    default: 0,     null: false
     t.string   "price_currency", default: "CAD", null: false
   end
+
+  add_index "rents", ["parking_id"], name: "index_rents_on_parking_id"
 
   create_table "users", force: true do |t|
     t.datetime "created_at"
@@ -72,5 +82,7 @@ ActiveRecord::Schema.define(version: 20130911232159) do
     t.string  "model"
     t.date    "year"
   end
+
+  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id"
 
 end
