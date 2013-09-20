@@ -3,8 +3,8 @@ FactoryGirl.define do
     parking
 
     price       { [50, 100].sample }
-    beginning   { Date.tomorrow }
-    termination { beginning + [1, 40, 120].sample.day }
+    beginning   { Date.current }
+    termination { beginning + [1, 2, 3].sample.month }
   end
 
   factory :invalid_rent, parent: :rent do
