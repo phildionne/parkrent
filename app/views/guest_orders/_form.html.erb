@@ -1,31 +1,31 @@
-<%= simple_form_for @guest_order, url: guest_order_path do |f| %>
+<%= simple_form_for(@guest_order, url: guest_order_path, defaults: { label: false, input_html: { :class => 'transparent' }}) do |f| %>
 
-  <%= f.input :first_name, placeholder: 'first_name', autofocus: true %>
+  <%= f.input :first_name, placeholder: 'First name', autofocus: true %>
 
-  <%= f.input :last_name, placeholder: 'last_name' %>
+  <%= f.input :last_name, placeholder: 'Last name' %>
 
-  <%= f.input :phone_number, placeholder: 'phone_number' %>
+  <%= f.input :phone_number, placeholder: 'Phone number' %>
 
-  <%= f.input :email, placeholder: 'email' %>
+  <%= f.input :email, placeholder: 'Email' %>
 
-  <%= f.input :password, placeholder: 'password' %>
+  <%= f.input :password, placeholder: 'Password' %>
 
-  <%= f.input :password_confirmation, placeholder: 'password_confirmation' %>
+  <%= f.input :password_confirmation, placeholder: 'Password confirmation' %>
 
   <hr>
 
-  <%= f.input :rent_id, collection: Rent.all, selected: Rent.where(id: params[:rent_id]).pluck(:id), prompt: 'Select a rent' %>
+  <%= f.input :rent_id, collection: Rent.all, selected: @rent.id, prompt: 'Select a rent' %>
 
   <%# @TODO Think of extracting this in a partial (repeated in orders form) %>
-  <% if @guest_order.user.vehicles.any? %>
-
+  <% if @guest_order.user.vehicles.many? %>
     <%= f.association :vehicle, collection: @guest_order.user.vehicles, prompt: 'Select a vehicle' %>
 
-  <% else %>
-
-    <h3>Add a vehicle</h3>
-    <%= render 'vehicles/fields', f: f %>
+  <% elsif @guest_order.user.vehicles.one? %>
+    <%= f.association :vehicle, collection: @guest_order.user.vehicles, selected: @order.user.vehicles.first %>
   <% end %>
+
+  <h3>Add a vehicle</h3>
+  <%= render 'vehicles/fields', f: f %>
 
   <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary btn-block' %>
 <% end %>

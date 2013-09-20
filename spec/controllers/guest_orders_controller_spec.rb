@@ -2,15 +2,32 @@ require 'spec_helper'
 
 describe GuestOrdersController do
   describe "GET new" do
-    before { get :new }
+    context "with valid params" do
+      let(:rent) { create(:rent) }
 
-    it "assigns a new guest_order as @guest_order" do
-      expect(assigns(:guest_order)).to be_a_new(GuestOrder)
+      before { get :new, { rent_id: rent.id } }
+
+      it "assigns a new guest_order as @guest_order" do
+        expect(assigns(:guest_order)).to be_a(GuestOrder)
+        expect(assigns(:guest_order)).not_to be_persisted
+      end
+
+      it "assigns the correct rent as @rent" do
+        expect(assigns(:rent)).to eq(rent)
+      end
+
+      it "responds with success and render template" do
+        expect(response).to be_success
+        expect(response).to render_template :new
+      end
     end
 
-    it "responds with success and render template" do
-      expect(response).to be_success
-      expect(response).to render_template :new
+    context "with invalid params" do
+      it "raises an error" do
+        expect {
+          get :new, { rent_id: nil }
+        }.to raise_error
+      end
     end
   end
 
