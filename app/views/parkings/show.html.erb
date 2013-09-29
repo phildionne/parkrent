@@ -1,5 +1,18 @@
-<%= render @parking %>
+<div class="row">
+  <div class="col col-lg-2 col-lg-offset-10">
+    <ul class="nav nav-pills">
+      <li>
+        <%= link_to 'New rental', new_parking_rent_path(@parking) %>
+      </li>
+      <li>
+        <%= link_to 'Edit', edit_parking_path(@parking) %>
+      </li>
+    </ul>
+  </div><!-- /.col -->
+</div><!-- /.row -->
 
-<%= link_to 'New rental', new_parking_rent_path(@parking) %> |
-<%= link_to 'Edit', edit_parking_path(@parking) %> |
-<%= link_to 'Back', parkings_path %>
+<div class="row">
+  <div class="col col-lg-12">
+    <%= render @parking %>
+  </div><!-- /.col -->
+</div><!-- /.row -->
