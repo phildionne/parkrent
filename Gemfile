@@ -19,6 +19,7 @@ gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'will_paginate'
 gem 'date_validator'
 gem 'money-rails'
+gem 'associates', path: '/Users/pdionne/Dev/associates'
 
 gem 'less-rails'
 gem 'therubyracer', platforms: :ruby
