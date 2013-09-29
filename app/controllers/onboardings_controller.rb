@@ -10,7 +10,7 @@ class OnboardingsController < ApplicationController
   def create
     @onboarding = Onboarding.new(permitted_params)
 
-    if @onboarding.register
+    if @onboarding.save
       sign_in @onboarding.user
 
       redirect_to({ controller: 'parkings', action: :show, id: @onboarding.parking }, notice: 'Welcome aboard!')

@@ -12,7 +12,7 @@ class GuestOrdersController < ApplicationController
     @guest_order = GuestOrder.new(permitted_params)
     @rent        = @guest_order.rent
 
-    if @guest_order.process
+    if @guest_order.save
       sign_in @guest_order.user
 
       redirect_to @guest_order.order, notice: 'Order was successfully created.'
