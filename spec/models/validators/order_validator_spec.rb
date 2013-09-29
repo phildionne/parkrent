@@ -1,17 +1,14 @@
 require 'spec_helper'
 
-class Validatable
-  include ActiveModel::Validations
-  validates_with OrderValidator
-end
-
 describe OrderValidator do
 
-  subject { Validatable.new }
+  let(:order) { build(:order, vehicle: nil) }
+  let(:user) { create(:user_with_vehicles) }
 
-  context "for a valid record" do
-  end
+  it "validates vehicle belongs to user" do
+    order.vehicle = user.vehicles.sample
+    order.save
 
-  context "for an invalid record" do
+    expect(order).to have(1).error_on(:vehicle)
   end
 end

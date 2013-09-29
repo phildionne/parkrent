@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe OrdersController do
   # @FIXME Consider adding context to test a signed in/signed out usecase
-  let(:user) { create(:user) }
+  let(:user) { create(:user_with_vehicles) }
   before { sign_in user }
 
   describe "GET index" do
@@ -15,7 +15,7 @@ describe OrdersController do
   end
 
   describe "GET show" do
-    let(:order) { create(:order, user: user) }
+    let(:order) { create(:order, user: user, vehicle: user.vehicles.sample) }
 
     before { get :show, id: order }
 
@@ -63,7 +63,7 @@ describe OrdersController do
   end
 
   describe "GET edit" do
-    let(:order) { create(:order, user: user) }
+    let(:order) { create(:order, user: user, vehicle: user.vehicles.sample) }
 
     before { get :edit, id: order }
 
@@ -146,7 +146,7 @@ describe OrdersController do
   end
 
   describe "PATCH update" do
-    let(:order) { create(:order, user: user) }
+    let(:order) { create(:order, user: user, vehicle: user.vehicles.sample) }
 
     context "with valid params" do
       let(:rent)             { create(:rent) }
@@ -195,7 +195,7 @@ describe OrdersController do
   end
 
   describe "DELETE destroy" do
-    before { @order = create(:order, user: user) }
+    before { @order = create(:order, user: user, vehicle: user.vehicles.sample) }
 
     it "destroys the requested order" do
       expect {

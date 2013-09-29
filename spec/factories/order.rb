@@ -1,8 +1,12 @@
 FactoryGirl.define do
   factory :order do
-    rent
-    user
-    vehicle
+    association :rent, factory: :rent
+    association :user, factory: :user_with_vehicles
+    vehicle nil
+
+    before(:create) do |order|
+      order.vehicle = order.user.vehicles.sample
+    end
   end
 
   factory :order_with_payment, parent: :order do
