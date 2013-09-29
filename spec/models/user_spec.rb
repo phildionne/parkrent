@@ -27,6 +27,8 @@ describe User do
     it { should have_many(:orders).dependent(:destroy) }
     it { should have_many(:parkings).dependent(:destroy) }
     it { should have_many(:vehicles).dependent(:destroy) }
+    it { should have_many(:rents) }
+    it { should have_many(:sales) }
   end
 
   describe :Validations do

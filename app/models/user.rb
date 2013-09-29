@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :parkings, dependent: :destroy
   has_many :vehicles, dependent: :destroy
+  has_many :rents, through: :parkings
+  has_many :sales, through: :rents, source: :orders
 
   # #return [ActiveRecord::Relation] Orders made for rents owned by this user
   def rent_orders
