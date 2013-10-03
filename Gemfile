@@ -55,6 +55,7 @@ group :test do
   gem 'guard-spork', '~> 1.5.0'
   gem 'rb-fsevent'
   gem 'database_cleaner'
+  gem 'fivemat'
 end
 
 group :production do
