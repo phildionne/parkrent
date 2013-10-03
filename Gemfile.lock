@@ -6,6 +6,12 @@ GIT
       activerecord (~> 4.0.0)
 
 GIT
+  remote: git://github.com/bmabey/database_cleaner.git
+  revision: 1ce7c9989acd4815621fe9a007fc4b759a37b239
+  specs:
+    database_cleaner (1.1.1)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: f0b95cb9805ebc895947cafaf33a07b67eeb8c71
   specs:
@@ -81,7 +87,6 @@ GEM
     columnize (0.3.6)
     commonjs (0.2.7)
     daemons (1.1.9)
-    database_cleaner (1.1.1)
     date_validator (0.7.0)
       activemodel (>= 3)
     debug_inspector (0.0.2)
@@ -305,7 +310,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
-  database_cleaner
+  database_cleaner!
   date_validator
   debugger
   devise

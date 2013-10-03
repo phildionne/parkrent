@@ -54,7 +54,7 @@ group :test do
   gem 'guard-livereload'
   gem 'guard-spork', '~> 1.5.0'
   gem 'rb-fsevent'
-  gem 'database_cleaner'
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'fivemat'
 end
 
