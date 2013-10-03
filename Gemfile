@@ -49,7 +49,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'guard-brakeman'
   gem 'rspec-rails'
-  gem 'spork-rails', github: 'sporkrb/spork-rails'
+  gem 'spork-rails'
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'guard-spork', '~> 1.5.0'
