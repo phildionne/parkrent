@@ -25,7 +25,7 @@ class RentsController < ApplicationController
 
   # PATCH/PUT parkings/:parking_id/rents/1
   def update
-    @rent = @parking.rents.new(permitted_params)
+    @rent = @parking.rents.find(params.require(:id))
 
     if @rent.update_attributes(permitted_params)
       redirect_to parking_path(@parking), notice: 'Rent was successfully updated.'

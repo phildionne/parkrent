@@ -26,7 +26,7 @@ class PaymentsController < ApplicationController
 
   # PATCH/PUT /orders/:order_id/payment/1
   def update
-    @payment = @order.payment.new(permitted_params)
+    @payment = @order.payments.find(params.require(:id))
 
     if @payment.update(permitted_params)
       redirect_to @payment, notice: 'Payment was successfully updated.'
