@@ -7,6 +7,7 @@ gem 'thin'
 gem 'foreman'
 
 gem 'rack-timeout'
+gem 'escape_utils'
 
 gem 'devise'
 gem 'devise-i18n'
