@@ -11,10 +11,16 @@ class OnboardingsController < ApplicationController
     @onboarding = Onboarding.new(permitted_params)
 
     if @onboarding.save
-      sign_in @onboarding.user
+      if @onboarding.user.active_for_authentication?
+        sign_in @onboarding.user
 
-      redirect_to({ controller: 'parkings', action: :show, id: @onboarding.parking }, notice: 'Welcome aboard!')
+        redirect_to({ controller: 'parkings', action: :show, id: @onboarding.parking }, notice: I18n.t('devise.registrations.signed_up'))
+      else
+        # @FIXME This notice could be false, depending on the state of the registration
+        redirect_to root_path, notice: I18n.t('devise.registrations.signed_up_but_unconfirmed')
+      end
     else
+      # @TODO Need to manually cleanup passwords?
       render action: :new
     end
   end
