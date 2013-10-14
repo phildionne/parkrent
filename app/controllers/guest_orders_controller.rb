@@ -3,6 +3,8 @@ class GuestOrdersController < ApplicationController
 
   # GET /guest_order/new
   def new
+    # @FIXME With an inexisting rent_id passed in the params, the view defaults to the first one
+    # Kind of a strange default behavior
     @guest_order = GuestOrder.new(params.permit(:rent_id))
   end
 

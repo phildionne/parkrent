@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe RentsController do
   let(:user) { create(:user) }
-  before { sign_in user }
+  before do
+    user.confirm!
+    sign_in user
+  end
 
   describe "GET new" do
     let(:parking) { create(:parking, user: user) }

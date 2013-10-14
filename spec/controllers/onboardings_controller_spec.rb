@@ -27,15 +27,18 @@ describe OnboardingsController do
 
       it "assigns a newly created onboarding as @onboarding" do
         post :create, { onboarding: onboarding_attributes }
-        expect(assigns(:onboarding)).to be_a(Onboarding)
-        expect(assigns(:onboarding).user).to be_persisted
+        expect(assigns(:onboarding)).to         be_a(Onboarding)
+        expect(assigns(:onboarding).user).to    be_persisted
         expect(assigns(:onboarding).parking).to be_persisted
-        expect(assigns(:onboarding).rent).to be_persisted
+        expect(assigns(:onboarding).rent).to    be_persisted
       end
 
-      it "redirects to the newly created parking" do
-        post :create, { onboarding: onboarding_attributes }
-        expect(response).to redirect_to(assigns(:onboarding).parking)
+      context "when unconfirmed" do
+
+        it "redirects to the root path" do
+          post :create, { onboarding: onboarding_attributes }
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
 

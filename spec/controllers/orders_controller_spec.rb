@@ -3,7 +3,10 @@ require 'spec_helper'
 describe OrdersController do
   # @FIXME Consider adding context to test a signed in/signed out usecase
   let(:user) { create(:user_with_vehicles) }
-  before { sign_in user }
+  before do
+    user.confirm!
+    sign_in user
+  end
 
   describe "GET index" do
     before { get :index }

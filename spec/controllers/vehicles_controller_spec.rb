@@ -3,7 +3,10 @@ require 'spec_helper'
 describe VehiclesController do
   # @FIXME Consider adding context to test a signed in/signed out usecase
   let(:user) { create(:user) }
-  before { sign_in user }
+  before do
+    user.confirm!
+    sign_in user
+  end
 
   describe "GET new" do
     before { get :new }

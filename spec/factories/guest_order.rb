@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :guest_order do
-    rent
+    rent_id      { create(:rent).id }
 
     first_name   { Faker::Name.first_name }
     last_name    { Faker::Name.last_name }

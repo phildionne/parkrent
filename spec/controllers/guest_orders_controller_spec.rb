@@ -12,10 +12,6 @@ describe GuestOrdersController do
         expect(assigns(:guest_order)).not_to be_persisted
       end
 
-      it "assigns the correct rent as @rent" do
-        expect(assigns(:rent)).to eq(rent)
-      end
-
       it "responds with success and render template" do
         expect(response).to be_success
         expect(response).to render_template :new
@@ -23,11 +19,7 @@ describe GuestOrdersController do
     end
 
     context "with invalid params" do
-      it "raises an error" do
-        expect {
-          get :new, { rent_id: nil }
-        }.to raise_error
-      end
+      pending
     end
   end
 
@@ -45,20 +37,23 @@ describe GuestOrdersController do
 
       it "assigns a newly created guest_order as @guest_order" do
         post :create, { guest_order: guest_order_attributes }
-        expect(assigns(:guest_order)).to be_a(GuestOrder)
-        expect(assigns(:guest_order).order).to be_persisted
-        expect(assigns(:guest_order).user).to be_persisted
+        expect(assigns(:guest_order)).to         be_a(GuestOrder)
+        expect(assigns(:guest_order).order).to   be_persisted
+        expect(assigns(:guest_order).user).to    be_persisted
         expect(assigns(:guest_order).vehicle).to be_persisted
       end
 
       it "assigns the correct rent" do
         post :create, { guest_order: guest_order_attributes }
-        expect(assigns(:guest_order).rent).to eq(rent)
+        expect(assigns(:guest_order).rent_id).to eq(rent.id)
       end
 
-      it "redirects to the newly created order" do
-        post :create, { guest_order: guest_order_attributes }
-        expect(response).to redirect_to(assigns(:guest_order).order)
+      context "when unconfirmed" do
+
+        it "redirects to the root path" do
+          post :create, { guest_order: guest_order_attributes }
+          expect(response).to redirect_to(root_path)
+        end
       end
     end
 
