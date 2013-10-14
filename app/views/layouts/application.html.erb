@@ -27,7 +27,7 @@
 <body data-view="<%= body_class %>">
   <div class="container" id="wrapper" role="document">
     <%= render 'layouts/header' %>
-    <%= bootstrap_flash %>
+    <%= render partial: 'layouts/flash', flash: flash %>
 
     <%= yield %>
   </div><!-- /#wrapper -->
