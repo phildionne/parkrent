@@ -3,8 +3,7 @@ class GuestOrdersController < ApplicationController
 
   # GET /guest_order/new
   def new
-    @guest_order      = GuestOrder.new
-    @guest_order.rent = Rent.find(params.require(:rent_id))
+    @guest_order = GuestOrder.new(params.permit(:rent_id))
   end
 
   # POST /guest_order

@@ -14,7 +14,7 @@
 
   <hr>
 
-  <%= f.input :rent_id, collection: Rent.all, selected: @guest_order.rent.id, prompt: 'Select a rent' %>
+  <%= f.input :rent_id, collection: Rent.all, selected: @guest_order.rent_id, prompt: 'Select a rent' %>
 
   <%# @TODO Think of extracting this in a partial (repeated in orders form) %>
   <% if @guest_order.user.vehicles.many? %>
