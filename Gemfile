@@ -12,6 +12,7 @@ gem 'escape_utils'
 
 gem 'devise'
 gem 'devise-i18n'
+gem 'authority'
 gem 'paranoia', '~> 2.0'
 gem 'geocoder'
 gem 'high_voltage'
