@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col col-lg-8">
 
-      <img src="http://placehold.it/600" alt="">
+      <img src="http://placehold.it/600x300" alt="">
 
       <hr>
 
@@ -20,6 +20,15 @@
       <header>
         <h1><%= parking.location %></h1>
       </header>
+
+      <hr>
+
+      <h3>Profile</h3>
+      <div>
+        <%= render parking.user %>
+      </div>
+
+      <hr>
 
       <div class="map js-mapbox" data-lat="<%= parking.latitude %>" data-lon="<%= parking.longitude %>" data-zoom="5"></div>
 
