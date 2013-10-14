@@ -10,7 +10,7 @@
   </ul>
 
   <footer>
-    <%= link_to 'Rent', new_order_path(rent_id: rent.id) %>
+    <%= link_to 'Rent', current_user ? new_order_path(rent_id: rent.id) : new_guest_order_path(rent_id: rent.id)  %>
     <%= link_to 'Edit', edit_parking_rent_path(rent.parking, rent) %>
     <%= link_to 'Destroy', parking_rent_path(rent.parking, rent), method: :delete, data: { confirm: 'Are you sure?' } %>
   </footer>
