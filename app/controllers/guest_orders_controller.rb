@@ -3,14 +3,13 @@ class GuestOrdersController < ApplicationController
 
   # GET /guest_order/new
   def new
-    @guest_order = GuestOrder.new
-    @rent        = Rent.find(params.require(:rent_id))
+    @guest_order      = GuestOrder.new
+    @guest_order.rent = Rent.find(params.require(:rent_id))
   end
 
   # POST /guest_order
   def create
     @guest_order = GuestOrder.new(permitted_params)
-    @rent        = @guest_order.rent
 
     if @guest_order.save
       sign_in @guest_order.user
