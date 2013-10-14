@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131003221210) do
+ActiveRecord::Schema.define(version: 20131010214618) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20131003221210) do
     t.integer  "parking_id"
     t.integer  "price_cents",    default: 0,     null: false
     t.string   "price_currency", default: "CAD", null: false
+    t.boolean  "published"
   end
 
   add_index "rents", ["parking_id"], name: "index_rents_on_parking_id"
