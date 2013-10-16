@@ -1,5 +1,6 @@
 class Rent < ActiveRecord::Base
   belongs_to :parking
+  has_one :user, through: :parking
   has_many :orders
 
   scope :published,   -> { where(published: true) }

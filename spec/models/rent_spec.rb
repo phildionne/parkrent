@@ -16,6 +16,7 @@ describe Rent do
 
   describe :Associations do
     it { should belong_to(:parking) }
+    it { should have_one(:user).through(:parking) }
     it { should have_many(:orders) }
   end
 
