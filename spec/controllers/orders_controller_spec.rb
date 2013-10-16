@@ -128,6 +128,9 @@ describe OrdersController do
         let(:vehicle_attributes) { attributes_for(:vehicle) }
 
         it "creates a new Vehicle" do
+          # Force the block to be evaluated, workaround for order factory eager creation
+          order_attributes
+
           expect {
             post :create, { order: order_attributes, vehicle: vehicle_attributes }
           }.to change(Vehicle, :count).by(1)
