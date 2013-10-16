@@ -1,4 +1,6 @@
 class Rent < ActiveRecord::Base
+  include Authority::Abilities
+
   belongs_to :parking
   has_one :user, through: :parking
   has_many :orders

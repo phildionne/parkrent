@@ -1,4 +1,5 @@
 class Parking < ActiveRecord::Base
+  include Authority::Abilities
 
   geocoded_by :location
 
