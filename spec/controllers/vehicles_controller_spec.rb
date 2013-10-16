@@ -112,16 +112,16 @@ describe VehiclesController do
   end
 
   describe "DELETE destroy" do
-    before { @vehicle = create(:vehicle, user: user) }
+    let(:vehicle) { create(:vehicle, user: user) }
 
     it "destroys the requested vehicle" do
       expect {
-        delete :destroy, { id: @vehicle }
+        delete :destroy, { id: vehicle }
       }.to change(Vehicle, :count).by(-1)
     end
 
     it "redirects to the dashboard" do
-      delete :destroy, { id: @vehicle }
+      delete :destroy, { id: vehicle }
       expect(response).to redirect_to(root_path)
     end
   end

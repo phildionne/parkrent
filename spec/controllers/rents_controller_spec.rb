@@ -63,18 +63,18 @@ describe RentsController do
   end
 
   describe "DELETE destroy" do
-    before { @parking = create(:parking_with_rents, user: user) }
-    let(:rent) { @parking.rents.first }
+    let!(:parking) { create(:parking_with_rents, user: user) }
+    let(:rent)     { parking.rents.first }
 
     it "destroys the requested rent" do
       expect {
-        delete :destroy, { id: rent, parking_id: @parking }
+        delete :destroy, { id: rent, parking_id: parking }
       }.to change(Rent, :count).by(-1)
     end
 
     it "redirects to the rents list" do
-      delete :destroy, { id: rent, parking_id: @parking }
-      expect(response).to redirect_to(parking_path(@parking))
+      delete :destroy, { id: rent, parking_id: parking }
+      expect(response).to redirect_to(parking_path(parking))
     end
   end
 

@@ -136,16 +136,16 @@ describe ParkingsController do
   end
 
   describe "DELETE destroy" do
-    before { @parking = create(:parking, user: user) }
+    let!(:parking) { create(:parking, user: user) }
 
     it "destroys the requested parking" do
       expect {
-        delete :destroy, { id: @parking }
+        delete :destroy, { id: parking }
       }.to change(Parking, :count).by(-1)
     end
 
     it "redirects to the dashboard" do
-      delete :destroy, { id: @parking }
+      delete :destroy, { id: parking }
       expect(response).to redirect_to(root_path)
     end
   end
