@@ -1,6 +1,8 @@
 class ParkingsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
+  authorize_actions_for Parking, except: [:edit, :update, :destroy]
+
   # GET /parkings
   def index
     if params[:search]
@@ -9,7 +11,7 @@ class ParkingsController < ApplicationController
       parkings = Parking.all
     end
 
-    @parkings = parkings.paginate(page: params[:page], per_page: 10)
+    @parkings = parkings.includes(:rents).paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,17 +26,19 @@ class ParkingsController < ApplicationController
 
   # GET /parkings/new
   def new
-    @parking = current_user.parkings.new
+    @parking = Parking.new
   end
 
   # GET /parkings/1/edit
   def edit
-    @parking = current_user.parkings.find(params.require(:id))
+    @parking = Parking.find(params.require(:id))
+    authorize_action_for(@parking)
   end
 
   # POST /parkings
   def create
-    @parking = current_user.parkings.new(permitted_params)
+    @parking = Parking.new(permitted_params)
+    @parking.user = current_user
 
     if @parking.save
       redirect_to @parking, notice: 'Parking was successfully created.'
@@ -45,7 +49,10 @@ class ParkingsController < ApplicationController
 
   # PATCH/PUT /parkings/1
   def update
-    @parking = current_user.parkings.find(params.require(:id))
+    @parking = Parking.find(params.require(:id))
+    @parking.user = current_user
+
+    authorize_action_for(@parking)
 
     if @parking.update_attributes(permitted_params)
       redirect_to @parking, notice: 'Parking was successfully updated.'
@@ -56,9 +63,11 @@ class ParkingsController < ApplicationController
 
   # DELETE /parkings/1
   def destroy
-    @parking = current_user.parkings.find(params.require(:id))
-    @parking.destroy
+    @parking = Parking.find(params.require(:id))
 
+    authorize_action_for(@parking)
+
+    @parking.destroy
     redirect_to root_path
   end
 
