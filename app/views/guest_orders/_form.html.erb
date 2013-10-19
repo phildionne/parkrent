@@ -1,4 +1,4 @@
-<%= simple_form_for(@guest_order, url: guest_order_path, defaults: { label: false, input_html: { :class => 'transparent' }}) do |f| %>
+<%= simple_form_for(@guest_order, url: guest_orders_path, defaults: { label: false, input_html: { :class => 'transparent' }}) do |f| %>
 
   <%= f.input :first_name, placeholder: 'First name', autofocus: true %>
 
