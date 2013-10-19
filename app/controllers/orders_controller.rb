@@ -3,11 +3,6 @@ class OrdersController < ApplicationController
 
   authorize_actions_for Order, except: [:show, :edit, :update, :destroy]
 
-  # GET /orders
-  def index
-    @orders = Order.all
-  end
-
   # GET /orders/1
   def show
     @order = Order.find(params.require(:id))

@@ -211,14 +211,6 @@ describe OrdersController do
 
     before { user.confirm! }
 
-    describe "GET index" do
-
-      it "redirects to root path" do
-        get :index
-        expect(response).to be_redirect
-      end
-    end
-
     describe "GET show" do
 
       it "redirects to root path" do

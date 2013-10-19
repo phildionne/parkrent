@@ -14,7 +14,7 @@ ParkRent::Application.routes.draw do
     resources :rents, except: [:index, :show]
   end
 
-  resources :orders do
+  resources :orders, except: [:index] do
     resource :payment, except: :index
   end
 
