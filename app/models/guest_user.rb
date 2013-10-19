@@ -1,6 +1,10 @@
 class GuestUser
   include ActiveModel::Model
 
+  def user
+    User.new
+  end
+
   # Associations
   def orders
     Order.none
@@ -20,6 +24,11 @@ class GuestUser
 
   def sales
     Order.none
+  end
+
+  # Authorization
+  Authority.verbs.each do |verb|
+    delegate "can_#{verb}?", to: :user
   end
 
   # Attributes
