@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20131020135644) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "itinerary"
-    t.boolean  "published"
+    t.boolean  "published",  default: false
   end
 
   add_index "parkings", ["user_id"], name: "index_parkings_on_user_id"

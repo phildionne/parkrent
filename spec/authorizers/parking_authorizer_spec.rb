@@ -1,14 +1,9 @@
 require 'spec_helper'
 
 describe ParkingAuthorizer do
-
-  let(:user) { create(:user_with_parkings) }
+  let(:user) { create(:user) }
 
   describe :Class do
-
-    it "lets users read" do
-      expect(ParkingAuthorizer).to be_readable_by(user)
-    end
 
     it "lets users create" do
       expect(ParkingAuthorizer).to be_creatable_by(user)
@@ -16,14 +11,29 @@ describe ParkingAuthorizer do
   end
 
   describe :Instances do
-    let(:parking) { user.parkings.sample }
 
-    it "lets users update a belonging parking" do
-      expect(parking.authorizer).to be_updatable_by(user)
+    context "with a belonging parking" do
+      let(:parking) { create(:parking, user: user) }
+
+      it "lets users read" do
+        expect(parking.authorizer).to be_readable_by(user)
+      end
+
+      it "lets users update" do
+        expect(parking.authorizer).to be_updatable_by(user)
+      end
+
+      it "lets users delete" do
+        expect(parking.authorizer).to be_deletable_by(user)
+      end
     end
 
-    it "lets users delete a belonging parking" do
-      expect(parking.authorizer).to be_deletable_by(user)
+    context "with a published parking" do
+      let(:parking) { create(:parking, :published) }
+
+      it "lets users read" do
+        expect(parking.authorizer).to be_readable_by(user)
+      end
     end
   end
 end

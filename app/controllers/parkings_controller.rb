@@ -1,7 +1,7 @@
 class ParkingsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
 
-  authorize_actions_for Parking, except: [:edit, :update, :destroy]
+  authorize_actions_for Parking, except: [:show, :edit, :update, :destroy]
 
   # GET /parkings
   def index
@@ -21,7 +21,8 @@ class ParkingsController < ApplicationController
 
   # GET /parkings/1
   def show
-    @parking = Parking.published.includes(:rents).find(params.require(:id))
+    @parking = Parking.includes(:rents).find(params.require(:id))
+    authorize_action_for(@parking)
   end
 
   # GET /parkings/new
@@ -31,7 +32,7 @@ class ParkingsController < ApplicationController
 
   # GET /parkings/1/edit
   def edit
-    @parking = Parking.published.find(params.require(:id))
+    @parking = Parking.find(params.require(:id))
     authorize_action_for(@parking)
   end
 
@@ -49,7 +50,7 @@ class ParkingsController < ApplicationController
 
   # PATCH/PUT /parkings/1
   def update
-    @parking = Parking.published.find(params.require(:id))
+    @parking = Parking.find(params.require(:id))
     @parking.user = current_user
 
     authorize_action_for(@parking)
@@ -63,7 +64,7 @@ class ParkingsController < ApplicationController
 
   # DELETE /parkings/1
   def destroy
-    @parking = Parking.published.find(params.require(:id))
+    @parking = Parking.find(params.require(:id))
 
     authorize_action_for(@parking)
 

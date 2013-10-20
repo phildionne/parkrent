@@ -19,7 +19,7 @@ describe ParkingsController do
     end
 
     describe "GET show" do
-      let(:parking) { create(:parking) }
+      let(:parking) { create(:parking, user: user) }
 
       before { get :show, id: parking }
 
@@ -154,7 +154,7 @@ describe ParkingsController do
 
   context "with an unauthenticated user" do
     let(:user)    { create(:user) }
-    let(:parking) { create(:parking, user: user) }
+    let(:parking) { create(:parking, :published, user: user) }
 
     before { user.confirm! }
 

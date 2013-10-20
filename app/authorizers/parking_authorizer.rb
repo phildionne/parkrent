@@ -8,6 +8,10 @@ class ParkingAuthorizer < ApplicationAuthorizer
     true
   end
 
+  def readable_by?(user)
+    resource.user == user || resource.published?
+  end
+
   def updatable_by?(user)
     resource.user == user
   end
