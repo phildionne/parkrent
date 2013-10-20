@@ -5,9 +5,6 @@ class Rent < ActiveRecord::Base
   has_one :user, through: :parking
   has_many :orders
 
-  scope :published,   -> { where(published: true) }
-  scope :unpublished, -> { where(published: false)}
-
   monetize :price_cents, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10000 }
   validates :parking, :price, :beginning, :termination, presence: true
   validates :beginning, date: { before: :termination }

@@ -58,7 +58,7 @@ class RentsController < ApplicationController
   private
 
   def set_parking
-    @parking = Parking.find(params.require(:parking_id))
+    @parking = Parking.published.find(params.require(:parking_id))
     authorize_action_for(@parking)
   end
 

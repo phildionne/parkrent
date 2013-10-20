@@ -11,7 +11,7 @@ class ParkingsController < ApplicationController
       parkings = Parking.all
     end
 
-    @parkings = parkings.includes(:rents).paginate(page: params[:page], per_page: 10)
+    @parkings = parkings.published.includes(:rents).paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,7 +21,7 @@ class ParkingsController < ApplicationController
 
   # GET /parkings/1
   def show
-    @parking = Parking.includes(:rents).find(params.require(:id))
+    @parking = Parking.published.includes(:rents).find(params.require(:id))
   end
 
   # GET /parkings/new
@@ -31,7 +31,7 @@ class ParkingsController < ApplicationController
 
   # GET /parkings/1/edit
   def edit
-    @parking = Parking.find(params.require(:id))
+    @parking = Parking.published.find(params.require(:id))
     authorize_action_for(@parking)
   end
 
@@ -49,7 +49,7 @@ class ParkingsController < ApplicationController
 
   # PATCH/PUT /parkings/1
   def update
-    @parking = Parking.find(params.require(:id))
+    @parking = Parking.published.find(params.require(:id))
     @parking.user = current_user
 
     authorize_action_for(@parking)
@@ -63,7 +63,7 @@ class ParkingsController < ApplicationController
 
   # DELETE /parkings/1
   def destroy
-    @parking = Parking.find(params.require(:id))
+    @parking = Parking.published.find(params.require(:id))
 
     authorize_action_for(@parking)
 
@@ -74,7 +74,7 @@ class ParkingsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:parking).permit(:location)
+    params.require(:parking).permit(:location, :itinerary, :published)
   end
 
   def permitted_search_params

@@ -1,6 +1,11 @@
 <h1>Editing parking</h1>
 
+<% if @parking.published? %>
+  <%= link_to 'Show', parking_path(@parking) %>
+<% else %>
+  Not yet published
+<% end %>
+
 <%= render 'form' %>
 
-<%= link_to 'Show', parking_path(@parking) %> |
 <%= link_to 'Dashboard', root_path %>

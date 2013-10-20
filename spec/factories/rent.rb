@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :rent do
     parking
 
-    published   { [true, false].sample }
     price       { [50, 100].sample }
     beginning   { Date.current }
     termination { beginning + [1, 2, 3].sample.month }
