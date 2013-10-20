@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable
 
   has_many :orders,   dependent: :destroy
   has_many :parkings, dependent: :destroy

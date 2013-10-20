@@ -9,6 +9,39 @@
         <li>
           <%= link_to 'Payment settings' %>
         </li>
+        <li>
+          <%
+          # @TODO Cleanup this and add other relevant parameters
+            params = {
+              response_type: 'code',
+              client_id: ENV['STRIPE_CLIENT_ID'],
+              scope: 'read_write',
+              state: @user.id,
+              redirect_uri: 'http://parkrent.weighted.pagekite.me/users/auth/stripe_connect/callback',
+              stripe_user: {
+                email: @user.email,
+                url: users_path(@user),
+                business_type: 'sole_prop',
+                business_name: 'ParkRent',
+                phone_number: '123-457-8910',
+                street_address: '# ParkRent street',
+                city: 'Quebec',
+                state: 'QC',
+                zip: '123 456',
+                first_name: @user.first_name,
+                last_name: @user.last_name,
+                physical_product: false,
+                product_category: 'other',
+                average_payment: 60,
+                country: 'CA',
+                currency: 'cad'
+              }
+
+            }
+           %>
+
+          <%= link_to 'Connect with Stripe', "https://connect.stripe.com/oauth/authorize?#{params.to_param}" %>
+        </li>
       </ul>
     </div>
 
