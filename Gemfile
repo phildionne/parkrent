@@ -58,6 +58,8 @@ group :test do
   gem 'rb-fsevent'
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'fivemat'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :production do
