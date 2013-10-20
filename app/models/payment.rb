@@ -1,4 +1,6 @@
 class Payment < ActiveRecord::Base
+  include Authority::Abilities
+
   acts_as_paranoid
 
   belongs_to :order

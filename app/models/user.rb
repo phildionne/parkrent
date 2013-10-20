@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Contactable
 
+  include Authority::UserAbilities
+
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable, :confirmable,

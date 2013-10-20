@@ -2,7 +2,16 @@ FactoryGirl.define do
   factory :parking do
     user
 
-    location { [Faker::Address.street_name, ", ", Faker::Address.city].join }
+    location  { [Faker::Address.street_name, ", ", Faker::Address.city].join }
+    itinerary { Faker::Lorem.paragraph(2) }
+
+    trait :published do
+      published true
+    end
+
+    trait :unpublished do
+      published false
+    end
   end
 
   factory :parking_with_rents, parent: :parking do
