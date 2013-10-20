@@ -24,6 +24,8 @@ gem 'date_validator'
 gem 'money-rails'
 gem 'associates', path: '/Users/pdionne/Dev/associates'
 
+gem 'omniauth-stripe-connect'
+
 gem 'less-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'sass-rails', '~> 4.0.0'
