@@ -11,18 +11,21 @@ describe OrderAuthorizer do
   end
 
   describe :Instances do
-    let(:order) { create(:order, user: user) }
 
-    it "lets users read a belonging order" do
-      expect(order.authorizer).to be_readable_by(user)
-    end
+    context "with a belonging order" do
+      let(:order) { create(:order, user: user) }
 
-    it "lets users update a belonging order" do
-      expect(order.authorizer).to be_updatable_by(user)
-    end
+      it "lets users read" do
+        expect(order.authorizer).to be_readable_by(user)
+      end
 
-    it "lets users delete a belonging order" do
-      expect(order.authorizer).to be_deletable_by(user)
+      it "lets users update" do
+        expect(order.authorizer).to be_updatable_by(user)
+      end
+
+      it "lets users delete" do
+        expect(order.authorizer).to be_deletable_by(user)
+      end
     end
   end
 end

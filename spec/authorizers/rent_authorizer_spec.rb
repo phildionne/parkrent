@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe RentAuthorizer do
-
   let(:user) { create(:user_with_parkings_and_rents) }
 
   describe :Class do
@@ -11,20 +10,22 @@ describe RentAuthorizer do
     end
   end
 
-  # @TODO Add publishable?
   describe :Instances do
-    let(:rent) { user.rents.sample }
 
-    it "lets users create a belonging rent" do
-      expect(rent.authorizer).to be_creatable_by(user)
-    end
+    context "with a belonging rent" do
+      let(:rent) { user.rents.sample }
 
-    it "lets users update a belonging rent" do
-      expect(rent.authorizer).to be_updatable_by(user)
-    end
+      it "lets users create" do
+        expect(rent.authorizer).to be_creatable_by(user)
+      end
 
-    it "lets users delete a belonging rent" do
-      expect(rent.authorizer).to be_deletable_by(user)
+      it "lets users update" do
+        expect(rent.authorizer).to be_updatable_by(user)
+      end
+
+      it "lets users delete" do
+        expect(rent.authorizer).to be_deletable_by(user)
+      end
     end
   end
 end
