@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131014143746) do
+ActiveRecord::Schema.define(version: 20131020134753) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131014143746) do
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.text     "itinerary"
   end
 
   add_index "parkings", ["user_id"], name: "index_parkings_on_user_id"

@@ -3,6 +3,7 @@ FactoryGirl.define do
     user
 
     location { [Faker::Address.street_name, ", ", Faker::Address.city].join }
+    itinerary { Faker::Lorem.sentences(2) }
   end
 
   factory :parking_with_rents, parent: :parking do
