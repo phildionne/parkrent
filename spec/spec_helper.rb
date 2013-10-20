@@ -14,10 +14,24 @@ Spork.prefork do
   require File.expand_path('../../config/environment', __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'webmock/rspec'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
+
+  VCR.configure do |vcr|
+    vcr.hook_into :webmock
+    vcr.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+    vcr.default_cassette_options = { record: :once, re_record_interval: 1.day }
+
+    vcr.around_http_request do |request|
+
+      if request.uri =~ /maps.googleapis.com\/maps\/api\/geocode/
+        VCR.use_cassette('geocoding', match_requests_on: [:host, :path], &request)
+      end
+    end
+  end
 
   RSpec.configure do |config|
 

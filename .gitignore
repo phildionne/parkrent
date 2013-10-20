@@ -17,3 +17,6 @@
 
 # Ignore environement variables
 /.env
+
+# Ignore VCR cassettes
+/spec/fixtures/vcr_cassettes
