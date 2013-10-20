@@ -58,14 +58,6 @@ describe OnboardingsController do
           expect(assigns(:onboarding).parking).to be_persisted
           expect(assigns(:onboarding).rent).to    be_persisted
         end
-
-        context "when unconfirmed" do
-
-          it "redirects to the root path" do
-            post :create, { onboarding: onboarding_attributes }
-            expect(response).to redirect_to(root_path)
-          end
-        end
       end
 
       context "with invalid params" do

@@ -67,14 +67,6 @@ describe GuestOrdersController do
           post :create, { guest_order: guest_order_attributes }
           expect(assigns(:guest_order).rent_id).to eq(rent.id)
         end
-
-        context "when unconfirmed" do
-
-          it "redirects to the root path" do
-            post :create, { guest_order: guest_order_attributes }
-            expect(response).to redirect_to(root_path)
-          end
-        end
       end
 
       context "with invalid params" do
