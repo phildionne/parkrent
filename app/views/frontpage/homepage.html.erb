@@ -1,0 +1,67 @@
+<section>
+
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <%= link_to 'Account settings' %>
+        </li>
+        <li>
+          <%= link_to 'Payment settings' %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-2 col-md-offset-2">
+      <h3>Parkings</h3>
+
+      <ol>
+        <% @user.parkings.each do |parking| %>
+          <li>
+            <%= link_to parking.location, edit_parking_path(parking) %>
+          </li>
+        <% end %>
+      </ol>
+
+      <%= link_to 'New parking', new_parking_path %>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Vehicles</h3>
+
+      <ol>
+        <% @user.vehicles.each do |vehicle| %>
+          <li>
+            <%= link_to vehicle.license_plate, edit_vehicle_path(vehicle) %>
+          </li>
+        <% end %>
+      </ol>
+
+      <%= link_to 'New vehicle', new_vehicle_path %>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Orders</h3>
+
+      <ol>
+        <% @user.orders.each do |order| %>
+          <li>
+            <%= link_to order, order_path(order) %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Sales</h3>
+
+      <ol>
+        <% @user.sales.each do |order| %>
+          <li>
+            <%= link_to order, order_path(order) %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</section>
