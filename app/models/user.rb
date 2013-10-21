@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :vehicles, dependent: :destroy
   has_many :rents,    through: :parkings
   has_many :sales,    through: :rents, source: :orders
+  has_one  :stripe_account
 
   # @note See ApplicationController #current_user
   attr_accessor :authenticated
