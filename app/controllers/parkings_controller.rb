@@ -55,7 +55,7 @@ class ParkingsController < ApplicationController
 
     authorize_action_for(@parking)
 
-    if @parking.update_attributes(permitted_params)
+    if @parking.update(permitted_params)
       redirect_to @parking, notice: 'Parking was successfully updated.'
     else
       render action: :edit

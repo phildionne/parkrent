@@ -37,7 +37,7 @@ class RentsController < ApplicationController
 
     authorize_action_for(@rent)
 
-    if @rent.update_attributes(permitted_params)
+    if @rent.update(permitted_params)
       redirect_to parking_path(@parking), notice: 'Rent was successfully updated.'
     else
       render action: :edit

@@ -32,7 +32,7 @@ class VehiclesController < ApplicationController
 
     authorize_action_for(@vehicle)
 
-    if @vehicle.update_attributes(permitted_params)
+    if @vehicle.update(permitted_params)
       redirect_to root_path, notice: 'Vehicle was successfully updated.'
     else
       render action: :edit
