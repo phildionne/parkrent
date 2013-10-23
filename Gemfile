@@ -25,6 +25,7 @@ gem 'money-rails'
 gem 'associates', path: '/Users/pdionne/Dev/associates'
 
 gem 'omniauth-stripe-connect'
+gem 'stripe'
 
 gem 'less-rails'
 gem 'therubyracer', platforms: :ruby
