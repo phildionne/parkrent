@@ -14,4 +14,12 @@ class Parking < ActiveRecord::Base
   validates_with RentValidator
 
   after_validation :geocode, if: :location_changed?
+
+  def publish
+    update_attribute(:published, true)
+  end
+
+  def unpublish
+    update_attribute(:published, false)
+  end
 end
