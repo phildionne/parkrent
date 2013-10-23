@@ -4,3 +4,5 @@ User.limit(5).each do |user|
   FactoryGirl.create(:vehicle, user: user)
   FactoryGirl.create_list(:order_with_payment, 3, user: user)
 end
+
+Parking.all.each(&:publish)
