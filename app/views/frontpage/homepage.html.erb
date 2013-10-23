@@ -12,6 +12,7 @@
         <li>
           <%
           # @TODO Cleanup this and add other relevant parameters
+          # https://stripe.com/docs/connect/reference#get-authorize
             params = {
               response_type: 'code',
               client_id: ENV['STRIPE_CLIENT_ID'],
@@ -40,7 +41,11 @@
             }
            %>
 
-          <%= link_to 'Connect with Stripe', "https://connect.stripe.com/oauth/authorize?#{params.to_param}" %>
+          <% if @user.stripe_account.present? %>
+            Stripe account connected
+          <% else %>
+            <%= link_to 'Connect with Stripe', "https://connect.stripe.com/oauth/authorize?#{params.to_param}" %>
+          <% end %>
         </li>
       </ul>
     </div>
