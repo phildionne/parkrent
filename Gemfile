@@ -7,6 +7,7 @@ gem 'thin'
 gem 'foreman'
 
 gem 'rack-timeout'
+gem 'rack-revision'
 gem 'rack-protection'
 gem 'escape_utils'
 
