@@ -14,4 +14,12 @@ class Rent < ActiveRecord::Base
   def title
     "#{price.format} - #{beginning.to_formatted_s(:short)} #{termination.to_formatted_s(:short)}"
   end
+
+  def schedule
+    IceCube::Schedule.from_yaml(read_attribute(:schedule)) if read_attribute(:schedule)
+  end
+
+  def schedule=(schedule)
+    write_attribute(:schedule, schedule.to_yaml)
+  end
 end
