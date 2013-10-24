@@ -29,5 +29,8 @@ module ParkRent
     # config.i18n.default_locale = :de
 
     config.middleware.use Rack::Protection
+
+    # Adds a X-Revision header with the current commit SHA
+    config.middleware.use Rack::Revision, default: `git log --pretty=format:'%h' -n 1`
   end
 end
