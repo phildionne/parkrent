@@ -1,5 +1,12 @@
 <h1>New order</h1>
 
+<h3>Parking</h3>
+Location: <%= @rent.parking.location %> <br>
+
+<%= @rent.title %>
+
+<hr>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', orders_path %>

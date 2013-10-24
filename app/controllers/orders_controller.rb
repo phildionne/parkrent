@@ -45,6 +45,22 @@ class OrdersController < ApplicationController
       end
     end
 
+    # Use application secret key to save customers on the app's account instead
+    # than on each merchant account
+    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+
+    begin
+      charge = Stripe::Charge.create(
+        amount:      @rent.price.cents,
+        currency:    @rent.price.currency_as_string,
+        card:        params[:stripeToken],
+        description: current_user.email,
+        #   application_fee
+      )
+    rescue Stripe::CardError => e
+      ap 'The card has been declined'
+    end
+
     if @order.save
       redirect_to @order, notice: 'Order was successfully created.'
     else

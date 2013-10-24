@@ -20,6 +20,11 @@ Spork.prefork do
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
 
+  # All requests to OmniAuth will be short circuited. A request to /auth/provider
+  # will redirect immediately to /auth/provider/callback.
+  # @see https://github.com/intridea/omniauth/wiki/Integration-Testing
+  OmniAuth.config.test_mode = true
+
   VCR.configure do |vcr|
     vcr.hook_into :webmock
     vcr.cassette_library_dir = 'spec/fixtures/vcr_cassettes'

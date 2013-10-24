@@ -1,0 +1,105 @@
+<section>
+
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <%= link_to 'Account settings' %>
+        </li>
+        <li>
+          <%= link_to 'Payment settings' %>
+        </li>
+        <li>
+          <%
+          # @TODO Cleanup this and add other relevant parameters
+          # https://stripe.com/docs/connect/reference#get-authorize
+            params = {
+              response_type: 'code',
+              client_id: ENV['STRIPE_CLIENT_ID'],
+              scope: 'read_write',
+              state: @user.id,
+              redirect_uri: 'http://parkrent.weighted.pagekite.me/users/auth/stripe_connect/callback',
+              stripe_user: {
+                email: @user.email,
+                url: users_path(@user),
+                business_type: 'sole_prop',
+                business_name: 'ParkRent',
+                phone_number: '123-457-8910',
+                street_address: '# ParkRent street',
+                city: 'Quebec',
+                state: 'QC',
+                zip: '123 456',
+                first_name: @user.first_name,
+                last_name: @user.last_name,
+                physical_product: false,
+                product_category: 'other',
+                average_payment: 60,
+                country: 'CA',
+                currency: 'cad'
+              }
+
+            }
+           %>
+
+          <% if @user.stripe_account.present? %>
+            Stripe account connected
+          <% else %>
+            <%= link_to 'Connect with Stripe', "https://connect.stripe.com/oauth/authorize?#{params.to_param}" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-2 col-md-offset-2">
+      <h3>Parkings</h3>
+
+      <ol>
+        <% @user.parkings.each do |parking| %>
+          <li>
+            <%= link_to parking.location, edit_parking_path(parking) %>
+          </li>
+        <% end %>
+      </ol>
+
+      <%= link_to 'New parking', new_parking_path %>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Vehicles</h3>
+
+      <ol>
+        <% @user.vehicles.each do |vehicle| %>
+          <li>
+            <%= link_to vehicle.license_plate, edit_vehicle_path(vehicle) %>
+          </li>
+        <% end %>
+      </ol>
+
+      <%= link_to 'New vehicle', new_vehicle_path %>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Orders</h3>
+
+      <ol>
+        <% @user.orders.each do |order| %>
+          <li>
+            <%= link_to order, order_path(order) %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Sales</h3>
+
+      <ol>
+        <% @user.sales.each do |order| %>
+          <li>
+            <%= link_to order, order_path(order) %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+</section>

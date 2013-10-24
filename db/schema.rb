@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020135644) do
+ActiveRecord::Schema.define(version: 20131022234029) do
 
   create_table "orders", force: true do |t|
     t.datetime "created_at"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20131020135644) do
     t.datetime "updated_at"
     t.integer  "order_id"
     t.datetime "deleted_at"
+    t.string   "stripe_charge_id"
   end
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id"
@@ -61,6 +62,15 @@ ActiveRecord::Schema.define(version: 20131020135644) do
   end
 
   add_index "rents", ["parking_id"], name: "index_rents_on_parking_id"
+
+  create_table "stripe_accounts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "stripe_user_id"
+    t.string   "publishable_key"
+    t.string   "access_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

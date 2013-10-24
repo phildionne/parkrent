@@ -6,6 +6,6 @@ class Payment < ActiveRecord::Base
   belongs_to :order
   has_one :user, through: :order
 
-  validates :order, :amount, presence: true
+  validates :order, :amount, :stripe_charge_id, presence: true
   validates :amount, numericality: { greater_than: 0 }
 end
