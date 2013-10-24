@@ -62,7 +62,7 @@ group :test do
   gem 'guard-spork', '~> 1.5.0'
   gem 'rb-fsevent'
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
-  gem 'fivemat'
+  # gem 'fivemat'
   gem 'webmock'
   gem 'vcr'
 end
