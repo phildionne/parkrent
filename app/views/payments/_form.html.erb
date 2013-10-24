@@ -1,4 +1,4 @@
-<%= simple_form_for @payment do |f| %>
+<%= simple_form_for [@order, @payment], url: order_payment_path do |f| %>
 
   <%= f.input :amount %>
 
