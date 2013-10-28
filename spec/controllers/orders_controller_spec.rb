@@ -84,8 +84,8 @@ describe OrdersController do
           it "creates a new Order" do
             expect {
               post :create, { order: order_attributes }
-              }.to change(Order, :count).by(1)
-            end
+            }.to change(Order, :count).by(1)
+          end
 
             it "assigns a newly created order as @order" do
               post :create, { order: order_attributes }
