@@ -10,7 +10,7 @@ class Rent < ActiveRecord::Base
   monetize :price_cents, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10000 }
   validates :parking, :price, :beginning, :termination, :schedule, presence: true
   validates :beginning, date: { before: :termination }
-  validates :beginning, date: { after: Proc.new { Date.yesterday.at_end_of_day }}
+  validates :beginning, date: { after: Proc.new { Date.yesterday.at_end_of_day }}, if: :new_record?
   validates_with RentValidator
 
   def title
