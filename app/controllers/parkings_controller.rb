@@ -79,6 +79,6 @@ class ParkingsController < ApplicationController
   end
 
   def permitted_search_params
-    params.require(:search).permit(:location, :distance, :beginning, :termination)
+    params.require(:search).permit(:location, :distance, :start_date, :end_date)
   end
 end

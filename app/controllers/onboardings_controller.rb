@@ -30,6 +30,6 @@ class OnboardingsController < ApplicationController
 
   def permitted_params
     params.require(:onboarding).permit(:first_name, :last_name, :phone_number,
-      :email, :password, :password_confirmation, :location, :beginning, :termination, :price)
+      :email, :password, :password_confirmation, :location, :start_date, :end_date, :price)
   end
 end

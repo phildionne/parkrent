@@ -26,8 +26,6 @@ describe Rent do
   # when passed an invalid value.
   describe :Validations do
     it { should validate_presence_of(:parking) }
-    it { should validate_presence_of(:beginning) }
-    it { should validate_presence_of(:termination) }
     it { should validate_presence_of(:schedule) }
     it { should monetize(:price_cents) }
   end

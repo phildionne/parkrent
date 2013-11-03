@@ -8,8 +8,6 @@ FactoryGirl.define do
     password_confirmation { password }
 
     price        { [50, 100].sample }
-    beginning    { Date.current }
-    termination  { beginning + [1, 2, 3].sample.month }
 
     location     { [Faker::Address.street_name, ", ", Faker::Address.city].join }
   end
@@ -23,8 +21,6 @@ FactoryGirl.define do
     password_confirmation nil
 
     price        nil
-    beginning    nil
-    termination  nil
 
     location     nil
   end

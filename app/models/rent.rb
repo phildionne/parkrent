@@ -1,6 +1,8 @@
 class Rent < ActiveRecord::Base
   include Authority::Abilities
 
+  delegate :start_date, :end_date, to: :schedule
+
   serialize :schedule, Hash
 
   belongs_to :parking
@@ -8,13 +10,11 @@ class Rent < ActiveRecord::Base
   has_many :orders
 
   monetize :price_cents, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10000 }
-  validates :parking, :price, :beginning, :termination, :schedule, presence: true
-  validates :beginning, date: { before: :termination }
-  validates :beginning, date: { after: Proc.new { Date.yesterday.at_end_of_day }}, if: :new_record?
+  validates :parking, :price, :schedule, presence: true
   validates_with RentValidator
 
   def title
-    "#{price.format} - #{beginning.to_formatted_s(:short)} #{termination.to_formatted_s(:short)}"
+    "#{price.format} - #{schedule.to_s}"
   end
 
   # @return [IceCube::Schedule]
