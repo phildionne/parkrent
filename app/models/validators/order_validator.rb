@@ -12,7 +12,7 @@ class OrderValidator < ActiveModel::Validator
   def validate_rent_doesnt_belongs_to_user(record)
     if record.user && record.rent
       if record.user == record.rent.user
-        record.errors[:rent] = "can't belong to the user"
+        record.errors.add(:rent, "can't belong to the user")
       end
     end
   end
@@ -20,7 +20,7 @@ class OrderValidator < ActiveModel::Validator
   def validate_vehicle_belongs_to_user(record)
     if record.user && record.vehicle
       unless record.user == record.vehicle.user
-        record.errors[:vehicle] = "must belong to the user"
+        record.errors.add(:vehicle, "must belong to the user")
       end
     end
   end
