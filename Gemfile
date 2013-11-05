@@ -25,6 +25,7 @@ gem 'will_paginate'
 gem 'date_validator'
 gem 'money-rails'
 gem 'associates', path: '/Users/pdionne/Dev/associates'
+gem 'virtus'
 
 gem 'omniauth-stripe-connect'
 gem 'stripe'
