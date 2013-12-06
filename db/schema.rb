@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131103203318) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "orders", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -22,9 +25,9 @@ ActiveRecord::Schema.define(version: 20131103203318) do
     t.datetime "deleted_at"
   end
 
-  add_index "orders", ["rent_id"], name: "index_orders_on_rent_id"
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
-  add_index "orders", ["vehicle_id"], name: "index_orders_on_vehicle_id"
+  add_index "orders", ["rent_id"], name: "index_orders_on_rent_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+  add_index "orders", ["vehicle_id"], name: "index_orders_on_vehicle_id", using: :btree
 
   create_table "parkings", force: true do |t|
     t.string   "location"
@@ -37,7 +40,7 @@ ActiveRecord::Schema.define(version: 20131103203318) do
     t.boolean  "published",  default: false
   end
 
-  add_index "parkings", ["user_id"], name: "index_parkings_on_user_id"
+  add_index "parkings", ["user_id"], name: "index_parkings_on_user_id", using: :btree
 
   create_table "payments", force: true do |t|
     t.decimal  "amount"
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 20131103203318) do
     t.string   "stripe_charge_id"
   end
 
-  add_index "payments", ["order_id"], name: "index_payments_on_order_id"
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
   create_table "rents", force: true do |t|
     t.datetime "created_at"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20131103203318) do
     t.text     "schedule"
   end
 
-  add_index "rents", ["parking_id"], name: "index_rents_on_parking_id"
+  add_index "rents", ["parking_id"], name: "index_rents_on_parking_id", using: :btree
 
   create_table "stripe_accounts", force: true do |t|
     t.integer  "user_id"
@@ -88,9 +91,9 @@ ActiveRecord::Schema.define(version: 20131103203318) do
     t.datetime "confirmation_sent_at"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vehicles", force: true do |t|
     t.string  "license_plate"
@@ -99,6 +102,6 @@ ActiveRecord::Schema.define(version: 20131103203318) do
     t.date    "year"
   end
 
-  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id"
+  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id", using: :btree
 
 end
