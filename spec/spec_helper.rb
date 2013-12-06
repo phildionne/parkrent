@@ -1,16 +1,11 @@
-require 'rubygems'
 require 'spork'
 require 'money-rails/test_helpers'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However,
-  # if you change any configuration or code from libraries loaded here, you'll
-  # need to restart spork for it take effect.
+  ENV['RACK_ENV'] ||= 'test'
 
-  # This file is copied to spec/ when you run 'rails generate rspec:install'
-  ENV['RAILS_ENV'] ||= 'test'
   require File.expand_path('../../config/environment', __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
@@ -24,6 +19,10 @@ Spork.prefork do
   # will redirect immediately to /auth/provider/callback.
   # @see https://github.com/intridea/omniauth/wiki/Integration-Testing
   OmniAuth.config.test_mode = true
+
+  # Checks for pending migrations before tests are run.
+  # If you are not using ActiveRecord, you can remove this line.
+  ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
   VCR.configure do |vcr|
     vcr.hook_into :webmock
@@ -40,11 +39,13 @@ Spork.prefork do
 
   RSpec.configure do |config|
 
-    # FactoryGirl
+    # Use FactoryGirl syntax methods
     config.include FactoryGirl::Syntax::Methods
 
-    config.include Devise::TestHelpers, :type => :controller
+    # Use Devise helpers
+    config.include Devise::TestHelpers, type: :controller
 
+    # Use MoneyRails helpers
     config.include MoneyRails::TestHelpers
 
     # Database Cleaner
@@ -87,7 +88,7 @@ Spork.prefork do
 
     # Only run a spec when a :focus tag is present
     config.treat_symbols_as_metadata_keys_with_true_values = true
-    config.filter_run :focus => true
+    config.filter_run focus: true
     config.run_all_when_everything_filtered = true
   end
 end

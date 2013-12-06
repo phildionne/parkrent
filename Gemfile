@@ -55,17 +55,28 @@ group :development do
 end
 
 group :test do
-  gem 'shoulda-matchers'
-  gem 'guard-brakeman'
+  # Rspec
   gem 'rspec-rails'
+
+  # Running spork with rails
   gem 'spork-rails'
+
+  # Automatically start/reload RSpec Spork server
+  gem 'guard-spork'
+
+  # Automatically run specs
   gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'guard-spork', '~> 1.5.0'
-  gem 'rb-fsevent'
+
+  gem 'guard-brakeman'
+
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
-  # gem 'fivemat'
+
+  gem 'shoulda-matchers'
+
+  # Rspec formatter
+
   gem 'webmock'
+
   gem 'vcr'
 end
 

@@ -121,9 +121,6 @@ GEM
     devise-i18n (0.10.0)
     diff-lcs (1.2.5)
     dotenv (0.9.0)
-    em-websocket (0.5.0)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0.5.3)
     equalizer (0.0.7)
     erubis (2.7.0)
     escape_utils (1.0.0)
@@ -154,10 +151,6 @@ GEM
     guard-brakeman (0.8.1)
       brakeman (>= 2.1.1)
       guard (>= 1.1.0)
-    guard-livereload (2.0.0)
-      em-websocket (~> 0.5)
-      guard (~> 2.0)
-      multi_json (~> 1.8)
     guard-rspec (4.0.4)
       guard (>= 2.1.1)
       rspec (~> 2.14)
@@ -171,7 +164,6 @@ GEM
     high_voltage (2.0.0)
     highline (1.6.20)
     hike (1.2.3)
-    http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.9)
     ice_cube (0.11.1)
@@ -384,9 +376,8 @@ DEPENDENCIES
   friendly_id!
   geocoder
   guard-brakeman
-  guard-livereload
   guard-rspec
-  guard-spork (~> 1.5.0)
+  guard-spork
   high_voltage
   ice_cube
   jbuilder (~> 1.2)
@@ -402,7 +393,6 @@ DEPENDENCIES
   rack-timeout
   rails (= 4.0.2)
   rails_12factor
-  rb-fsevent
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
