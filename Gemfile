@@ -74,6 +74,7 @@ group :test do
   gem 'shoulda-matchers'
 
   # Rspec formatter
+  gem 'fivemat'
 
   gem 'webmock'
 

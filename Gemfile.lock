@@ -136,6 +136,7 @@ GEM
     fastercsv (1.5.5)
     ffaker (1.21.0)
     ffi (1.9.3)
+    fivemat (1.2.1)
     flutie (2.0.0)
     foreman (0.63.0)
       dotenv (>= 0.7)
@@ -371,6 +372,7 @@ DEPENDENCIES
   escape_utils
   factory_girl_rails (~> 4.0)
   ffaker
+  fivemat
   flutie
   foreman
   friendly_id!
