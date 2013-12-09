@@ -1,22 +1,24 @@
-<%= content_tag_for(:article, rent) do %>
-  <header>
-    <h2><%= rent.title %></h2>
-  </header>
+<% present rent do |rent| %>
+  <%= content_tag_for(:article, rent) do %>
+    <header>
+      <h2><%= rent.title %></h2>
+    </header>
 
-  <ul>
-    <li><%= rent.price %></li>
-    <li><%= rent.start_date %></li>
-    <li><%= rent.end_date %></li>
-  </ul>
+    <ul>
+      <li><%= rent.price %></li>
+      <li><%= rent.schedule.start_time %></li>
+      <li><%= rent.schedule.end_time %></li>
+    </ul>
 
-  <footer>
-    <% if current_user.authenticated? %>
-      <%= link_to 'Rent', new_order_path(rent_id: rent.id), class: 'btn btn-default' %>
-    <% else %>
-      <%= link_to 'Rent', new_guest_order_path(rent_id: rent.id), class: 'btn btn-default' %>
-    <% end %>
+    <footer>
+      <% if current_user.authenticated? %>
+        <%= link_to 'Rent', new_order_path(rent_id: rent.id), class: 'btn btn-default' %>
+      <% else %>
+        <%= link_to 'Rent', new_guest_order_path(rent_id: rent.id), class: 'btn btn-default' %>
+      <% end %>
 
-    <%= link_to 'Edit', edit_parking_rent_path(rent.parking, rent) %>
-    <%= link_to 'Destroy', parking_rent_path(rent.parking, rent), method: :delete, data: { confirm: 'Are you sure?' } %>
-  </footer>
+      <%= link_to 'Edit', edit_parking_rent_path(rent.parking, rent) %>
+      <%= link_to 'Destroy', parking_rent_path(rent.parking, rent), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </footer>
+  <% end %>
 <% end %>
