@@ -4,6 +4,11 @@ require 'money-rails/test_helpers'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
+  if ENV['COVERAGE']
+    require 'simplecov'
+    SimpleCov.start
+  end
+
   ENV['RACK_ENV'] ||= 'test'
 
   require File.expand_path('../../config/environment', __FILE__)
@@ -96,4 +101,9 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   FactoryGirl.reload
+
+  if ENV['COVERAGE']
+    require 'simplecov'
+    SimpleCov.start
+  end
 end

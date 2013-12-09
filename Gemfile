@@ -80,6 +80,9 @@ group :test do
   gem 'webmock'
 
   gem 'vcr'
+
+  # Code coverage
+  gem 'simplecov', require: false
 end
 
 group :production do
