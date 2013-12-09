@@ -32,5 +32,8 @@ module ParkRent
 
     # Adds a X-Revision header with the current commit SHA
     config.middleware.use Rack::Revision, default: `git log --pretty=format:'%h' -n 1`
+
+    # Enables compression of http responses
+    config.middleware.use Rack::Deflater
   end
 end
