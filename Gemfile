@@ -42,7 +42,6 @@ gem 'turbolinks'
 
 group :development, :test do
   gem 'debugger'
-  gem 'sqlite3'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'awesome_print'
   gem 'ffaker'
