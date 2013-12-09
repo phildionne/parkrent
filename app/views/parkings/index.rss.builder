@@ -2,8 +2,8 @@ application_name = Rails.application.class.parent_name
 search_query = params[:search].try(:map) { |k,v| "#{k}: #{v}" }
 feed_description = params[:search] ? "#{application_name} parkings search results for: #{search_query.to_sentence}" : "#{application_name} parkings"
 
-xml.instruct! :xml, :version => '1.0'
-xml.rss :version => '2.0' do
+xml.instruct! :xml, version: '1.0'
+xml.rss version: '2.0' do
   xml.channel do
     xml.title application_name
     xml.description feed_description

@@ -12,7 +12,7 @@
   <% end %>
 
   <h4>Add a vehicle</h4>
-  <%= simple_fields_for(@vehicle, defaults: { label: false, input_html: { :class => 'transparent'}}) do |vehicle_form| %>
+  <%= simple_fields_for(@vehicle, defaults: { label: false, input_html: { class: 'transparent'}}) do |vehicle_form| %>
     <%= render 'vehicles/fields', f: vehicle_form %>
   <% end %>
 

@@ -11,9 +11,9 @@
 
   <footer>
     <% if current_user.authenticated? %>
-      <%= link_to 'Rent', new_order_path(rent_id: rent.id), :class => 'btn btn-default' %>
+      <%= link_to 'Rent', new_order_path(rent_id: rent.id), class: 'btn btn-default' %>
     <% else %>
-      <%= link_to 'Rent', new_guest_order_path(rent_id: rent.id), :class => 'btn btn-default' %>
+      <%= link_to 'Rent', new_guest_order_path(rent_id: rent.id), class: 'btn btn-default' %>
     <% end %>
 
     <%= link_to 'Edit', edit_parking_rent_path(rent.parking, rent) %>

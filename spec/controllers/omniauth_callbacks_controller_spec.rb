@@ -3,7 +3,7 @@ require 'spec_helper'
 describe OmniauthCallbacksController do
   before { request.env["devise.mapping"] = Devise.mappings[:user] }
 
-  OmniAuth.config.add_mock(:twitter, {:uid => '12345'})
+  OmniAuth.config.add_mock(:twitter, { uid: '12345' })
 
   describe :stripe_connect do
 

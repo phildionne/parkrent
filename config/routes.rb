@@ -16,5 +16,5 @@ ParkRent::Application.routes.draw do
 
   resources :orders, except: [:index]
 
-  root :to => 'frontpage#show'
+  root to: 'frontpage#show'
 end

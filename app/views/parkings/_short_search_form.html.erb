@@ -2,13 +2,13 @@
   <div class="col col-lg-8 col-lg-offset-2">
 
     <div class="row">
-      <%= simple_form_for :search, url: parkings_path, method: :get, html: { :class => 'form-inline' } do |f| %>
+      <%= simple_form_for :search, url: parkings_path, method: :get, html: { class: 'form-inline' } do |f| %>
         <div class="col col-lg-6 col-lg-offset-2">
-          <%= f.input :location, wrapper: false, input_html: { :class => 'form-control transparent js-geocomplete', :autocomplete => false }, placeholder: 'Québec, Montréal, ...', label: false %>
+          <%= f.input :location, wrapper: false, input_html: { class: 'form-control transparent js-geocomplete', autocomplete: false }, placeholder: 'Québec, Montréal, ...', label: false %>
         </div>
 
         <div class="col col-lg-2">
-          <%= f.button :submit, 'Search', data: { disable_with: 'Please wait ...' }, :class => 'btn btn-default btn-block' %>
+          <%= f.button :submit, 'Search', data: { disable_with: 'Please wait ...' }, class: 'btn btn-default btn-block' %>
         </div>
       <% end %>
     </div><!-- /.row -->
