@@ -40,6 +40,9 @@ gem 'high_voltage'
 # View helpers
 gem 'flutie'
 
+# Use presenters
+gem 'bourgeois'
+
 # Permalinks and slugs
 gem 'friendly_id', github: 'FriendlyId/friendly_id'
 
