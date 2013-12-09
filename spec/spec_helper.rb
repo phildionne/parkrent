@@ -43,6 +43,9 @@ Spork.prefork do
   end
 
   RSpec.configure do |config|
+    config.expect_with :rspec do |c|
+      c.syntax = :expect
+    end
 
     # Use FactoryGirl syntax methods
     config.include FactoryGirl::Syntax::Methods
