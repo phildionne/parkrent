@@ -2,6 +2,13 @@
 
     <%= f.input :price %>
 
+    <%= f.simple_fields_for @rent.schedule do |schedule_form| %>
+      <%= schedule_form.input :start_time %>
+      <%= schedule_form.input :end_time %>
+      <%= schedule_form.input :daily_start_hour %>
+      <%= schedule_form.input :daily_end_hour %>
+      <%= schedule_form.input :weekend %>
+    <% end %>
 
 
     <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary' %>

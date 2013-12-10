@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :rent do
     parking
+    schedule
 
     price { [50, 100].sample }
   end

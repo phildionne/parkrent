@@ -6,9 +6,14 @@
 
     <ul>
       <li><%= rent.price %></li>
-      <li><%= rent.schedule.start_time %></li>
-      <li><%= rent.schedule.end_time %></li>
     </ul>
+
+    <% present rent.schedule do |schedule| %>
+      <ul>
+        <li><%= schedule.start_date %></li>
+        <li><%= schedule.end_date %></li>
+      </ul>
+    <% end %>
 
     <footer>
       <% if current_user.authenticated? %>

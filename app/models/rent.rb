@@ -6,6 +6,7 @@ class Rent < ActiveRecord::Base
   serialize :schedule, Hash
 
   belongs_to :parking
+  belongs_to :schedule, dependent: :destroy
   has_one :user, through: :parking
   has_many :orders
 

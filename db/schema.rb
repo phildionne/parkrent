@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209005936) do
+ActiveRecord::Schema.define(version: 20131210193610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,9 +61,20 @@ ActiveRecord::Schema.define(version: 20131209005936) do
     t.integer  "price_cents",    default: 0,     null: false
     t.string   "price_currency", default: "CAD", null: false
     t.text     "schedule"
+    t.integer  "schedule_id"
   end
 
   add_index "rents", ["parking_id"], name: "index_rents_on_parking_id", using: :btree
+
+  create_table "schedules", force: true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "daily_start_hour"
+    t.integer  "daily_end_hour"
+    t.boolean  "weekend",          default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stripe_accounts", force: true do |t|
     t.integer  "user_id"
