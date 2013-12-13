@@ -16,7 +16,7 @@ class ScheduleValidator < ActiveModel::Validator
   end
 
   def validate_start_time_not_in_past(record)
-    unless record.start_time > Proc.new { Date.yesterday.at_end_of_day }.call
+    unless record.start_time > Date.yesterday.at_end_of_day
       record.errors.add(:start_time, "start time must be after today")
     end
   end
