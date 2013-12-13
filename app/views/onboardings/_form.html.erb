@@ -16,11 +16,10 @@
       <fieldset>
         <legend>Your Parking</legend>
 
-        <%= f.input :location,    placeholder: 'Location' %>
-        <%= f.input :start_time,  placeholder: 'Start time', input_html: { class: 'transparent js-datepicker' } %>
-        <%= f.input :end_time,    placeholder: 'End time', input_html: { class: 'transparent js-datepicker' } %>
-        <%= f.input :price,       placeholder: 'Price' %>
-
+        <%= f.input :location,   placeholder: 'Location' %>
+        <%= f.input :start_time, as: :string, placeholder: 'Start time', input_html: { class: 'transparent js-datepicker' } %>
+        <%= f.input :end_time,   as: :string, placeholder: 'End time', input_html: { class: 'transparent js-datepicker' } %>
+        <%= f.input :price,      placeholder: 'Price' %>
       </fieldset>
 
       <hr>

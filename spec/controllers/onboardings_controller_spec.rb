@@ -53,10 +53,11 @@ describe OnboardingsController do
 
         it "assigns a newly created onboarding as @onboarding" do
           post :create, { onboarding: onboarding_attributes }
-          expect(assigns(:onboarding)).to         be_a(Onboarding)
-          expect(assigns(:onboarding).user).to    be_persisted
-          expect(assigns(:onboarding).parking).to be_persisted
-          expect(assigns(:onboarding).rent).to    be_persisted
+          expect(assigns(:onboarding)).to          be_a(Onboarding)
+          expect(assigns(:onboarding).user).to     be_persisted
+          expect(assigns(:onboarding).parking).to  be_persisted
+          expect(assigns(:onboarding).rent).to     be_persisted
+          expect(assigns(:onboarding).schedule).to be_persisted
         end
       end
 
