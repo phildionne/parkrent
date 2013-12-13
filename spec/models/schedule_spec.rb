@@ -20,6 +20,10 @@ describe Schedule do
   end
 
   describe :Validations do
+    it { should validate_presence_of(:start_time) }
+    it { should validate_presence_of(:end_time) }
+    it { should validate_presence_of(:daily_start_hour) }
+    it { should validate_presence_of(:daily_end_hour) }
   end
 
   describe :Callbacks do
@@ -29,11 +33,5 @@ describe Schedule do
   end
 
   describe :InstanceMethods do
-    it { should respond_to(:daily_start_hour) }
-    it { should respond_to(:daily_start_hour=) }
-    it { should respond_to(:daily_end_hour) }
-    it { should respond_to(:daily_end_hour=) }
-    it { should respond_to(:weekend) }
-    it { should respond_to(:weekend=) }
   end
 end
