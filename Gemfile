@@ -79,6 +79,9 @@ gem 'turbolinks'
 
 
 group :development, :test do
+  # Loads environment variables from .env
+  gem 'dotenv-rails'
+
   # Use debugger to debug, duh.
   gem 'debugger'
 
