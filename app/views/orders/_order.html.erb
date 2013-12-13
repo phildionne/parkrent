@@ -1,9 +1,11 @@
-<%= content_tag_for(:article, order) do %>
-  <header></header>
+<% present order do |order| %>
+  <%= content_tag_for(:article, order) do %>
+    <header></header>
 
-  <ul>
-    <li><%= order.id %></li>
-  </ul>
+    <ul>
+      <li><%= order.id %></li>
+    </ul>
 
-  <footer></footer>
+    <footer></footer>
+  <% end %>
 <% end %>

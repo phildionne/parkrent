@@ -1,9 +1,14 @@
 <h1>New order</h1>
 
 <h3>Parking</h3>
-Location: <%= @rent.parking.location %> <br>
 
-<%= @rent.title %>
+<% present @rent.parking do |parking| %>
+  Location: <%= parking.location %> <br>
+<% end %>
+
+<% present @rent do |rent| %>
+  <%= rent.title %>
+<% end %>
 
 <hr>
 
