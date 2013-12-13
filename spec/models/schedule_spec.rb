@@ -14,6 +14,11 @@ describe Schedule do
     end
   end
 
+  describe :Associations do
+    it { should belong_to(:rent) }
+    it { should have_one(:parking).through(:rent) }
+  end
+
   describe :Validations do
   end
 
