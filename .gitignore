@@ -22,7 +22,10 @@ config/initializers/secret_token.rb
 .ruby-version
 
 # Ignore environment variables
-.env
+.env.local
+.env.development
+.env.test
+.env.production
 
 # Ignore bundler config
 /.bundle

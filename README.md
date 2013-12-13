@@ -4,13 +4,19 @@
 
 ## Getting started
 
+    touch .env.local
+    cp .env.default .test-env.development
+    cp .env.default .env.test
+    cp .env.default .env.production
+
     bundle install
     bundle exec rake db:create
     bundle exec rake db:migrate
-    foreman start
+    bundle exec foreman start
 
 
 ## Running tests
 
-    foreman run guard
+    bundle exec guard
+
 
