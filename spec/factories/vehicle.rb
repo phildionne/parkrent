@@ -9,6 +9,8 @@ FactoryGirl.define do
 
   factory :invalid_vehicle, parent: :vehicle do
     license_plate nil
+    year          nil
+    model         nil
   end
 end
 

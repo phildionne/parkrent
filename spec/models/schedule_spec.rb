@@ -4,7 +4,7 @@ describe Schedule do
 
   describe :Factories do
     context "Valid factory" do
-      subject { build(:schedule) }
+      subject { create(:schedule) }
       specify { should be_valid }
     end
 

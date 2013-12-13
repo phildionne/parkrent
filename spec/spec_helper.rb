@@ -39,6 +39,8 @@ Spork.prefork do
       if request.uri =~ /maps.googleapis.com\/maps\/api\/geocode/
         VCR.use_cassette('geocoding', match_requests_on: [:host, :path], &request)
       end
+
+      request.proceed
     end
   end
 
