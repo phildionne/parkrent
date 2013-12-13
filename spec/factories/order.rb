@@ -1,8 +1,16 @@
 FactoryGirl.define do
   factory :order do
-    rent    { create(:rent) }
-    user    { create(:user) }
-    vehicle { create(:vehicle, user: user) }
+    user
+
+    before(:create) do |order|
+      order.rent ||= create(:rent)
+      order.vehicle ||= create(:vehicle, user: order.user)
+    end
+
+    after(:build) do |order|
+      order.rent ||= build(:rent)
+      order.vehicle ||= build(:vehicle, user: order.user)
+    end
   end
 
   factory :order_with_payment, parent: :order do
@@ -12,8 +20,8 @@ FactoryGirl.define do
   end
 
   factory :invalid_order, parent: :order do
-    user
-    rent nil
+    user    nil
+    rent    nil
     vehicle nil
   end
 end
