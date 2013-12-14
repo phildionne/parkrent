@@ -2,10 +2,14 @@
   <div class="col col-lg-2 col-lg-offset-10">
     <ul class="nav nav-pills">
       <li>
-        <%= link_to 'New rental', new_parking_rent_path(@parking) %>
+        <% if @parking.updatable_by?(current_user) %>
+          <%= link_to 'New rental', new_parking_rent_path(@parking) %>
+        <% end %>
       </li>
       <li>
-        <%= link_to 'Edit', edit_parking_path(@parking) %>
+        <% if @parking.updatable_by?(current_user) %>
+          <%= link_to 'Edit', edit_parking_path(@parking) %>
+        <% end %>
       </li>
     </ul>
   </div><!-- /.col -->

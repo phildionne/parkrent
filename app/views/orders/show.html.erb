@@ -1,4 +1,11 @@
 <%= render @order %>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
+<% if @order.updatable_by?(current_user) %>
+  <%= link_to 'Edit', edit_order_path(@order) %>
+<% end %>
+
+<% if @order.deletable_by?(current_user) %>
+  <%= link_to 'Destroy', order_path(@order), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
 <%= link_to 'Back', orders_path %>

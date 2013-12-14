@@ -6,8 +6,16 @@
   </ul>
 
   <footer>
-    <%= link_to 'Show', order_path(order) %>
-    <%= link_to 'Edit', edit_order_path(order) %>
-    <%= link_to 'Destroy', order_path(order), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if order.readable_by?(current_user) %>
+      <%= link_to 'Show', order_path(order) %>
+    <% end %>
+
+    <% if order.updatable_by?(current_user) %>
+      <%= link_to 'Edit', edit_order_path(order) %>
+    <% end %>
+
+    <% if order.deletable_by?(current_user) %>
+      <%= link_to 'Destroy', order_path(order), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </footer>
 <% end %>

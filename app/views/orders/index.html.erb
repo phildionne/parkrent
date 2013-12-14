@@ -4,4 +4,6 @@
 
 <hr>
 
-<%= link_to 'New Order', new_order_path %>
+<% if Order.creatable_by?(current_user) %>
+  <%= link_to 'New Order', new_order_path %>
+<% end %>

@@ -6,8 +6,16 @@
   <%= render partial: 'rents/rent_listing', collection: parking.rents, as: :rent %>
 
   <footer>
-    <%= link_to 'Show', parking_path(parking) %>
-    <%= link_to 'Edit', edit_parking_path(parking) %>
-    <%= link_to 'Destroy', parking_path(parking), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if parking.readable_by?(current_user) %>
+      <%= link_to 'Show', parking_path(parking) %>
+    <% end %>
+
+    <% if parking.updatable_by?(current_user) %>
+      <%= link_to 'Edit', edit_parking_path(parking) %>
+    <% end %>
+
+    <% if parking.deletable_by?(current_user) %>
+      <%= link_to 'Destroy', parking_path(parking), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </footer>
 <% end %>
