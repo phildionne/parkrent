@@ -10,7 +10,7 @@ class GuestOrdersController < ApplicationController
 
   # POST /guest_order
   def create
-    @guest_order = GuestOrder.new(permitted_params)
+    @guest_order = GuestOrder.new(guest_order_params)
 
     if @guest_order.save
       if @guest_order.user.active_for_authentication?
@@ -30,7 +30,7 @@ class GuestOrdersController < ApplicationController
 
   private
 
-  def permitted_params
+  def guest_order_params
     params.require(:guest_order).permit(:first_name, :last_name, :phone_number,
       :email, :password, :password_confirmation, :license_plate, :year, :model, :rent_id)
   end

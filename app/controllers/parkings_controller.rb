@@ -6,7 +6,7 @@ class ParkingsController < ApplicationController
   # GET /parkings
   def index
     if params[:search]
-      parkings = Parking.near(permitted_search_params[:location], permitted_search_params[:distance])
+      parkings = Parking.near(search_params[:location], search_params[:distance])
     else
       parkings = Parking.all
     end
@@ -38,7 +38,7 @@ class ParkingsController < ApplicationController
 
   # POST /parkings
   def create
-    @parking = Parking.new(permitted_params)
+    @parking = Parking.new(parking_params)
     @parking.user = current_user
 
     if @parking.save
@@ -55,7 +55,7 @@ class ParkingsController < ApplicationController
 
     authorize_action_for(@parking)
 
-    if @parking.update(permitted_params)
+    if @parking.update(parking_params)
       redirect_to @parking, notice: 'Parking was successfully updated.'
     else
       render action: :edit
@@ -74,11 +74,11 @@ class ParkingsController < ApplicationController
 
   private
 
-  def permitted_params
+  def parking_params
     params.require(:parking).permit(:location, :itinerary, :published)
   end
 
-  def permitted_search_params
+  def search_params
     params.require(:search).permit(:location, :distance, :start_date, :end_date)
   end
 end

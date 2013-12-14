@@ -28,14 +28,14 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    @order   = Order.new(permitted_params)
+    @order   = Order.new(order_params)
     @order.user = current_user
     @rent    = @order.rent
     @vehicle = Vehicle.new
 
     # Build and persist a newly created vehicle
     if params[:vehicle].present?
-      @vehicle = Vehicle.new(permitted_vehicle_params)
+      @vehicle = Vehicle.new(vehicle_params)
       @vehicle.user = current_user
 
       authorize_action_for(@vehicle)
@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
 
     authorize_action_for(@order)
 
-    if @order.update(permitted_params)
+    if @order.update(order_params)
       redirect_to @order, notice: 'Order was successfully updated.'
     else
       render action: :edit
@@ -93,11 +93,11 @@ class OrdersController < ApplicationController
 
   private
 
-  def permitted_params
+  def order_params
     params.require(:order).permit(:rent_id, :vehicle_id)
   end
 
-  def permitted_vehicle_params
+  def vehicle_params
     params.require(:vehicle).permit(:license_plate, :year, :model)
   end
 end

@@ -16,7 +16,7 @@ class VehiclesController < ApplicationController
 
   # POST /vehicles
   def create
-    @vehicle = Vehicle.new(permitted_params)
+    @vehicle = Vehicle.new(vehicle_params)
     @vehicle.user = current_user
 
     if @vehicle.save
@@ -32,7 +32,7 @@ class VehiclesController < ApplicationController
 
     authorize_action_for(@vehicle)
 
-    if @vehicle.update(permitted_params)
+    if @vehicle.update(vehicle_params)
       redirect_to root_path, notice: 'Vehicle was successfully updated.'
     else
       render action: :edit
@@ -51,7 +51,7 @@ class VehiclesController < ApplicationController
 
   private
 
-  def permitted_params
+  def vehicle_params
     params.require(:vehicle).permit(:license_plate, :year, :model)
   end
 end

@@ -8,7 +8,7 @@ class OnboardingsController < ApplicationController
 
   # POST /onboarding
   def create
-    @onboarding = Onboarding.new(permitted_params)
+    @onboarding = Onboarding.new(onboarding_params)
 
     if @onboarding.save
       if @onboarding.user.active_for_authentication?
@@ -28,7 +28,7 @@ class OnboardingsController < ApplicationController
 
   private
 
-  def permitted_params
+  def onboarding_params
     params.require(:onboarding).permit(:first_name, :last_name, :phone_number,
       :email, :password, :password_confirmation, :location, :start_time, :end_time, :price)
   end

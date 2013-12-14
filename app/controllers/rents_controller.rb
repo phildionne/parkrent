@@ -19,7 +19,7 @@ class RentsController < ApplicationController
 
   # POST parkings/:parking_id/rents
   def create
-    @rent = Rent.new(permitted_params)
+    @rent = Rent.new(rent_params)
     @rent.parking = @parking
 
     authorize_action_for(@rent)
@@ -62,7 +62,11 @@ class RentsController < ApplicationController
     authorize_action_for(@parking)
   end
 
-  def permitted_params
-    params.require(:rent).permit(:price, :start_date, :end_date)
+  def rent_params
+    params.require(:rent).permit(:price)
+  end
+
+  def schedule_params
+    params.require(:rent).require(:schedule).permit(:start_time, :end_time, :daily_start_time, :daily_end_time, :weekend)
   end
 end
