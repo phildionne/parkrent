@@ -9,7 +9,7 @@ FactoryGirl.define do
 
     price        { [50, 100].sample }
 
-    start_time   { (Date.today.send([:+, :-].sample, 1.month)).at_beginning_of_day }
+    start_time   { (Date.today + 1.month).at_beginning_of_day }
     end_time     { start_time + [1, 2, 3].sample.send([:days, :weeks, :months].sample) }
 
     location     { [Faker::Address.street_name, ", ", Faker::Address.city].join }
