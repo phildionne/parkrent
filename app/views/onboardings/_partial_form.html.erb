@@ -1,0 +1,20 @@
+<div class="row">
+  <%= simple_form_for(@onboarding, url: onboarding_path, defaults: { label: false, input_html: { class: 'transparent' }}) do |f| %>
+
+    <div class="col col-lg-6 col-md-offset-6">
+      <fieldset>
+        <legend>Your Parking</legend>
+
+        <%= f.input :location,   placeholder: 'Location' %>
+        <%= f.input :start_time, as: :string, placeholder: 'Start time', input_html: { class: 'transparent js-datepicker' } %>
+        <%= f.input :end_time,   as: :string, placeholder: 'End time', input_html: { class: 'transparent js-datepicker' } %>
+        <%= f.input :price,      placeholder: 'Price' %>
+      </fieldset>
+
+      <hr>
+
+      <%= f.button :submit, 'Create listing', data: { disable_with: 'Please wait ...' }, class: 'btn btn-primary btn-block' %>
+    </div>
+
+  <% end %>
+</div><!-- /.row -->

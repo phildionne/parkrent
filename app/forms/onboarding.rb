@@ -8,8 +8,12 @@ class Onboarding
   associate :schedule, depends_on: :rent
 
   # @return [Boolean] Wether the Onboarding is only missing the user's password & password_confirmation
-  def can_assign_credential?
+  def can_assign_credentials?
     valid?
-    errors.keys == [:password, :password_confirmation] || [:password] || [:password_confirmation]
+    [
+      [:password, :password_confirmation],
+      [:password],
+      [:password_confirmation]
+    ].any? { |missing_attributes| missing_attributes == errors.keys }
   end
 end

@@ -1,31 +1,44 @@
 <div class="row">
   <%= simple_form_for(@onboarding, url: onboarding_path, defaults: { label: false, input_html: { class: 'transparent' }}) do |f| %>
 
-    <div class="col col-lg-6">
-      <fieldset>
-        <legend>Your informations</legend>
+    <% if f.object.can_assign_credentials? %>
+      <%= f.input :first_name,   as: :hidden %>
+      <%= f.input :last_name,    as: :hidden %>
+      <%= f.input :phone_number, as: :hidden %>
+      <%= f.input :email,        as: :hidden %>
+      <%= f.input :location,     as: :hidden %>
+      <%= f.input :start_time,   as: :hidden %>
+      <%= f.input :end_time,     as: :hidden %>
+      <%= f.input :price,        as: :hidden %>
 
-        <%= f.input :first_name,   placeholder: 'First name' %>
-        <%= f.input :last_name,    placeholder: 'Last name' %>
-        <%= f.input :phone_number, placeholder: 'Phone number' %>
-        <%= f.input :email,        placeholder: 'Email' %>
-      </fieldset>
-    </div>
+      <%= f.input :password, placeholder: 'password', autofocus: true %>
+      <%= f.input :password_confirmation, placeholder: 'password_confirmation' %>
+    <% else %>
+      <div class="col col-lg-6">
+        <fieldset>
+          <legend>Your informations</legend>
 
-    <div class="col col-lg-6">
-      <fieldset>
-        <legend>Your Parking</legend>
+          <%= f.input :first_name,   placeholder: 'First name' %>
+          <%= f.input :last_name,    placeholder: 'Last name' %>
+          <%= f.input :phone_number, placeholder: 'Phone number' %>
+          <%= f.input :email,        placeholder: 'Email' %>
+        </fieldset>
+      </div>
 
-        <%= f.input :location,   placeholder: 'Location' %>
-        <%= f.input :start_time, as: :string, placeholder: 'Start time', input_html: { class: 'transparent js-datepicker' } %>
-        <%= f.input :end_time,   as: :string, placeholder: 'End time', input_html: { class: 'transparent js-datepicker' } %>
-        <%= f.input :price,      placeholder: 'Price' %>
-      </fieldset>
+      <div class="col col-lg-6">
+        <fieldset>
+          <legend>Your Parking</legend>
 
-      <hr>
+          <%= f.input :location,   placeholder: 'Location' %>
+          <%= f.input :start_time, as: :string, placeholder: 'Start time', input_html: { class: 'transparent js-datepicker' } %>
+          <%= f.input :end_time,   as: :string, placeholder: 'End time', input_html: { class: 'transparent js-datepicker' } %>
+          <%= f.input :price,      placeholder: 'Price' %>
+        </fieldset>
+      </div>
+    <% end %>
 
-      <%= f.button :submit, 'Create listing', data: { disable_with: 'Please wait ...' }, class: 'btn btn-primary btn-block' %>
-    </div>
+    <hr>
 
+    <%= f.button :submit, 'Create listing', data: { disable_with: 'Please wait ...' }, class: 'btn btn-primary btn-block' %>
   <% end %>
-</div><!-- /.row -->
+</div>
