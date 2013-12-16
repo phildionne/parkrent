@@ -1,0 +1,56 @@
+<%= simple_form_for @checkout do |f| %>
+
+  <%= f.input :rent_id, as: :hidden, input_html: { value: @checkout.rent.id } %>
+
+  <h3>Rent</h3>
+  <%= @checkout.rent.to_s %>
+
+  <hr>
+
+  <h3>Vehicle</h3>
+  <% if @checkout.user.vehicles.many? %>
+    <%= f.association :vehicle, collection: @checkout.user.vehicles, prompt: 'Select a vehicle' %>
+
+  <% elsif @checkout.user.vehicles.one? %>
+    Vehicle: <%= @checkout.user.vehicles.first.license_plate %>
+    <%= f.input :vehicle_id, as: :hidden, input_html: { value: @checkout.user.vehicles.first.id } %>
+  <% end %>
+
+  <h4>Add a vehicle</h4>
+  <%= simple_fields_for(@checkout.vehicle, defaults: { label: false, input_html: { class: 'transparent'}}) do |vehicle_form| %>
+    <%= render 'vehicles/fields', f: vehicle_form %>
+  <% end %>
+
+  <hr>
+
+  <h3>Details</h3>
+
+  Price: <%= number_to_currency(@checkout.rent.price) %> <br>
+  Fees: <%= number_to_currency(Money.new(400, 'CAD')) %> <br>
+  Total: <%= number_to_currency(Money.new(400, 'CAD') + @checkout.rent.price) %>
+
+  <hr>
+
+  <h3>Terms</h3>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, nulla, similique, optio consequatur qui suscipit vero quaerat fugit quisquam culpa illum obcaecati modi tempora animi debitis aspernatur facilis minus dicta.</p>
+  <%# f.input :terms_of_service %>
+
+  <hr>
+
+  <h3>Payment</h3>
+
+  <hr>
+
+  <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary' %>
+<% end %>
+
+<hr>
+
+<script
+  src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+  data-key=<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>
+  data-amount="2000"
+  data-name="Demo Site"
+  data-description="2 widgets ($20.00)">
+</script>

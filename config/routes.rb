@@ -6,6 +6,8 @@ ParkRent::Application.routes.draw do
 
   resource :onboarding, only: [:new, :create]
 
+  resources :checkouts, only: [:new, :create]
+
   resources :guest_orders, only: [:new, :create]
 
   resources :vehicles, except: [:index, :show]
