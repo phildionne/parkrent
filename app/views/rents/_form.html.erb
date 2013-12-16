@@ -2,14 +2,18 @@
 
     <%= f.input :price %>
 
-    <%= f.simple_fields_for @rent.schedule do |schedule_form| %>
-      <%= schedule_form.input :start_time %>
-      <%= schedule_form.input :end_time %>
+    <%= f.simple_fields_for :schedule do |schedule_form| %>
+      <%= schedule_form.input :start_time, as: :string, placeholder: 'Start time', input_html: { class: 'transparent js-datepicker' } %>
+      <%= schedule_form.input :end_time,   as: :string, placeholder: 'End time', input_html: { class: 'transparent js-datepicker' } %>
       <%= schedule_form.input :daily_start_hour %>
       <%= schedule_form.input :daily_end_hour %>
       <%= schedule_form.input :weekend %>
     <% end %>
 
+    <h4>Schedule</h4>
+    <p><%= f.object.schedule %></p>
 
-    <%= f.button :submit, data: { disable_with: 'Please wait ...' }, :class => 'btn btn-primary' %>
+    <hr>
+
+    <%= f.button :submit, data: { disable_with: 'Please wait ...' }, class: 'btn btn-primary' %>
 <% end %>

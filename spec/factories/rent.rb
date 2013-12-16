@@ -3,15 +3,17 @@ FactoryGirl.define do
     parking
 
     price { [50, 100].sample }
-  end
 
-  factory :rent_with_schedule, parent: :rent do
-    after(:create) do |rent|
+    before(:create) do |rent|
       rent.schedule = create(:schedule, rent: rent)
+    end
+
+    after(:build) do |rent|
+      rent.schedule = build(:schedule)
     end
   end
 
   factory :invalid_rent, parent: :rent do
-    price nil
+    price -10
   end
 end

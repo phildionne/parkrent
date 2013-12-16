@@ -18,6 +18,10 @@ describe RentsController do
         expect(assigns(:rent)).to be_a_new(Rent)
       end
 
+      it "builds a new schedule" do
+        expect(assigns(:rent).schedule).to be_a_new(Schedule)
+      end
+
       it "responds with success and render template" do
         expect(response).to be_success
         expect(response).to render_template :new
@@ -27,7 +31,7 @@ describe RentsController do
     describe "POST create" do
       context "with valid params" do
         let(:parking) { create(:parking, user: user) }
-        let(:rent_attributes) { attributes_for(:rent) }
+        let(:rent_attributes) { attributes_for(:rent).merge({ schedule_attributes: attributes_for(:schedule) }) }
 
         it "creates a new Rent" do
           expect {
@@ -49,7 +53,7 @@ describe RentsController do
 
       context "with invalid params" do
         let(:parking) { create(:parking, user: user) }
-        let(:invalid_rent_attributes) { attributes_for(:invalid_rent) }
+        let(:invalid_rent_attributes) { attributes_for(:invalid_rent).merge({ schedule_attributes: attributes_for(:invalid_schedule) }) }
 
         before do
           post :create, { rent: invalid_rent_attributes, parking_id: parking }

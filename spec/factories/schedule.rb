@@ -1,8 +1,6 @@
 FactoryGirl.define do
   factory :schedule do
-    rent
-
-    start_time       { (Date.today.send([:+, :-].sample, 1.month)).at_beginning_of_day }
+    start_time       { (Date.today + 1.month).at_beginning_of_day }
     end_time         { start_time + [1, 2, 3].sample.send([:days, :weeks, :months].sample) }
     daily_start_hour { [6, 7, 8].sample }
     daily_end_hour   { [17, 18, 19].sample }

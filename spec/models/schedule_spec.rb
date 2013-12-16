@@ -24,6 +24,10 @@ describe Schedule do
     it { should validate_presence_of(:end_time) }
     it { should validate_presence_of(:daily_start_hour) }
     it { should validate_presence_of(:daily_end_hour) }
+    it { should validate_numericality_of(:daily_start_hour).is_greater_than_or_equal_to(0) }
+    it { should validate_numericality_of(:daily_end_hour).is_greater_than_or_equal_to(0) }
+    it { should validate_numericality_of(:daily_start_hour).is_less_than_or_equal_to(24) }
+    it { should validate_numericality_of(:daily_end_hour).is_less_than_or_equal_to(24) }
   end
 
   describe :Callbacks do

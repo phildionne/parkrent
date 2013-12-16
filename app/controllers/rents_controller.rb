@@ -8,6 +8,7 @@ class RentsController < ApplicationController
   def new
     @rent = Rent.new
     @rent.parking = @parking
+    @rent.build_schedule
     authorize_action_for(@rent)
   end
 
@@ -37,7 +38,7 @@ class RentsController < ApplicationController
 
     authorize_action_for(@rent)
 
-    if @rent.update(permitted_params)
+    if @rent.update(rent_params)
       redirect_to parking_path(@parking), notice: 'Rent was successfully updated.'
     else
       render action: :edit
@@ -63,10 +64,6 @@ class RentsController < ApplicationController
   end
 
   def rent_params
-    params.require(:rent).permit(:price)
-  end
-
-  def schedule_params
-    params.require(:rent).require(:schedule).permit(:start_time, :end_time, :daily_start_time, :daily_end_time, :weekend)
+    params.require(:rent).permit(:price, schedule_attributes: [:start_time, :end_time, :daily_start_hour, :daily_end_hour, :weekend])
   end
 end

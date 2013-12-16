@@ -8,11 +8,6 @@ describe Rent do
       specify { should be_valid }
     end
 
-    context "Valid factory" do
-      subject { create(:rent_with_schedule) }
-      specify { should be_valid }
-    end
-
     context "Invalid factory" do
       subject { build(:invalid_rent) }
       specify { should_not be_valid }
