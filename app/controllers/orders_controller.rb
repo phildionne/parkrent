@@ -3,18 +3,14 @@ class OrdersController < ApplicationController
 
   authorize_actions_for Order, except: [:show, :edit, :update, :destroy]
 
+  # GET /orders
+  def index
+  end
+
   # GET /orders/1
   def show
     @order = Order.find(params.require(:id))
     authorize_action_for(@order)
-  end
-
-  # GET /orders/new
-  def new
-    @order   = Order.new
-    @order.user = current_user
-    @rent    = Rent.find(params.require(:rent_id))
-    @vehicle = Vehicle.new
   end
 
   # GET /orders/1/edit
@@ -24,48 +20,6 @@ class OrdersController < ApplicationController
     @vehicle = Vehicle.new
 
     authorize_action_for(@order)
-  end
-
-  # POST /orders
-  def create
-    @order   = Order.new(order_params)
-    @order.user = current_user
-    @rent    = @order.rent
-    @vehicle = Vehicle.new
-
-    # Build and persist a newly created vehicle
-    if params[:vehicle].present?
-      @vehicle = Vehicle.new(vehicle_params)
-      @vehicle.user = current_user
-
-      authorize_action_for(@vehicle)
-
-      if @vehicle.save
-        @order.vehicle = @vehicle
-      end
-    end
-
-    # Use application secret key to save customers on the app's account instead
-    # than on each merchant account
-    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-
-    begin
-      charge = Stripe::Charge.create(
-        amount:      @rent.price.cents,
-        currency:    @rent.price.currency_as_string,
-        card:        params[:stripeToken],
-        description: current_user.email,
-        #   application_fee
-      )
-    rescue Stripe::CardError => e
-      ap 'The card has been declined'
-    end
-
-    if @order.save
-      redirect_to @order, notice: 'Order was successfully created.'
-    else
-      render action: :new
-    end
   end
 
   # PATCH/PUT /orders/1
@@ -81,15 +35,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/1
-  def destroy
-    @order = Order.find(params.require(:id))
-
-    authorize_action_for(@order)
-
-    @order.destroy
-    redirect_to orders_path
-  end
 
   private
 

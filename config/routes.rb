@@ -16,7 +16,7 @@ ParkRent::Application.routes.draw do
     resources :rents, except: [:index, :show]
   end
 
-  resources :orders, except: [:index]
+  resources :orders, except: [:new, :destroy]
 
   root to: 'frontpage#show'
 end
