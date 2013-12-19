@@ -26,4 +26,8 @@ class Parking < ActiveRecord::Base
   def unpublish
     update_attribute(:published, false)
   end
+
+  def published?
+    published
+  end
 end
