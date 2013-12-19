@@ -1,6 +1,8 @@
 class Parking < ActiveRecord::Base
   include Authority::Abilities
 
+  acts_as_commentable
+
   geocoded_by :location
 
   belongs_to :user

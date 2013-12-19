@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219134921) do
+ActiveRecord::Schema.define(version: 20131219163857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,8 @@ ActiveRecord::Schema.define(version: 20131219134921) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "itinerary"
-    t.boolean  "published",  default: false
+    t.boolean  "published",      default: false
+    t.integer  "comments_count", default: 0
   end
 
   add_index "parkings", ["user_id"], name: "index_parkings_on_user_id", using: :btree

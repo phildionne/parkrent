@@ -14,6 +14,7 @@ ParkRent::Application.routes.draw do
 
   resources :parkings do
     resources :rents, except: [:index, :show]
+    resources :comments, only: [:new, :create]
   end
 
   resources :orders, except: [:new, :destroy]

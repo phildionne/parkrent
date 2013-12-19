@@ -23,6 +23,7 @@ describe Parking do
     it { should belong_to(:user) }
     it { should have_many(:rents).dependent(:destroy) }
     it { should have_many(:clients).through(:rents) }
+    it { should have_many(:comments).dependent(:destroy) }
   end
 
   describe :Validations do
