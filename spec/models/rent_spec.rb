@@ -19,6 +19,7 @@ describe Rent do
     it { should have_one(:schedule).dependent(:destroy) }
     it { should have_one(:user).through(:parking) }
     it { should have_many(:orders) }
+    it { should have_many(:clients).through(:orders) }
   end
 
   # @note There is no presence validation spec for 'price' attribute because

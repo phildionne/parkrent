@@ -5,6 +5,7 @@ class Parking < ActiveRecord::Base
 
   belongs_to :user
   has_many :rents, dependent: :destroy
+  has_many :clients, through: :rents, source: :clients
 
   scope :published,   -> { where(published: true) }
   scope :unpublished, -> { where(published: false)}

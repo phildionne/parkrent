@@ -5,6 +5,7 @@ class Rent < ActiveRecord::Base
   has_one :schedule, validate: true, dependent: :destroy
   has_one :user, through: :parking
   has_many :orders
+  has_many :clients, through: :orders, source: :user
 
   accepts_nested_attributes_for :schedule
 

@@ -22,6 +22,7 @@ describe Parking do
   describe :Associations do
     it { should belong_to(:user) }
     it { should have_many(:rents).dependent(:destroy) }
+    it { should have_many(:clients).through(:rents) }
   end
 
   describe :Validations do
