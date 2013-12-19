@@ -227,6 +227,9 @@ GEM
     orm_adapter (0.5.0)
     paranoia (2.0.1)
       activerecord (~> 4.0)
+    parole (0.1.2)
+      activerecord (>= 4.0.0)
+      activesupport (>= 4.0.0)
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.3)
@@ -403,6 +406,7 @@ DEPENDENCIES
   money-rails
   omniauth-stripe-connect
   paranoia (~> 2.0)
+  parole
   pg
   pry-rails
   quiet_assets

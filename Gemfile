@@ -28,6 +28,9 @@ gem 'authority'
 # Soft destroys
 gem 'paranoia', '~> 2.0'
 
+# Comments for models
+gem 'parole'
+
 # Geocoding and reverse geocoding
 gem 'geocoder'
 
