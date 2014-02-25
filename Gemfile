@@ -17,6 +17,8 @@ gem 'rack-revision'
 gem 'rack-protection'
 # Faster string escaping
 gem 'escape_utils'
+# Faster String#blank?
+gem 'fast_blank'
 
 # Use Devise to handle users
 gem 'devise'
