@@ -1,4 +1,4 @@
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || (ENV['RACK_ENV'] == 'development' ? 1 : nil) || 3)
 timeout 15
 preload_app true
 
