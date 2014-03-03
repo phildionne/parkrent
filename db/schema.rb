@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219163857) do
+ActiveRecord::Schema.define(version: 20140303150042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20131219163857) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "itinerary"
-    t.boolean  "published",      default: false
+    t.boolean  "published",      default: false, null: false
     t.integer  "comments_count", default: 0
   end
 
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 20131219163857) do
     t.datetime "end_time"
     t.integer  "daily_start_hour", default: 9
     t.integer  "daily_end_hour",   default: 17
-    t.boolean  "weekend",          default: false
+    t.boolean  "weekend",          default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "rent_id"
