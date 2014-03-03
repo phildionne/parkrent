@@ -17,7 +17,7 @@ ParkRent::Application.routes.draw do
     resources :comments, only: [:new, :create]
   end
 
-  resources :orders, except: [:new, :destroy]
+  resources :orders, except: [:destroy]
 
   root to: 'frontpage#show'
 end

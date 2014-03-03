@@ -13,6 +13,11 @@ class OrdersController < ApplicationController
     authorize_action_for(@order)
   end
 
+  # GET /orders/new
+  def new
+    @order = Order.new
+  end
+
   # GET /orders/1/edit
   def edit
     @order   = Order.find(params.require(:id))
