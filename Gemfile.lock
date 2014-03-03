@@ -19,13 +19,6 @@ GIT
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
 
-PATH
-  remote: /Users/pdionne/Dev/associates
-  specs:
-    associates (0.0.3)
-      activerecord (>= 3.2.14)
-      activesupport (>= 3.2.14)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -55,6 +48,9 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     arel (4.0.2)
+    associates (0.0.3)
+      activerecord (>= 3.2.14)
+      activesupport (>= 3.2.14)
     atomic (1.1.14)
     authority (2.9.0)
       activesupport (>= 3.0.0)
@@ -385,7 +381,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  associates!
+  associates
   authority
   awesome_print
   better_errors

@@ -63,7 +63,7 @@ gem 'date_validator'
 gem 'money-rails'
 
 # Multi-model objects
-gem 'associates', path: '/Users/pdionne/Dev/associates'
+gem 'associates'
 
 # Object attributes
 gem 'virtus'
